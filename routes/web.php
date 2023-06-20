@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 // });
 
 
-Route::get('data', [DataController::class, 'index'])->name('data.index');
+Route::get('data', [DataController::class, 'index'])->name('data.index')->middleware('Verifikasi');;
 Route::post('data/store', [DataController::class, 'store'])->name('data.store');
 Route::get('data/{id}/edit', [DataController::class, 'edit'])->name('data.edit');
 Route::put('data/{id}', [DataController::class, 'update'])->name('data.update');
