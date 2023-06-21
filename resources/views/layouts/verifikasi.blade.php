@@ -16,7 +16,7 @@
     <!-- Referensi ke file CSS SweetAlert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-    
+
     <!-- Referensi ke file JavaScript SweetAlert -->
     <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 
@@ -115,51 +115,51 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-<script>
-    $(function () {
+    <script>
+        $(function () {
 
     $.ajaxSetup({
     headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
     });
-
-
-   var table = $('.data-table').DataTable({
-processing: true,
-serverSide: true,
-ajax: {
-url: "{{ route('data.index') }}",
-data: function (d) {
-d.verifikasi = 1; // Mengirim parameter verifikasi = 1 untuk memfilter data terverifikasi
-}
-},
-columns: [
-{ data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-{ data: 'NIK', name: 'NIK' },
-{ data: 'NamaLengkap', name: 'NamaLengkap' },
-{ data: 'AlamatDomisili', name: 'AlamatDomisili' },
-{ data: 'JenisKelamin', name: 'JenisKelamin' },
-{ data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
-{ data: 'Jurusan', name: 'Jurusan' },
-{ data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
-{ data: 'Status', name: 'Status' },
-{ data: 'action', name: 'action', orderable: false, searchable: false },
-],
+var table = $('.data-table2').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: "{{ route('data.verifikasi.index') }}",
+        data: function (d) {
+            d.verifikasi = true; // Mengirim parameter verifikasi = true untuk memfilter data tidak terverifikasi
+        }
+    },
+    columns: [
+        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+        { data: 'NIK', name: 'NIK' },
+        { data: 'NamaLengkap', name: 'NamaLengkap' },
+        { data: 'AlamatDomisili', name: 'AlamatDomisili' },
+        { data: 'JenisKelamin', name: 'JenisKelamin' },
+        { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
+        { data: 'Jurusan', name: 'Jurusan' },
+        { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
+        { data: 'Status', name: 'Status' },
+        { data: 'action', name: 'action', orderable: false, searchable: false },
+    ],
 });
 
 window.addEventListener('load', function () {
-@if(session('success'))
-Swal.fire({
-icon: 'success',
-title: 'Success',
-text: '{{ session('success') }}',
-showConfirmButton: false,
-timer: 3000
-});
-@endif
+    @if(session('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ session('success') }}',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    @endif
 });
 
+
+    
     // Tambah data
     $('#addData').click(function () {
         $('#addDataForm').trigger('reset');
@@ -209,40 +209,85 @@ timer: 3000
         });
     });
 
-    // Hapus data
-    $('body').on('click', '.deleteData', function () {
-        var id = $(this).data('id');
-        var url = "{{ url('data') }}" + '/' + id;
+        
+    $(document).on('click', '.verifyData', function () {
+        var id = $(this).data('verifikasi-id');
+        var url = "{{ url('data/verifikasi') }}" + "/" + id;
 
         Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Data akan dihapus permanen!",
+            title: 'Konfirmasi',
+            text: 'Anda yakin ingin memverifikasi data ini?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus',
-            cancelButtonText: 'Batal'
+            confirmButtonText: 'Verifikasi',
+            cancelButtonText: 'Batal',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
                     url: url,
-                    type: 'DELETE',
+                    type: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     success: function (response) {
-                        table.ajax.reload();
-                        Swal.fire('Berhasil', response.message, 'success');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        table.ajax.reload(); // Refresh tabel setelah verifikasi berhasil
                     },
                     error: function (xhr) {
-                        Swal.fire('Error', xhr.responseJSON.message, 'error');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Terjadi kesalahan. Silakan coba lagi.',
+                        });
                     }
                 });
             }
         });
     });
-});
-</script>
 
-@include('sweetalert::alert')
+    // Hapus data
+   $('body').on('click', '.deleteData', function () {
+       var id = $(this).data('id');
+       var url = "{{ url('data/verifikasi') }}" + '/' + id;
+
+       Swal.fire({
+           title: 'Apakah Anda yakin?',
+           text: "Data akan dihapus permanen!",
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'Ya, hapus',
+           cancelButtonText: 'Batal'
+       }).then((result) => {
+           if (result.isConfirmed) {
+               $.ajax({
+                   url: url,
+                   type: 'DELETE',
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   },
+                   success: function (response) {
+                       table.ajax.reload();
+                       Swal.fire('Berhasil', response.message, 'success');
+                   },
+                   error: function (xhr) {
+                       Swal.fire('Error', xhr.responseJSON.message, 'error');
+                   }
+               });
+           }
+       });
+   });
+});
+    </script>
+
+    @include('sweetalert::alert')
 
 </body>
 

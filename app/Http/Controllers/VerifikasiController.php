@@ -8,38 +8,59 @@ use Illuminate\Validation\Rule;
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class DataController extends Controller
+class VerifikasiController extends Controller
 {
     public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $query = Data::query();
+    {
+        if ($request->ajax()) {
+            $query = Data::query();
 
-        if ($request->verifikasi) {
-            $query->where('Status', 'Terverifikasi');
+            if ($request->verifikasi) {
+                $query->where('Status', 'Belum Terverifikasi');
+            } else {
+                $query->where('Status', '!=', 'Belum Terverifikasi');
+            }
+
+            $data = $query->latest()->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('data.verifikasi.edit', ['id' => $row->id]);
+                    $deleteUrl = route('data.verifikasi.destroy', ['id' => $row->id]);
+                    $btn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
+                    $btn .= '<button class="btn btn-sm btn-danger deleteData" data.verifikasi-id="' . $row->id . '">Delete</button>';
+                   $btn .= '<button class="btn btn-sm btn-success verifyData" data-verifikasi-id="' . $row->id . '">Verify</button>'; // Tombol Verifikasi
+ // Tombol Verifikasi
+                    return $btn;
+
+                    // $btn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
+                    // $btn .= '<button class="btn btn-sm btn-danger deleteData" data.verifikasi-id="' . $row->id . '">Delete</button>';
+                    // return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
-        $data = $query->latest()->get();
-
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $editUrl = route('data.edit', ['id' => $row->id]);
-                $deleteUrl = route('data.destroy', ['id' => $row->id]);
-                $btn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
-                $btn .= '<button class="btn btn-sm btn-danger deleteData" data-id="' . $row->id . '">Delete</button>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+        return view('data.verifikasi.index');
     }
 
-    return view('data.index');
+
+
+   public function verifikasi($id)
+{
+    $data = Data::findOrFail($id);
+    $data->update(['Status' => 'Terverifikasi']);
+
+    return response()->json(['message' => 'Data successfully verified']);
 }
+
+
+
 
     public function create()
 {
-    return view('data.create');
+    return view('data.verifikasi.create');
 }
 
 public function store(Request $request)
@@ -67,7 +88,7 @@ public function store(Request $request)
 
     Data::create($validatedData);
 
-    return redirect()->route('data.index')->with('success', 'Data created successfully');
+    return redirect()->route('data.verifikasi.index')->with('success', 'Data created successfully');
 }
 
 
@@ -75,7 +96,7 @@ public function store(Request $request)
     public function edit($id)
 {
     $data = Data::findOrFail($id);
-    return view('data.edit', compact('data'));
+    return view('data.verifikasi.edit', compact('data'));
 }
 
 
@@ -98,7 +119,7 @@ public function update(Request $request, $id)
 
     Alert::success('Success', 'Data updated successfully')->autoClose(3000);
 
-    return redirect()->route('data.index');
+    return redirect()->route('data.verifikasi.index');
 }
 
 

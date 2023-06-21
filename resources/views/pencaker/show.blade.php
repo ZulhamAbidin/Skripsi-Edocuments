@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+<script>
+    window.print();
+</script>
+
 @section('container')
 <div class="container">
     <h1>Detail Data Pencaker</h1>
