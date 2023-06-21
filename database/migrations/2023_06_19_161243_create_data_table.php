@@ -26,5 +26,4 @@ class CreateDataTable extends Migration
     {
         Schema::dropIfExists('data');
     }
-}
-
+};

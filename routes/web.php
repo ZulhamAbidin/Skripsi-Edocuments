@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DataController;
-
+use App\Http\Controllers\PencakerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,5 +32,30 @@ Route::put('data/{id}', [DataController::class, 'update'])->name('data.update');
 Route::delete('data/{id}', [DataController::class, 'destroy'])->name('data.destroy');
 
 Route::get('/data/create', [DataController::class, 'create'])->name('data.create');
+
+
+// routes/web.php
+
+
+// routes/web.php
+
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::prefix('pencaker')->name('pencaker.')->group(function () {
+//         Route::get('/', [PencakerController::class, 'index'])->name('index');
+//     });
+// });
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/pencaker', [PencakerController::class, 'index'])->name('pencaker.index');
+    Route::get('/pencaker/create', [PencakerController::class, 'create'])->name('pencaker.create');
+    Route::post('/pencaker', [PencakerController::class, 'store'])->name('pencaker.store');
+    Route::get('/pencaker/{id}', [PencakerController::class, 'show'])->name('pencaker.show');
+    Route::get('/pencaker/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
+    Route::put('/pencaker/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
+    Route::delete('/pencaker/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
+});
+
+
 
 require __DIR__.'/auth.php';
