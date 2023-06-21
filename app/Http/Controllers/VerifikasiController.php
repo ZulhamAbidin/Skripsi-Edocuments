@@ -28,15 +28,10 @@ class VerifikasiController extends Controller
                 ->addColumn('action', function ($row) {
                     $editUrl = route('data.verifikasi.edit', ['id' => $row->id]);
                     $deleteUrl = route('data.verifikasi.destroy', ['id' => $row->id]);
-                    $btn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
-                    $btn .= '<button class="btn btn-sm btn-danger deleteData" data.verifikasi-id="' . $row->id . '">Delete</button>';
-                   $btn .= '<button class="btn btn-sm btn-success verifyData" data-verifikasi-id="' . $row->id . '">Verify</button>'; // Tombol Verifikasi
- // Tombol Verifikasi
-                    return $btn;
-
-                    // $btn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
-                    // $btn .= '<button class="btn btn-sm btn-danger deleteData" data.verifikasi-id="' . $row->id . '">Delete</button>';
-                    // return $btn;
+                    $btnn = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary block my-1 editData">Edit</a>';
+                    $btnn .= '<button class="btn btn-sm btn-danger deleteData2" data-id="' . $row->id . '">Delete</button>';
+                    $btnn .= '<button class="btn btn-sm btn-success verifyData" data-verifikasi-id="' . $row->id . '">Verify</button>';
+                    return $btnn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -54,8 +49,6 @@ class VerifikasiController extends Controller
 
     return response()->json(['message' => 'Data successfully verified']);
 }
-
-
 
 
     public function create()

@@ -171,7 +171,7 @@ window.addEventListener('load', function () {
     // Edit data
     $('body').on('click', '.editData', function () {
         var id = $(this).data('id');
-        var url = "{{ url('data') }}" + '/' + id + '/edit';
+        var url = "{{ url('data/verifikasi') }}" + '/' + id + '/edit';
 
         $.get(url, function (data) {
             $('#addDataForm').trigger('reset');
@@ -189,7 +189,7 @@ window.addEventListener('load', function () {
         });
     });
 
-    // Update data
+    //Update data
     $('#addDataForm').on('submit', function (e) {
         e.preventDefault();
         var url = $(this).attr('action');
@@ -209,7 +209,7 @@ window.addEventListener('load', function () {
         });
     });
 
-        
+    // Verifikasi data    
     $(document).on('click', '.verifyData', function () {
         var id = $(this).data('verifikasi-id');
         var url = "{{ url('data/verifikasi') }}" + "/" + id;
@@ -251,39 +251,39 @@ window.addEventListener('load', function () {
         });
     });
 
-    // Hapus data
-   $('body').on('click', '.deleteData', function () {
-       var id = $(this).data('id');
-       var url = "{{ url('data/verifikasi') }}" + '/' + id;
 
-       Swal.fire({
-           title: 'Apakah Anda yakin?',
-           text: "Data akan dihapus permanen!",
-           icon: 'warning',
-           showCancelButton: true,
-           confirmButtonColor: '#3085d6',
-           cancelButtonColor: '#d33',
-           confirmButtonText: 'Ya, hapus',
-           cancelButtonText: 'Batal'
-       }).then((result) => {
-           if (result.isConfirmed) {
-               $.ajax({
-                   url: url,
-                   type: 'DELETE',
-                   headers: {
-                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                   },
-                   success: function (response) {
-                       table.ajax.reload();
-                       Swal.fire('Berhasil', response.message, 'success');
-                   },
-                   error: function (xhr) {
-                       Swal.fire('Error', xhr.responseJSON.message, 'error');
-                   }
-               });
-           }
-       });
-   });
+    
+    // Hapus data
+    $('body').on('click', '.deleteData', function () {
+        var id = $(this).data('id');
+        var url = "{{ url('data.verifikasi') }}" + '/' + id;
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data akan dihapus permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    success: function (response) {
+                        table.ajax.reload();
+                        Swal.fire('Berhasil', response.message, 'success');
+                    },
+                    error: function (xhr) {
+                        Swal.fire('Error', xhr.responseJSON.message, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    
 });
     </script>
 

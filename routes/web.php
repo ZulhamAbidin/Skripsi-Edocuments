@@ -41,7 +41,10 @@ Route::get('data/verifikasi/{id}/edit', [VerifikasiController::class, 'edit'])->
 Route::put('data/verifikasi/{id}', [VerifikasiController::class, 'update'])->name('data.verifikasi.update');
 
 
-Route::delete('data/verifikasi/{id}', [VerifikasiController::class, 'destroy'])->name('data.verifikasi.destroy');
+Route::delete('data/{id}', [VerifikasiController::class, 'destroy'])->name('data.destroy');
+
+
+Route::delete('/delete/{id}', [VerifikasiController::class, 'destroy'])->name('data.verifikasi.destroy');
 Route::get('/data/verifikasi/create', [VerifikasiController::class, 'create'])->name('data.verifikasi.create');
 
 Route::put('/data/verifikasi/{id}', [VerifikasiController::class, 'verifikasi'])->name('data.verifikasi.verifikasi');
