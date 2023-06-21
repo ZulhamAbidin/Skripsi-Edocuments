@@ -11,7 +11,10 @@ class PencakerController extends Controller
    public function index()
     {
         $user = Auth::user();
-        $pencakerData = $user->data;
+        $pencakerData = $user->data()->where('Status', 'Terverifikasi')->get();
+
+        // $user = Auth::user();
+        // $pencakerData = $user->data;
 
         return view('pencaker.index', compact('pencakerData'));
     }
@@ -47,7 +50,7 @@ class PencakerController extends Controller
 
         $user->data()->save($pencaker);
 
-        return redirect()->route('pencaker.index')->with('success', 'Data Anda Disimpan Silahkan Hubungi Admin Untuk Memverifikasi Data Anda.');
+        return redirect()->route('pencaker.index')->with('success', 'Data Anda Disimpan Silahkan Hubungi Admin Untuk Memverifikasi Dan Mencetak Data Anda Data Anda.');
     }
 
     public function show($id)
@@ -119,5 +122,6 @@ class PencakerController extends Controller
 
         return redirect()->route('pencaker.index')->with('success', 'Data pencaker berhasil dihapus.');
     }
+        
 }
 

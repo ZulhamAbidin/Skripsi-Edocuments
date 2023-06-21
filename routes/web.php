@@ -45,7 +45,7 @@ Route::get('/data/create', [DataController::class, 'create'])->name('data.create
 //     });
 // });
 
-
+//HALAMAN PESERTA PENGESAHAN
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/pencaker', [PencakerController::class, 'index'])->name('pencaker.index');
     Route::get('/pencaker/create', [PencakerController::class, 'create'])->name('pencaker.create');
@@ -56,6 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/pencaker/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
 });
 
+// Route::get('/pencaker/print/{id}', [PencakerController::class, 'print'])->name('pencaker.print');
+ // Route::get('/pencaker/print', 'Pencaker\PencakerController@printVerifiedData')->name('pencaker.print');
+// Route::get('/pencaker/print', [PencakerController::class, 'printVerifiedData'])->name('pencaker.print');
 
 
 require __DIR__.'/auth.php';

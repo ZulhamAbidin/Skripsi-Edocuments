@@ -4,10 +4,10 @@
 <div class="container">
     <h1>Detail Data Pencaker</h1>
     <table class="table mt-3">
-        <tr>
+        {{-- <tr>
             <th>ID</th>
             <td>{{ $pencakerData->id }}</td>
-        </tr>
+        </tr> --}}
         <tr>
             <th>NIK</th>
             <td>{{ $pencakerData->NIK }}</td>

@@ -137,7 +137,7 @@
             { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
             { data: 'Jurusan', name: 'Jurusan' },
             { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
-            // { data: 'Status', name: 'Status' },
+            { data: 'Status', name: 'Status' },
             { data: 'action', name: 'action', orderable: false, searchable: false },
         ],
     });

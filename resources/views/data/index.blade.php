@@ -28,7 +28,7 @@
                                     <th>Pendidikan Terakhir</th>
                                     <th>Jurusan</th>
                                     <th>Tanggal Pengesahan</th>
-                                    {{-- <th>Status</th> --}}
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
