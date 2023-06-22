@@ -41,7 +41,8 @@
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 
     <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all"
+        href="{{ asset('assets/colors/color1.css') }}" />
 
 </head>
 
@@ -104,10 +105,10 @@
 
 
     <!-- INTERNAL Notifications js -->
-    <script src="{{ asset('assets/plugins/notify/js/rainbow.js')}}"></script>
-    <script src="{{ asset('assets/plugins/notify/js/sample.js')}}"></script>
-    <script src="{{ asset('assets/plugins/notify/js/jquery.growl.js')}}"></script>
-    <script src="{{ asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{ asset('assets/plugins/notify/js/rainbow.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notify/js/sample.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notify/js/jquery.growl.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notify/js/notifIt.js') }}"></script>
 
     <!-- INTERNAL File-Uploads Js-->
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
@@ -115,178 +116,7 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-    <script>
-        $(function () {
-
-    $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-    });
-var table = $('.data-table2').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: {
-        url: "{{ route('data.verifikasi.index') }}",
-        data: function (d) {
-            d.verifikasi = true; // Mengirim parameter verifikasi = true untuk memfilter data tidak terverifikasi
-        }
-    },
-    columns: [
-        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-        { data: 'NIK', name: 'NIK' },
-        { data: 'NamaLengkap', name: 'NamaLengkap' },
-        { data: 'AlamatDomisili', name: 'AlamatDomisili' },
-        { data: 'JenisKelamin', name: 'JenisKelamin' },
-        { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
-        { data: 'Jurusan', name: 'Jurusan' },
-        { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
-        { data: 'Status', name: 'Status' },
-        { data: 'action', name: 'action', orderable: false, searchable: false },
-    ],
-});
-
-window.addEventListener('load', function () {
-    @if(session('success'))
-    Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: '{{ session('success') }}',
-        showConfirmButton: false,
-        timer: 3000
-    });
-    @endif
-});
-
-
-    
-    // Tambah data
-    $('#addData').click(function () {
-        $('#addDataForm').trigger('reset');
-        $('#addDataModal').modal('show');
-    });
-
-   
-
-    // Edit data
-    $('body').on('click', '.editData', function () {
-        var id = $(this).data('id');
-        var url = "{{ url('data/verifikasi') }}" + '/' + id + '/edit';
-
-        $.get(url, function (data) {
-            $('#addDataForm').trigger('reset');
-            $('#addDataModal').modal('show');
-            $('#addDataModalLabel').text('Edit Data');
-            $('#addDataForm').attr('action', "{{ url('data') }}" + '/' + id);
-            $('#addDataForm #NIK').val(data.NIK);
-            $('#addDataForm #NamaLengkap').val(data.NamaLengkap);
-            $('#addDataForm #AlamatDomisili').val(data.AlamatDomisili);
-            $('#addDataForm #JenisKelamin').val(data.JenisKelamin);
-            $('#addDataForm #PendidikanTerakhir').val(data.PendidikanTerakhir);
-            $('#addDataForm #Jurusan').val(data.Jurusan);
-            $('#addDataForm #TanggalPengesahan').val(data.TanggalPengesahan);
-            $('#addDataForm #Status').val(data.Status);
-        });
-    });
-
-    //Update data
-    $('#addDataForm').on('submit', function (e) {
-        e.preventDefault();
-        var url = $(this).attr('action');
-        
-        $.ajax({
-            url: url,
-            type: 'PUT',
-            data: $(this).serialize(),
-            success: function (response) {
-                $('#addDataModal').modal('hide');
-                table.ajax.reload();
-                Swal.fire('Berhasil', response.message, 'success');
-            },
-            error: function (xhr) {
-                Swal.fire('Error', xhr.responseJSON.message, 'error');
-            }
-        });
-    });
-
-    // Verifikasi data    
-    $(document).on('click', '.verifyData', function () {
-        var id = $(this).data('verifikasi-id');
-        var url = "{{ url('data/verifikasi') }}" + "/" + id;
-
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Anda yakin ingin memverifikasi data ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Verifikasi',
-            cancelButtonText: 'Batal',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: url,
-                    type: 'PUT',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: response.message,
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                        table.ajax.reload(); // Refresh tabel setelah verifikasi berhasil
-                    },
-                    error: function (xhr) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Terjadi kesalahan. Silakan coba lagi.',
-                        });
-                    }
-                });
-            }
-        });
-    });
-
-
-    
-    // Hapus data
-    $('body').on('click', '.deleteData', function () {
-        var id = $(this).data('id');
-        var url = "{{ url('data.verifikasi') }}" + '/' + id;
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Data akan dihapus permanen!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    success: function (response) {
-                        table.ajax.reload();
-                        Swal.fire('Berhasil', response.message, 'success');
-                    },
-                    error: function (xhr) {
-                        Swal.fire('Error', xhr.responseJSON.message, 'error');
-                    }
-                });
-            }
-        });
-    });
-
-    
-});
-    </script>
-
+  
     @include('sweetalert::alert')
 
 </body>

@@ -21,10 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::prefix('dashboard')->group(function () {
-//     Route::resource('data', DataController::class);
-// });
-
 //RENDERING DATA TERVERIFIKASI
 Route::get('data', [DataController::class, 'index'])->name('data.index')->middleware('Verifikasi');
 Route::post('data/store', [DataController::class, 'store'])->name('data.store');
@@ -33,40 +29,20 @@ Route::put('data/{id}', [DataController::class, 'update'])->name('data.update');
 Route::delete('data/{id}', [DataController::class, 'destroy'])->name('data.destroy');
 Route::get('/data/create', [DataController::class, 'create'])->name('data.create');
 
-
 //RENDERING DATA YANG TIDAK TERVERIFIKASI
-Route::get('data/verifikasi', [VerifikasiController::class, 'index'])->name('data.verifikasi.index')->middleware('Verifikasi');
-Route::post('data/verifikasi/store', [VerifikasiController::class, 'store'])->name('data.verifikasi.store');
-Route::get('data/verifikasi/{id}/edit', [VerifikasiController::class, 'edit'])->name('data.verifikasi.edit');
-Route::put('data/verifikasi/{id}', [VerifikasiController::class, 'update'])->name('data.verifikasi.update');
-
-
-Route::delete('data/{id}', [VerifikasiController::class, 'destroy'])->name('data.destroy');
-
-
-Route::delete('/delete/{id}', [VerifikasiController::class, 'destroy'])->name('data.verifikasi.destroy');
-Route::get('/data/verifikasi/create', [VerifikasiController::class, 'create'])->name('data.verifikasi.create');
-
-Route::put('/data/verifikasi/{id}', [VerifikasiController::class, 'verifikasi'])->name('data.verifikasi.verifikasi');
-
-
-
+Route::get('/data/verifikasi', [VerifikasiController::class, 'index'])->name('data/verifikasi.index');
+Route::get('/data/verifikasi/create', [VerifikasiController::class, 'create'])->name('data/verifikasi.create');
+Route::post('/data/verifikasi', [VerifikasiController::class, 'store'])->name('data/verifikasi.store');
+Route::get('/data/verifikasi/{data/verifikasi}/edit', [VerifikasiController::class, 'edit'])->name('data/verifikasi.edit');
+Route::put('/data/verifikasi/{data/verifikasi}', [VerifikasiController::class, 'update'])->name('data/verifikasi.update');
+Route::delete('/data/verifikasi/{data/verifikasi}', [VerifikasiController::class, 'destroy'])->name('data/verifikasi.destroy');
+Route::get('/data/verifikasi/verify/{id}', [VerifikasiController::class, 'verify'])->name('data/verifikasi.verify');
 
 //HALAMAN PESERTA PENGESAHAN
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/pencaker', [PencakerController::class, 'index'])->name('pencaker.index');
-    Route::get('/pencaker/create', [PencakerController::class, 'create'])->name('pencaker.create');
-    Route::post('/pencaker', [PencakerController::class, 'store'])->name('pencaker.store');
-    Route::get('/pencaker/{id}', [PencakerController::class, 'show'])->name('pencaker.show');
-    Route::get('/pencaker/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
-    Route::put('/pencaker/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
-    Route::delete('/pencaker/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
+Route::group(['prefix' => 'data/verifikasi', 'as' => 'verifikasi.'], function () {
+    Route::get('/', [VerifikasiController::class, 'index'])->name('index');
+    Route::get('/verify/{id}', [VerifikasiController::class, 'verify'])->name('verify');
+    Route::delete('/destroy/{data}', [VerifikasiController::class, 'destroy'])->name('destroy');
 });
-
-
-// Route::get('/pencaker/print/{id}', [PencakerController::class, 'print'])->name('pencaker.print');
- // Route::get('/pencaker/print', 'Pencaker\PencakerController@printVerifiedData')->name('pencaker.print');
-// Route::get('/pencaker/print', [PencakerController::class, 'printVerifiedData'])->name('pencaker.print');
-
 
 require __DIR__.'/auth.php';
