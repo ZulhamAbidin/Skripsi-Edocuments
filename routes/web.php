@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PencakerController;
 use App\Http\Controllers\VerifikasiController;
 
@@ -44,5 +45,16 @@ Route::group(['prefix' => 'data/verifikasi', 'as' => 'verifikasi.'], function ()
     Route::get('/verify/{id}', [VerifikasiController::class, 'verify'])->name('verify');
     Route::delete('/destroy/{data}', [VerifikasiController::class, 'destroy'])->name('destroy');
 });
+
+
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+    Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
+    Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+    Route::get('/documents/{id}/view', [DocumentController::class, 'view'])->name('documents.view');
+    Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
+});
+
 
 require __DIR__.'/auth.php';
