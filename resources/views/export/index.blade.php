@@ -29,64 +29,58 @@
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 
 @push('scripts')
-    <script>
-        $(function() {
-            $('#dataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('export.data') }}",
-                columns: [{
-                        data: 'NIK',
-                        name: 'NIK'
-                    },
-                    {
-                        data: 'NamaLengkap',
-                        name: 'NamaLengkap'
-                    },
-                    {
-                        data: 'AlamatDomisili',
-                        name: 'AlamatDomisili'
-                    },
-                    {
-                        data: 'JenisKelamin',
-                        name: 'JenisKelamin'
-                    },
-                    {
-                        data: 'PendidikanTerakhir',
-                        name: 'PendidikanTerakhir'
-                    },
-                    {
-                        data: 'Jurusan',
-                        name: 'Jurusan'
-                    },
-                    {
-                        data: 'TanggalPengesahan',
-                        name: 'TanggalPengesahan'
-                    },
-                    {
-                        data: 'Status',
-                        name: 'Status'
+   <script>
+    $(function() {
+        $('#dataTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('export.data') }}",
+            columns: [
+                { data: 'NIK', name: 'NIK' },
+                { data: 'NamaLengkap', name: 'NamaLengkap' },
+                { data: 'AlamatDomisili', name: 'AlamatDomisili' },
+                { data: 'JenisKelamin', name: 'JenisKelamin' },
+                { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
+                { data: 'Jurusan', name: 'Jurusan' },
+                { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
+                { data: 'Status', name: 'Status' }
+            ],
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Export to Excel'
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Export to PDF',
+                    customize: function(doc) {
+                        // Tambahkan header dari file header.blade.php
+                        var headerView = '{!! addslashes(view('export.header')) !!}';
+                        var headerHtml = $('<div>').html(headerView).text();
+                        doc.content.splice(0, 0, {
+                            margin: [0, 0, 0, 10],
+                            alignment: 'center',
+                            layout: 'noBorders',
+                            table: {
+                                widths: ['*'],
+                                body: [
+                                    [{
+                                        stack: [
+                                            {
+                                                text: headerHtml,
+                                                alignment: 'center',
+                                                margin: [0, 0, 0, 5]
+                                            }
+                                        ]
+                                    }]
+                                ]
+                            }
+                        });
                     }
-                ],
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'excel',
-                        text: 'Export to Excel'
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'Export to PDF',
-                        customize: function(doc) {
-                            // Tambahkan header ke halaman PDF
-                            doc.content.splice(0, 0, {
-                                text: 'Header PDF',
-                                alignment: 'center',
-                                margin: [0, 0, 0, 10]
-                            });
-                        }
-                    }
-                ]
-            });
+                }
+            ]
         });
-    </script>
+    });
+</script>
 @endpush
