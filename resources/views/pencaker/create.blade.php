@@ -37,7 +37,6 @@
             <label for="status">Status</label>
             <select class="form-control" id="status" name="Status">
                 <option value="BelumTerverifikasi">Belum Terverifikasi</option>
-                <option value="Terverifikasi">Terverifikasi</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>

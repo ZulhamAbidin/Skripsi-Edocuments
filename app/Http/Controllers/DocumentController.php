@@ -92,7 +92,6 @@ class DocumentController extends Controller
         }
     }
 
-
     public function delete($id)
     {
         $document = Document::findOrFail($id);
@@ -109,44 +108,44 @@ class DocumentController extends Controller
         return response()->json(['message' => 'Document deleted successfully.']);
     }
 
+    public function edit($id)
+    {
+        $document = Document::findOrFail($id);
 
-    
-public function edit($id)
-{
-    $document = Document::findOrFail($id);
-
-    return response()->json(['document' => $document]);
-}
-public function update(Request $request, $id)
-{
-    $document = Document::findOrFail($id);
-
-    $request->validate([
-        'title' => 'required',
-        'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
-    ]);
-
-    $document->title = $request->title;
-
-    if ($request->hasFile('file')) {
-        // Hapus file lama jika ada
-        $oldFilePath = storage_path('app/public/' . $document->file_path);
-        if (file_exists($oldFilePath)) {
-            unlink($oldFilePath);
-        }
-
-        // Unggah file baru
-        $file = $request->file('file');
-        $fileName = str_replace(' ', '_', $file->getClientOriginalName());
-        $filePath = $file->storeAs('uploads', $fileName, 'public');
-
-        $document->file_path = $filePath;
+        return response()->json(['document' => $document]);
     }
 
-    $document->save();
+    
+    public function update(Request $request, $id)
+    {
+        $document = Document::findOrFail($id);
 
-    return redirect()->route('documents.index')->with('success', 'Dokumen berhasil diperbarui');
-}
+        $request->validate([
+            'title' => 'required',
+            'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
+        ]);
 
+        $document->title = $request->title;
 
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            $oldFilePath = storage_path('app/public/' . $document->file_path);
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+
+            // Unggah file baru
+            $file = $request->file('file');
+            $fileName = str_replace(' ', '_', $file->getClientOriginalName());
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+            $document->file_path = $filePath;
+        }
+
+        $document->save();
+
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'Dokumen berhasil diperbarui');
+    }
 }

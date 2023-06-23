@@ -5,7 +5,7 @@
 <div class="container">
     <h1>Tambah Data</h1>
 
-    <form action="{{ route('data.store') }}" method="POST">
+    <form action="{{ route('data.verifikasi.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="NIK" class="form-label">NIK</label>

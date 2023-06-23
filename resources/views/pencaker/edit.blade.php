@@ -40,7 +40,7 @@
             <input type="date" class="form-control" id="tanggal_pengesahan" name="TanggalPengesahan"
                 value="{{ $pencakerData->TanggalPengesahan }}" required>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="status" name="Status">
                 <option value="BelumTerverifikasi" {{ $pencakerData->Status == 'BelumTerverifikasi' ? 'selected' : ''
@@ -48,7 +48,7 @@
                 <option value="Terverifikasi" {{ $pencakerData->Status == 'Terverifikasi' ? 'selected' : ''
                     }}>Terverifikasi</option>
             </select>
-        </div>
+        </div> --}}
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>

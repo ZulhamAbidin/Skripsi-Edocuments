@@ -46,11 +46,11 @@ class PencakerController extends Controller
         $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
         $pencaker->Jurusan = $request->input('Jurusan');
         $pencaker->TanggalPengesahan = $request->input('TanggalPengesahan');
-        $pencaker->Status = 'BelumTerverifikasi';
+        // $pencaker->Status = 'BelumTerverifikasi';
 
         $user->data()->save($pencaker);
 
-        return redirect()->route('pencaker.index')->with('success', 'Data Anda Disimpan Silahkan Hubungi Admin Untuk Memverifikasi Dan Mencetak Data Anda Data Anda.');
+        return redirect()->route('pencaker.index')->with('success', 'Selanjutnya Ke Admin Agar Data Anda Segera Diverifikasi');
     }
 
     public function show($id)
@@ -106,7 +106,7 @@ class PencakerController extends Controller
 
         $pencaker->save();
 
-        return redirect()->route('pencaker.index')->with('success', 'Data pencaker berhasil diperbarui.');
+        return redirect()->route('pencaker.index')->with('success', 'Data Anda berhasil diperbarui.');
     }
 
     public function destroy($id)

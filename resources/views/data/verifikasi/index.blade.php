@@ -1,9 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.verifikasi')
 
 @section('container')
 <div class="container">
-
-    <h1>Data Verifikasi</h1>
+    <h1>Pengajuan Pengesahan</h1>
 
     <table class="table table-striped">
         <thead>
@@ -34,11 +33,11 @@
                     <form action="{{ route('verifikasi.destroy', $item) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDeletion(event)">Hapus</button>
                     </form>
-                    @if ($item->Status === 'Belum Terverifikasi')
-                    <a href="{{ route('verifikasi.verify', $item->id) }}" class="btn btn-success btn-sm">Verifikasi</a>
+                    @if ($item->Status === 'BelumTerverifikasi')
+                    <button class="btn btn-success btn-sm"
+                        onclick="confirmVerification({{ $item->id }})">Verifikasi</button>
                     @endif
                 </td>
             </tr>
@@ -46,4 +45,50 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function confirmVerification(id) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin memverifikasi data ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('verifikasi.verify', '') }}/" + id;
+            } else {
+                Swal.fire({
+                    title: 'Dibatalkan',
+                    text: 'Verifikasi data dibatalkan.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    }
+</script>
+
+<script>
+    function confirmDeletion(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.form.submit();
+            }
+        });
+    }
+</script>
 @endsection

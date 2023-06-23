@@ -10,7 +10,7 @@ class VerifikasiController extends Controller
 {
     public function index()
     {
-        $data = Data::where('Status', 'Belum Terverifikasi')->get();
+        $data = Data::where('Status', 'BelumTerverifikasi')->get();
         return view('data.verifikasi.index', compact('data'));
     }
 
@@ -19,7 +19,7 @@ class VerifikasiController extends Controller
         $data = Data::findOrFail($id);
         $data->update(['Status' => 'Terverifikasi']);
 
-        Alert::success('Sukses', 'Data berhasil diverifikasi!')->persistent(true)->autoClose(3000);
+        Alert::success('Sukses', 'Data diverifikasi!')->persistent(true)->autoClose(3000);
 
         return redirect()->route('verifikasi.index');
     }
