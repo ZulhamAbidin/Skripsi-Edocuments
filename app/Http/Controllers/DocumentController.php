@@ -12,36 +12,33 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DocumentController extends Controller
 {
-  public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $documents = Document::select(['id', 'title', 'file_path']);
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $documents = Document::select(['id', 'title', 'file_path']);
 
-        return DataTables::of($documents)
-            ->addColumn('action', function ($document) {
-                $actionButtons = '';
+            return DataTables::of($documents)
+                ->addColumn('action', function ($document) {
+                    $actionButtons = '';
 
-                $extension = pathinfo($document->file_path, PATHINFO_EXTENSION);
-                if (in_array($extension, ['jpg', 'jpeg', 'png', 'pdf'])) {
-                    // Hanya menampilkan tombol "View" jika file adalah gambar atau PDF
-                    $actionButtons .= '<a href="' . route('documents.view', $document->id) . '" target="_blank" class="btn btn-primary btn-sm">View</a>';
-                }
+                    $extension = pathinfo($document->file_path, PATHINFO_EXTENSION);
+                    if (in_array($extension, ['jpg', 'jpeg', 'png', 'pdf'])) {
+                        // Hanya menampilkan tombol "View" jika file adalah gambar atau PDF
+                        $actionButtons .= '<a href="' . route('documents.view', $document->id) . '" target="_blank" class="btn btn-primary btn-sm">View</a>';
+                    }
 
-                $actionButtons .= '<a href="' . route('documents.download', $document->id) . '" class="btn btn-success btn-sm">Download</a>';
-                $actionButtons .= '<button class="btn btn-warning btn-sm edit-document" data-toggle="modal" data-target="#editModal" data-document-id="' . $document->id . '">Edit</button>';
-                $actionButtons .= '<a href="#" class="btn btn-danger btn-sm delete-document" data-document-id="' . $document->id . '">Delete</a>';
-                
-                return $actionButtons;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    $actionButtons .= '<a href="' . route('documents.download', $document->id) . '" class="btn btn-success btn-sm">Download</a>';
+                    $actionButtons .= '<button class="btn btn-warning btn-sm edit-document" data-toggle="modal" data-target="#editModal" data-document-id="' . $document->id . '" data-document-title="' . $document->title . '">Edit</button>';
+                    $actionButtons .= '<a href="#" class="btn btn-danger btn-sm delete-document" data-document-id="' . $document->id . '">Delete</a>';
+
+                    return $actionButtons;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('documents.index');
     }
-
-    return view('documents.index');
-}
-
-
-
 
     public function create()
     {
@@ -51,9 +48,8 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-    'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
-]);
-
+            'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
+        ]);
 
         $file = $request->file('file');
         $fileName = str_replace(' ', '_', $file->getClientOriginalName());
@@ -95,43 +91,62 @@ class DocumentController extends Controller
             abort(404);
         }
     }
-public function delete($id)
-{
-    $document = Document::findOrFail($id);
 
-    // Hapus file terlebih dahulu
-    $filePath = storage_path('app/public/' . $document->file_path);
-    if (file_exists($filePath)) {
-        unlink($filePath);
+
+    public function delete($id)
+    {
+        $document = Document::findOrFail($id);
+
+        // Hapus file terlebih dahulu
+        $filePath = storage_path('app/public/' . $document->file_path);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // Hapus data document dari database
+        $document->delete();
+
+        return response()->json(['message' => 'Document deleted successfully.']);
     }
 
-    // Hapus data document dari database
-    $document->delete();
 
-    return response()->json(['message' => 'Document deleted successfully.']);
-}
+    
 public function edit($id)
 {
     $document = Document::findOrFail($id);
 
-    return response()->json(['title' => $document->title]);
+    return response()->json(['document' => $document]);
 }
-
 public function update(Request $request, $id)
 {
     $document = Document::findOrFail($id);
 
     $request->validate([
         'title' => 'required',
+        'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
     ]);
 
     $document->title = $request->title;
+
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        $oldFilePath = storage_path('app/public/' . $document->file_path);
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
+        }
+
+        // Unggah file baru
+        $file = $request->file('file');
+        $fileName = str_replace(' ', '_', $file->getClientOriginalName());
+        $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+        $document->file_path = $filePath;
+    }
+
     $document->save();
 
-    return response()->json(['message' => 'Document title updated successfully.']);
+    return redirect()->route('documents.index')->with('success', 'Dokumen berhasil diperbarui');
 }
-
-
 
 
 }

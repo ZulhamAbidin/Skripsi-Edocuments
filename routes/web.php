@@ -55,9 +55,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/documents/{id}/view', [DocumentController::class, 'view'])->name('documents.view');
     Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
     Route::delete('documents/{id}', [DocumentController::class, 'delete'])->name('documents.destroy');
-Route::get('documents/{id}/edit', [DocumentController::class, 'edit']);
-Route::put('documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
 
+    
+Route::get('/documents/{id}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
+Route::put('/documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
 
 
 });
