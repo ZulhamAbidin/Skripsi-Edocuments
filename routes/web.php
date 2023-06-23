@@ -54,6 +54,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/{id}/view', [DocumentController::class, 'view'])->name('documents.view');
     Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
+    Route::delete('documents/{id}', [DocumentController::class, 'delete'])->name('documents.destroy');
+Route::get('documents/{id}/edit', [DocumentController::class, 'edit']);
+Route::put('documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
+
+
+
 });
 
 
