@@ -7,6 +7,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PencakerController;
 use App\Http\Controllers\VerifikasiController;
+use App\Http\Controllers\ExportController;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
+
+
+Route::get('/export', [ExportController::class, 'index'])->name('export.index');
+Route::get('/export/data', [ExportController::class, 'getData'])->name('export.data');
 
 Route::get('/', function () {
     return view('welcome');
