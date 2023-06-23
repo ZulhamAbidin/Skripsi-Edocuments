@@ -18,9 +18,6 @@ class ExportController extends Controller
     {
         $data = Data::select(['id', 'NIK', 'NamaLengkap', 'AlamatDomisili', 'JenisKelamin', 'PendidikanTerakhir', 'Jurusan', 'TanggalPengesahan', 'Status']);
         return DataTables::of($data)->make(true);
-    }
-
-    
-
+    } 
 
 }
