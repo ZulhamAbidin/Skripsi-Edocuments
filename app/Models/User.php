@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Data;
+use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,11 @@ class User extends Authenticatable
     public function data()
     {
         return $this->hasMany(Data::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -50,8 +56,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     
-    
-     
 
 
 }

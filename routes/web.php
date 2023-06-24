@@ -1,15 +1,16 @@
 <?php
 
 
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PencakerController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VerifikasiController;
-use App\Http\Controllers\ExportController;
-use Dompdf\Dompdf;
-use Illuminate\Support\Facades\View;
 
 
 Route::get('/export', [ExportController::class, 'index'])->name('export.index');
@@ -29,19 +30,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::middleware('auth')->group(function () {
     //RENDERING DATA TERVERIFIKASI
-    Route::get('data', [DataController::class, 'index'])->name('data.index')->middleware('Verifikasi');
+    Route::get('data', [DataController::class, 'index'])->name('data.index');
     Route::post('data/store', [DataController::class, 'store'])->name('data.store');
     Route::get('data/{id}/edit', [DataController::class, 'edit'])->name('data.edit');
     Route::put('data/{id}', [DataController::class, 'update'])->name('data.update');
+    
     Route::delete('data/{id}', [DataController::class, 'destroy'])->name('data.destroy');
     Route::get('/data/create', [DataController::class, 'create'])->name('data.create');
-Route::get('/data/export', [DataController::class, 'export'])->name('data.export');
-
-Route::get('/data/print', [DataController::class, 'print'])->name('data.print');
-
+        
+    Route::get('/data/export', [DataController::class, 'export'])->name('data.export');
+    Route::get('/data/print', [DataController::class, 'print'])->name('data.print');
 
     //RENDERING DATA YANG TIDAK TERVERIFIKASI
     Route::get('/data/verifikasi', [VerifikasiController::class, 'index'])->name('data/verifikasi.index');
@@ -75,6 +75,39 @@ Route::get('/data/print', [DataController::class, 'print'])->name('data.print');
     Route::put('/pencaker/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
     Route::delete('/pencaker/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
 
+});
+
+// Rute untuk pendaftaran siswa
+Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
+Route::post('/register', [RegisterController::class, 'registerSiswa']);
+
+// Rute untuk pendaftaran guru
+Route::get('/register/praktik-industi', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
+Route::post('/register/praktik-industi', [RegisterController::class, 'registerGuru']);
+
+Route::get('/register/admin', [RegisterController::class, 'showKepalaSekolahRegistrationForm'])->name('register.kepala-sekolah');
+Route::post('/register/admin', [RegisterController::class, 'registerKepalaSekolah'])->name('register.kepala-sekolah.submit');
+
+
+// Routes untuk siswa
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/siswa', function () {
+        return view('siswa');
+    })->name('siswa');
+});
+
+// Routes untuk guru
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/guru', function () {
+        return view('guru');
+    })->name('guru');
+});
+
+// Routes untuk kepala sekolah
+Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
+    Route::get('/kepala-sekolah', function () {
+        return view('kepala-sekolah');
+    })->name('kepala-sekolah');
 });
 
 

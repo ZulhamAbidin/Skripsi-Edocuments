@@ -33,12 +33,12 @@
             <label for="tanggal_pengesahan">Tanggal Pengesahan</label>
             <input type="date" class="form-control" id="tanggal_pengesahan" name="TanggalPengesahan" required>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="status" name="Status">
-                <option value="BelumTerverifikasi">Belum Terverifikasi</option>
+                <option value="BelumTerverifikasi">BelumTerverifikasi</option>
             </select>
-        </div>
+        </div> --}}
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>

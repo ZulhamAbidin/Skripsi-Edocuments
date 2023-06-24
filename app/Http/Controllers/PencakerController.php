@@ -46,7 +46,7 @@ class PencakerController extends Controller
         $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
         $pencaker->Jurusan = $request->input('Jurusan');
         $pencaker->TanggalPengesahan = $request->input('TanggalPengesahan');
-        // $pencaker->Status = 'BelumTerverifikasi';
+        $pencaker->Status = 'BelumTerverifikasi';
 
         $user->data()->save($pencaker);
 
