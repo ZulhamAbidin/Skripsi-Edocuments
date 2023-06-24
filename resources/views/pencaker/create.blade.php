@@ -1,6 +1,4 @@
-@extends('layouts.main')
 
-@section('container')
 <div class="container">
     <h1>Tambah Data Pencaker</h1>
     <form action="{{ route('pencaker.store') }}" method="POST">
@@ -42,4 +40,3 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
-@endsection
