@@ -29,6 +29,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Cek role_id pengguna yang login
+        $user = $request->user();
+        if ($user->role_id == 3) {
+            return redirect()->route('pencaker.index');
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

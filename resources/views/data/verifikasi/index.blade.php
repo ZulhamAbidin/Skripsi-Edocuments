@@ -1,4 +1,4 @@
-@extends('layouts.verifikasi')
+@extends('layouts.main')
 
 @section('container')
 <div class="container">

@@ -20,12 +20,12 @@ Route::get('/', function () {
 Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
 Route::post('/register', [RegisterController::class, 'registerSiswa']);
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth', 'role:guru,kepala_sekolah')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('/pencaker', [PencakerController::class, 'index'])->name('pencaker.index');

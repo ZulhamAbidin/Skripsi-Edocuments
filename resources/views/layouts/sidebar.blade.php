@@ -39,11 +39,12 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)">DATA PEKERJA</a></li>
                         <li><a href="/data/" class="slide-item"> List Data</a></li>
+                        <li><a href="/data/verifikasi" class="slide-item"> Pengajuan Pengesahan</a></li>
                         <li><a href="/cetak/" class="slide-item"> Export Data</a></li>
                     </ul>
                 </li>
 
-                @can('admin')
+                @if(auth()->user()->role_id == 1)
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -75,7 +76,7 @@
                         <span class="side-menu__label">Create Account</span></a>
                 </li>
 
-                @endcan
+                @endif
 
 
                 <li class="sub-category">

@@ -36,7 +36,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('pencaker.create');
+        return redirect()->route('pencaker.index');
     }
 
     public function showGuruRegistrationForm()
