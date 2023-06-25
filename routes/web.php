@@ -13,6 +13,17 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VerifikasiController;
 
+
+use App\Http\Middleware\CheckWritePermission;
+
+
+
+Route::get('/data/verifikasi/index', [VerifikasiController::class, 'index'])->name('data.verifikasi.index');
+Route::delete('/data/verifikasi/{item}', [VerifikasiController::class, 'destroy'])->name('data.verifikasi.destroy');
+Route::post('/data/verifikasi/reject/{id}', [VerifikasiController::class, 'reject'])->name('data.verifikasi.reject');
+Route::get('/data/verifikasi/verifikasi/{id}', [VerifikasiController::class, 'verifikasi'])->name('data.verifikasi.verifikasi');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -57,6 +68,7 @@ Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
     Route::delete('/data/verifikasi/{data/verifikasi}', [VerifikasiController::class, 'destroy'])->name('data/verifikasi.destroy');
     Route::get('/data/verifikasi/verify/{id}', [VerifikasiController::class, 'verify'])->name('data/verifikasi.verify');
 
+
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
     Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
     Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
@@ -66,9 +78,10 @@ Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
     Route::get('/documents/{id}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
     Route::put('/documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
 
-    Route::get('/data/verifikasi', [VerifikasiController::class, 'index'])->name('verifikasi.index');
-    Route::get('/data/verifikasi/verify/{id}', [VerifikasiController::class, 'verify'])->name('verifikasi.verify');
-    Route::delete('/data/verifikasi/destroy/{data}', [VerifikasiController::class, 'destroy'])->name('verifikasi.destroy');
+
+ 
+
+
 
     Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
     Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);

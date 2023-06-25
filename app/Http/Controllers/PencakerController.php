@@ -11,10 +11,10 @@ class PencakerController extends Controller
    public function index()
     {
         $user = Auth::user();
-        $pencakerData = $user->data()->where('Status', 'Terverifikasi')->get();
+        // $pencakerData = $user->data()->where('Status', 'Terverifikasi')->get();
 
-        // $user = Auth::user();
-        // $pencakerData = $user->data;
+        $user = Auth::user();
+        $pencakerData = $user->data;
 
         return view('pencaker.index', compact('pencakerData'));
     }
@@ -120,7 +120,7 @@ class PencakerController extends Controller
 
         $pencaker->delete();
 
-        return redirect()->route('pencaker.index')->with('success', 'Data pencaker berhasil dihapus.');
+        return redirect()->route('pencaker.index')->with('success', 'Data Anda berhasil dihapus.');
     }
         
 }

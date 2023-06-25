@@ -66,4 +66,10 @@ class Kernel extends HttpKernel
         'Verifikasi' => \App\Http\Middleware\Verifikasi::class,
         'role' => \App\Http\Middleware\CheckRole::class,
     ];
+
+    protected $routeMiddleware = [
+    // ...
+    'checkWritePermission' => \App\Http\Middleware\CheckWritePermission::class,
+];
+
 }

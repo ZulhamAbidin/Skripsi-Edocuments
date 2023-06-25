@@ -4,32 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Models\Data;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class VerifikasiController extends Controller
 {
     public function index()
     {
-        $data = Data::where('Status', 'BelumTerverifikasi')->get();
+        $data = Data::all();
         return view('data.verifikasi.index', compact('data'));
     }
 
-    public function verify($id)
+    public function destroy(Data $item)
     {
-        $data = Data::findOrFail($id);
-        $data->update(['Status' => 'Terverifikasi']);
-
-        Alert::success('Sukses', 'Data diverifikasi!')->persistent(true)->autoClose(3000);
-
-        return redirect()->route('verifikasi.index');
+        $item->delete();
+        return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil dihapus');
     }
+public function reject(Request $request, $id)
+{
+    $this->validate($request, [
+        'alasan' => 'required',
+    ]);
 
-    public function destroy(Data $data)
+    DB::beginTransaction();
+
+    try {
+        $data = Data::findOrFail($id);
+        $data->Status = 'Ditolak';
+        $data->alasan_penolakan = $request->alasan; // Simpan alasan penolakan ke kolom "alasan_penolakan"
+        $data->save();
+
+        // Lakukan tindakan lain yang diperlukan, seperti mengirim notifikasi, dsb.
+
+        DB::commit();
+
+        return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil ditolak');
+    } catch (\Exception $e) {
+        DB::rollback();
+        throw $e;
+    }
+}
+
+    public function verifikasi($id)
     {
-        $data->delete();
+        DB::beginTransaction();
 
-        Alert::success('Sukses', 'Data berhasil dihapus!')->persistent(true)->autoClose(3000);
+        try {
+            $data = Data::findOrFail($id);
+            $data->Status = 'Terverifikasi';
+            $data->save();
 
-        return redirect()->route('verifikasi.index');
+            // Lakukan tindakan lain yang diperlukan, seperti mengirim notifikasi, dsb.
+
+            DB::commit();
+
+            return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil diverifikasi');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 }

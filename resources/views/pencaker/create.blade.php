@@ -1,5 +1,9 @@
-{{-- 
+@extends('layouts.main')
+
+@section('container')
+    
 <div class="container">
+    
     <h1>Tambah Data Pencaker</h1>
     <form action="{{ route('pencaker.store') }}" method="POST">
         @csrf
@@ -39,9 +43,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
-</div> --}}
-
-
+</div>
+@endsection
+{{-- 
 <!doctype html>
 <html>
 
@@ -95,4 +99,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
 </body>
 
-</html>
+</html> --}}

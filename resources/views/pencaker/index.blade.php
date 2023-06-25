@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             @foreach ($pencakerData as $data)
-            @if ($loop->first)
+            {{-- @if ($loop->first) --}}
             {{-- Hanya menampilkan satu data --}}
             <tr>
                 {{-- Tampilkan data --}}
@@ -38,10 +38,10 @@
                 <td>{{ $data->TanggalPengesahan }}</td>
                 <td>{{ $data->Status }}</td>
                 <td>
-                    @if ($data->Status !== 'BelumTerverifikasi')
+                    {{-- @if ($data->Status !== 'BelumTerverifikasi') --}}
                     <a href="{{ route('pencaker.show', $data->id) }}" class="button btn btn-primary">Print</a>
-                    @endif
-                    <a href="{{ route('pencaker.edit', $data->id) }}" class="btn btn-primary">Edit</a>
+                    {{-- @endif --}}
+                    {{-- <a href="{{ route('pencaker.edit', $data->id) }}" class="btn btn-primary">Edit</a> --}}
                     <form action="{{ route('pencaker.destroy', $data->id) }}" method="POST"
                         style="display: inline-block">
                         @csrf
@@ -50,16 +50,19 @@
                     </form>
                 </td>
             </tr>
-            @endif
+            {{-- @endif --}}
             @endforeach
         </tbody>
     </table>
     @endif
 </div>
 
+@endsection
 
-<script>
-    function confirmDeletion(event) {
+@push('scripts')
+    
+    <script>
+        function confirmDeletion(event) {
             event.preventDefault();
             Swal.fire({
                 title: 'Konfirmasi',
@@ -76,5 +79,15 @@
                 }
             });
         }
-</script>
-@endsection
+    
+        @if (session('success'))
+            Swal.fire({
+                title: 'Sukses',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
+@endpush
