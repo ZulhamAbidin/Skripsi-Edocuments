@@ -20,9 +20,9 @@
     <!-- Referensi ke file CSS SweetAlert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-    
+{{--     
     <!-- Referensi ke file JavaScript SweetAlert -->
-    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
 
 
 
@@ -76,7 +76,7 @@
     
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <script src="{{ asset('assets/dist/sweetalert2.all.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/sweetalert2.all.min.js') }}"></script> --}}
     <!-- JQUERY JS -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 
@@ -142,8 +142,6 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-
-    @include('sweetalert::alert')
 
     
     @stack('scripts')

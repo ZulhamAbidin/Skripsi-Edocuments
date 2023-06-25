@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,11 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PencakerController extends Controller
 {
-   public function index()
+    public function index()
     {
-        $user = Auth::user();
-        // $pencakerData = $user->data()->where('Status', 'Terverifikasi')->get();
-
         $user = Auth::user();
         $pencakerData = $user->data;
 
@@ -21,12 +17,22 @@ class PencakerController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
+
+        if ($user->data()->exists()) {
+            return redirect()->route('pencaker.index')->with('error', 'Anda sudah memiliki data yang terkait.');
+        }
+
         return view('pencaker.create');
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
+
+        if ($user->data()->exists()) {
+            return redirect()->route('pencaker.index')->with('error', 'Anda sudah memiliki data yang terkait.');
+        }
 
         $request->validate([
             'NIK' => 'required|unique:data',
@@ -51,18 +57,6 @@ class PencakerController extends Controller
         $user->data()->save($pencaker);
 
         return redirect()->route('pencaker.index')->with('success', 'Selanjutnya Ke Admin Agar Data Anda Segera Diverifikasi');
-    }
-
-    public function show($id)
-    {
-        $pencakerData = Data::findOrFail($id);
-        $user = Auth::user();
-
-        if ($pencakerData->user_id !== $user->id) {
-            return redirect()->route('pencaker.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
-        }
-
-        return view('pencaker.show', compact('pencakerData'));
     }
 
     public function edit($id)
@@ -122,6 +116,5 @@ class PencakerController extends Controller
 
         return redirect()->route('pencaker.index')->with('success', 'Data Anda berhasil dihapus.');
     }
-        
 }
 
