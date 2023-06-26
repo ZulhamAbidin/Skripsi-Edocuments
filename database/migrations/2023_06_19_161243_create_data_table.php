@@ -17,7 +17,7 @@ class CreateDataTable extends Migration
             $table->string('PendidikanTerakhir');
             $table->string('Jurusan');
             $table->date('TanggalPengesahan');
-            $table->string('Status')->default('Belum Terverifikasi');
+            $table->string('Status')->default('BelumTerverifikasi');
             $table->timestamps();
         });
     }

@@ -43,6 +43,20 @@ public function reject(Request $request, $id)
         throw $e;
     }
 }
+ public function show($id)
+    {
+        $data = Data::findOrFail($id);
+
+        // Logika untuk menghasilkan file unduhan (misalnya, membuat PDF)
+
+        // Contoh menggunakan Laravel PDF untuk membuat file PDF
+        $pdf = PDF::loadView('pencaker.show', compact('data'));
+        $pdfPath = storage_path('app/public/downloads/' . $data->id . '.pdf');
+        $pdf->save($pdfPath);
+
+        // Mengembalikan respons unduhan
+        return response()->download($pdfPath);
+    }
 
     public function verifikasi($id)
     {

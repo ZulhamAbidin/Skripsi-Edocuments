@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,24 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class PencakerController extends Controller
 {
+
     public function index()
-    {
-        $user = Auth::user();
-        $pencakerData = $user->data;
+{
+    $pencakerData = Data::all();
+    $user = Auth::user();
+    $status = 'Ditolak';
+    return view('pencaker.index', compact('pencakerData', 'user', 'status'));
+}
 
-        return view('pencaker.index', compact('pencakerData'));
+
+    private function getStatus($data)
+    {
+        return $data->Status === 'Ditolak' ? 'Ditolak' : 'Diterima';
     }
 
-    public function create()
-    {
-        $user = Auth::user();
-
-        if ($user->data()->exists()) {
-            return redirect()->route('pencaker.index')->with('error', 'Anda sudah memiliki data yang terkait.');
-        }
-
-        return view('pencaker.create');
-    }
 
     public function store(Request $request)
     {
@@ -41,7 +39,7 @@ class PencakerController extends Controller
             'JenisKelamin' => 'required',
             'PendidikanTerakhir' => 'required',
             'Jurusan' => 'required',
-            'TanggalPengesahan' => 'required|date',
+            // 'Status' => 'required',
         ]);
 
         $pencaker = new Data();
@@ -51,12 +49,13 @@ class PencakerController extends Controller
         $pencaker->JenisKelamin = $request->input('JenisKelamin');
         $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
         $pencaker->Jurusan = $request->input('Jurusan');
-        $pencaker->TanggalPengesahan = $request->input('TanggalPengesahan');
-        $pencaker->Status = 'BelumTerverifikasi';
+        $pencaker->TanggalPengesahan = now(); // Menggunakan waktu saat ini sebagai tanggal pengesahan
+        // $pencaker->Status = $request->input('Status');
 
         $user->data()->save($pencaker);
 
-        return redirect()->route('pencaker.index')->with('success', 'Selanjutnya Ke Admin Agar Data Anda Segera Diverifikasi');
+        return redirect()->route('pencaker.index')->with('success', 'Selanjutnya, harap hubungi admin untuk memverifikasi data Anda.');
+
     }
 
     public function edit($id)
@@ -68,7 +67,7 @@ class PencakerController extends Controller
             return redirect()->route('pencaker.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
-        return view('pencaker.edit', compact('pencakerData'));
+        return view('pencaker.edit', compact('pencakerData', 'user'));
     }
 
     public function update(Request $request, $id)
@@ -77,17 +76,18 @@ class PencakerController extends Controller
         $user = Auth::user();
 
         if ($pencaker->user_id !== $user->id) {
-            return redirect()->route('pencaker.index')->with('error', 'Data Anda Berhasil Di Edit Silahkan Hubungi Admin Untuk Memverifikasi Data Anda');
+            return redirect()->route('pencaker.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
         $request->validate([
-            'NIK' => 'required|unique:data,NIK,'.$pencaker->id,
+            'NIK' => 'required|unique:data,NIK,' . $pencaker->id,
             'NamaLengkap' => 'required',
             'AlamatDomisili' => 'required',
             'JenisKelamin' => 'required',
             'PendidikanTerakhir' => 'required',
             'Jurusan' => 'required',
             'TanggalPengesahan' => 'required|date',
+            'Status' => 'required',
         ]);
 
         $pencaker->NIK = $request->input('NIK');
@@ -97,6 +97,7 @@ class PencakerController extends Controller
         $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
         $pencaker->Jurusan = $request->input('Jurusan');
         $pencaker->TanggalPengesahan = $request->input('TanggalPengesahan');
+        $pencaker->Status = $request->input('Status');
 
         $pencaker->save();
 
@@ -105,16 +106,13 @@ class PencakerController extends Controller
 
     public function destroy($id)
     {
-        $pencaker = Data::findOrFail($id);
-        $user = Auth::user();
+        $pencakerData = Data::findOrFail($id);
+        // Perform any additional logic for deletion, such as checking permissions or relationships
+    
+        $pencakerData->delete();
 
-        if ($pencaker->user_id !== $user->id) {
-            return redirect()->route('pencaker.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
-        }
-
-        $pencaker->delete();
-
-        return redirect()->route('pencaker.index')->with('success', 'Data Anda berhasil dihapus.');
+        return redirect()->route('pencaker.index')->with('success', 'Data berhasil dihapus.');
     }
-}
 
+    
+}

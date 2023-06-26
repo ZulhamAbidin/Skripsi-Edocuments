@@ -38,15 +38,19 @@ Route::post('/register', [RegisterController::class, 'registerSiswa']);
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
+
 Route::middleware(['auth', 'role:siswa'])->group(function () {
-    Route::get('/pencaker', [PencakerController::class, 'index'])->name('pencaker.index');
-    Route::get('/pencaker/create', [PencakerController::class, 'create'])->name('pencaker.create');
-    Route::post('/pencaker', [PencakerController::class, 'store'])->name('pencaker.store');
-    Route::get('/pencaker/{id}', [PencakerController::class, 'show'])->name('pencaker.show');
-    Route::get('/pencaker/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
-    Route::put('/pencaker/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
-    Route::delete('/pencaker/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
+    Route::prefix('pencaker')->group(function () {
+        Route::get('/', [PencakerController::class, 'index'])->name('pencaker.index');
+        Route::get('/create', [PencakerController::class, 'create'])->name('pencaker.create');
+        Route::post('/', [PencakerController::class, 'store'])->name('pencaker.store');
+        Route::get('/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
+        Route::put('/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
+        Route::delete('/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
+    });
 });
+
+
 
 Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
     Route::get('data', [DataController::class, 'index'])->name('data.index');
