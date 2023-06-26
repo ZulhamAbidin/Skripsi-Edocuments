@@ -15,20 +15,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-1.png') }}" />
 
 
-
-
     <!-- Referensi ke file CSS SweetAlert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
 {{--     
     <!-- Referensi ke file JavaScript SweetAlert -->
     <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
-
-
-
-
-
-
 
     <!-- TITLE -->
     <title>E-Documents</title>

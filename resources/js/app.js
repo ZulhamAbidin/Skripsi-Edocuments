@@ -1,6 +1,7 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import "tailwindcss/dist/tailwind.min.css";
 
 window.Alpine = Alpine;
 

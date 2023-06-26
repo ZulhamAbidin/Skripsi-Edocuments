@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="isolate bg-white sm:py-32 md:py-0 lg:px-8">
+    <div class="isolate bg-white sm:py-3 md:py-0 lg:px-8">
         
         <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
             aria-hidden="true">
@@ -18,12 +18,12 @@
             </div>
         </div>
         
-        <div class="mx-auto max-w-2xl text-center mt-6 md:mt-10">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">DAFTAR PESERTA PENGESAHAN</h2>
-            <p class="mt-2 text-sm leading-8 text-gray-600 px-10 md:px-0">Dinas Ketenagakerjaan Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja.</p>
+        <div class="mx-auto max-w-xl text-center mt-6 md:mt-10">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">DAFTAR PESERTA PENGESAHAN</h2>
+            <p class="mt-2 text-sm leading-8 text-gray-600 px-10 md:px-0 lg:px-10">Dinas Ketenagakerjaan Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja.</p>
         </div>
         
-        <form method="POST" class="mx-auto lg:mt-1 max-w-xl sm:py-32 md:py-14 lg:py-7 lg:px-8 px-10" action="{{ route('register.siswa') }}">
+        <form method="POST" class="mx-auto lg:mt-1 max-w-lg sm:py-10 md:py-14 lg:py-7 lg:px-8 px-10" action="{{ route('register.siswa') }}">
          @csrf
             
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -70,7 +70,7 @@
                 <div>
                     <label for="password_confirmation" class="block text-sm font-semibold leading-6 text-gray-900">Konfirmasi Password</label>
                     <div class="mt-2.5">
-                        <input type="password_confirmation" name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}" required autofocus
+                        <input type="password" name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}" required autofocus
                             class="@error('password_confirmation') is-invalid @enderror focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-inset  sm:text-sm sm:leading-6">
                     </div>
                     @error('password_confirmation')
