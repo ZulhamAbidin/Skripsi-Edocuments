@@ -60,11 +60,16 @@
                         makassar.</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
 
-                        @if ($pencakerData->isEmpty())
-                        <button type="button"
-                            class="rounded-md mobile-menu-button bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Lengkapi
-                            Data Anda →</button>
-                        @endif
+
+                @if ($pencakerDataButton->isEmpty() && $pencakerData->isEmpty())
+                <button type="button"
+                    class="rounded-md mobile-menu-button bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Lengkapi
+                    Data Anda →</button>
+                @elseif ($pencakerDataButton->isNotEmpty() && $pencakerData->isEmpty())
+                <button type="button"
+                    class="rounded-md mobile-menu-button bg-yellow-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400">Harap
+                    tunggu, data Anda dalam tahap verifikasi</button>
+                @endif
 
                     </div>
                 </div>
@@ -269,27 +274,7 @@
     function confirmDeletion(event) {
     event.preventDefault();
 
-    var isRejected = "{{ $pencakerData->contains('Status', 'Ditolak') }}";
-
-    if (isRejected) {
-        var rejectionReason = "{{ $pencakerData->where('Status', 'Ditolak')->first()->alasanpenolakan }}";
-
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Data Anda telah ditolak. Alasan penolakan: ' + rejectionReason + '. Silakan hubungi administrator untuk informasi lebih lanjut.',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-            customClass: {
-                container: 'swal-center' // Menambahkan kelas 'swal-center' untuk mengatur tampilan di tengah
-            },
-            appendTo: 'body' // Menampilkan alert di tengah halaman dengan mengabaikan elemen parent
-        });
-    } else {
+    
         Swal.fire({
             title: 'Konfirmasi',
             text: 'Apakah Anda yakin ingin menghapus data ini?',

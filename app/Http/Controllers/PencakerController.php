@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Auth;
 class PencakerController extends Controller
 {
 
-    public function index()
+public function index()
 {
-    $pencakerData = Data::all();
+   $pencakerData = Data::where('status', 'BelumDiverifikasi')->orWhere('status', 'Ditolak')->get();
+   $pencakerDataButton = Data::all();
     $user = Auth::user();
     $status = 'Ditolak';
-    return view('pencaker.index', compact('pencakerData', 'user', 'status'));
+    return view('pencaker.index', compact('pencakerData', 'user', 'status','pencakerDataButton'));
 }
+
 
 
     private function getStatus($data)
@@ -25,38 +27,37 @@ class PencakerController extends Controller
 
 
     public function store(Request $request)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        if ($user->data()->exists()) {
-            return redirect()->route('pencaker.index')->with('error', 'Anda sudah memiliki data yang terkait.');
-        }
-
-        $request->validate([
-            'NIK' => 'required|unique:data',
-            'NamaLengkap' => 'required',
-            'AlamatDomisili' => 'required',
-            'JenisKelamin' => 'required',
-            'PendidikanTerakhir' => 'required',
-            'Jurusan' => 'required',
-            // 'Status' => 'required',
-        ]);
-
-        $pencaker = new Data();
-        $pencaker->NIK = $request->input('NIK');
-        $pencaker->NamaLengkap = $request->input('NamaLengkap');
-        $pencaker->AlamatDomisili = $request->input('AlamatDomisili');
-        $pencaker->JenisKelamin = $request->input('JenisKelamin');
-        $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
-        $pencaker->Jurusan = $request->input('Jurusan');
-        $pencaker->TanggalPengesahan = now(); // Menggunakan waktu saat ini sebagai tanggal pengesahan
-        // $pencaker->Status = $request->input('Status');
-
-        $user->data()->save($pencaker);
-
-        return redirect()->route('pencaker.index')->with('success', 'Selanjutnya, harap hubungi admin untuk memverifikasi data Anda.');
-
+    if ($user->data()->exists()) {
+        return redirect()->route('pencaker.index')->with('error', 'Anda sudah memiliki data yang terkait.');
     }
+
+    $request->validate([
+        'NIK' => 'required|unique:data',
+        'NamaLengkap' => 'required',
+        'AlamatDomisili' => 'required',
+        'JenisKelamin' => 'required',
+        'PendidikanTerakhir' => 'required',
+        'Jurusan' => 'required',
+    ]);
+
+    $pencaker = new Data();
+    $pencaker->NIK = $request->input('NIK');
+    $pencaker->NamaLengkap = $request->input('NamaLengkap');
+    $pencaker->AlamatDomisili = $request->input('AlamatDomisili');
+    $pencaker->JenisKelamin = $request->input('JenisKelamin');
+    $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
+    $pencaker->Jurusan = $request->input('Jurusan');
+    $pencaker->TanggalPengesahan = now();
+    $pencaker->Status = 'BelumTerverifikasi'; // Menetapkan nilai default untuk kolom Status
+
+    $user->data()->save($pencaker);
+
+    return redirect()->route('pencaker.index')->with('success', 'Selanjutnya, harap hubungi admin untuk memverifikasi data Anda.');
+}
+
 
     public function edit($id)
     {

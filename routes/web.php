@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
     });
 });
 
+// web.php
 
 
 Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
