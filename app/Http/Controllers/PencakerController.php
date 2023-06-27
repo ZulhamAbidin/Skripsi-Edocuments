@@ -10,16 +10,23 @@ class PencakerController extends Controller
 {
 
 
-
-    public function index()
+public function index()
 {
-    $pencakerData = Data::where('status', 'Terverifikasi')->orWhere('status', 'Ditolak')->get();
-    $pencakerDataButton = Data::where('status', 'BelumTerverifikasi')->get();
     $user = Auth::user();
+
+    $pencakerData = Data::where('user_id', $user->id)
+        ->whereIn('status', ['Terverifikasi', 'Ditolak'])
+        ->get();
+
+    $pencakerDataButton = Data::where('user_id', $user->id)
+        ->where('status', 'BelumTerverifikasi')
+        ->get();
+
     $status = 'Ditolak';
 
     return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton'));
 }
+
 
 
 
@@ -109,15 +116,17 @@ class PencakerController extends Controller
         return redirect()->route('pencaker.index')->with('success', 'Data Anda berhasil diperbarui.');
     }
 
-    public function destroy($id)
-    {
-        $pencakerData = Data::findOrFail($id);
-        // Perform any additional logic for deletion, such as checking permissions or relationships
     
-        $pencakerData->delete();
+public function destroy($id)
+{
+    $pencakerData = Data::findOrFail($id);
+    // Perform any additional logic for deletion, such as checking permissions or relationships
 
-        return redirect()->route('pencaker.index')->with('success', 'Data berhasil dihapus.');
-    }
+    $pencakerData->delete();
+
+    return redirect()->route('pencaker.index')->with('success', 'Data berhasil dihapus.');
+}
+
 
     
 }

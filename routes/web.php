@@ -50,6 +50,9 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
     });
 });
 
+
+Route::get('pencaker/confirm-delete/{id}', 'PencakerController@confirmDelete')->name('pencaker.confirm-delete');
+
 // web.php
 
 

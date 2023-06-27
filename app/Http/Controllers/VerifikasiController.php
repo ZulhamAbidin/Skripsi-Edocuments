@@ -17,33 +17,39 @@ class VerifikasiController extends Controller
     public function destroy(Data $item)
     {
         $item->delete();
-        return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil dihapus');
+        return redirect()
+            ->route('data.verifikasi.index')
+            ->with('success', 'Data berhasil dihapus');
     }
-public function reject(Request $request, $id)
-{
-    $this->validate($request, [
-        'alasan' => 'required',
-    ]);
 
-    DB::beginTransaction();
+    public function reject(Request $request, $id)
+    {
+        $this->validate($request, [
+            'alasan' => 'required',
+        ]);
 
-    try {
-        $data = Data::findOrFail($id);
-        $data->Status = 'Ditolak';
-        $data->alasan_penolakan = $request->alasan; // Simpan alasan penolakan ke kolom "alasan_penolakan"
-        $data->save();
+        DB::beginTransaction();
 
-        // Lakukan tindakan lain yang diperlukan, seperti mengirim notifikasi, dsb.
+        try {
+            $data = Data::findOrFail($id);
+            $data->Status = 'Ditolak';
+            $data->alasan_penolakan = $request->alasan; // Simpan alasan penolakan ke kolom "alasan_penolakan"
+            $data->save();
 
-        DB::commit();
+            // Lakukan tindakan lain yang diperlukan, seperti mengirim notifikasi, dsb.
 
-        return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil ditolak');
-    } catch (\Exception $e) {
-        DB::rollback();
-        throw $e;
+            DB::commit();
+
+            return redirect()
+                ->route('data.verifikasi.index')
+                ->with('success', 'Data berhasil ditolak');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
-}
- public function show($id)
+    
+    public function show($id)
     {
         $data = Data::findOrFail($id);
 
@@ -71,7 +77,9 @@ public function reject(Request $request, $id)
 
             DB::commit();
 
-            return redirect()->route('data.verifikasi.index')->with('success', 'Data berhasil diverifikasi');
+            return redirect()
+                ->route('data.verifikasi.index')
+                ->with('success', 'Data berhasil diverifikasi');
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
