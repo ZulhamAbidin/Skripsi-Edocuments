@@ -60,16 +60,19 @@
                         makassar.</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
 
-
-                @if ($pencakerDataButton->isEmpty() && $pencakerData->isEmpty())
-                <button type="button"
-                    class="rounded-md mobile-menu-button bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Lengkapi
-                    Data Anda →</button>
-                @elseif ($pencakerDataButton->isNotEmpty() && $pencakerData->isEmpty())
-                <button type="button"
-                    class="rounded-md mobile-menu-button bg-yellow-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400">Harap
-                    tunggu, data Anda dalam tahap verifikasi</button>
-                @endif
+                        @if ($pencakerDataButton->isEmpty() && $pencakerData->isEmpty())
+                        <button type="button"
+                            class="rounded-md mobile-menu-button bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Lengkapi
+                            Data Anda →</button>
+                        @elseif ($pencakerDataButton->isNotEmpty() && $pencakerData->isEmpty())
+                        <button type="button"
+                            class="rounded-md bg-yellow-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400">Harap
+                            tunggu, data Anda dalam tahap verifikasi</button>
+                        @elseif ($status == 'Terverifikasi')
+                        <button type="button"
+                            class="rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500">Data
+                            Anda telah terverifikasi</button>
+                        @endif
 
                     </div>
                 </div>
@@ -85,22 +88,34 @@
             <hr class="mt-20 w-full bg-gray-500">
 
 
-           
+            
 
                 <div class="relative overflow-x-auto mt-10 mx-4 lg:mx-64">
                     @foreach ($pencakerData as $data)
-                   
-                    @if ($status == 'Ditolak')
-                    <div class="bg-red-100 border my-10 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <strong class="font-bold">Maaf!</strong>
-                        <span class="block sm:inline">Data Anda telah ditolak.</span>
-                        <span class="block sm:inline capitalize">Dengan Alasan {{ $data->alasan_penolakan }} Hapus Data Anda Dan Lengkapi Kembali Data Anda.</span>
-                    </div>
-                    @else
-                    <!-- Bagian lain yang ingin ditampilkan jika status bukan 'Ditolak' -->
-                    @endif
-                    
+                   {{-- @if ($data->Status == 'Ditolak')
+                <div class="bg-red-100 border my-10 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Maaf!</strong>
+                    <span class="block sm:inline">Data Anda telah ditolak.</span>
+                    <span class="block sm:inline capitalize">Dengan Alasan {{ $data->alasan_penolakan }} Hapus Data Anda Dan Lengkapi
+                        Kembali Data Anda.</span>
+                </div>
+                @endif --}}
 
+                @if ($data->Status == 'Ditolak')
+                <div class="bg-red-100 border my-10 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Maaf!</strong>
+                    <span class="block sm:inline">Data Anda telah ditolak.</span>
+                    <span class="block sm:inline capitalize">Dengan Alasan {{ $data->alasan_penolakan }} Hapus Data Anda Dan Lengkapi
+                        Kembali Data Anda.</span>
+                </div>
+                @elseif ($data->Status == 'Terverifikasi')
+                <div class="bg-green-100 border my-10 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Selamat!</strong>
+                    <span class="block sm:inline">Data Anda telah diverifikasi.</span>
+                    <span class="block sm:inline">Anda dapat melanjutkan ke tahap berikutnya.</span>
+                </div>
+                @endif
+            
                         <div>
                             <div class="px-4 sm:px-0 flex justify-between">
                                 
@@ -118,6 +133,7 @@
                                     {{-- <a href="{{ route('pencaker.show', $data->id) }}"
                                         class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Download</a> --}}
                                 </div>
+                                
                                 
 
                             </div>
@@ -157,6 +173,8 @@
 
                             </div>
                         </div>
+
+                        
                     </div>
                 @endforeach
         </div>

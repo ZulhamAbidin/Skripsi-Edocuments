@@ -9,14 +9,18 @@ use Illuminate\Support\Facades\Auth;
 class PencakerController extends Controller
 {
 
-public function index()
+
+
+    public function index()
 {
-   $pencakerData = Data::where('status', 'BelumDiverifikasi')->orWhere('status', 'Ditolak')->get();
-   $pencakerDataButton = Data::all();
+    $pencakerData = Data::where('status', 'Terverifikasi')->orWhere('status', 'Ditolak')->get();
+    $pencakerDataButton = Data::where('status', 'BelumTerverifikasi')->get();
     $user = Auth::user();
     $status = 'Ditolak';
-    return view('pencaker.index', compact('pencakerData', 'user', 'status','pencakerDataButton'));
+
+    return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton'));
 }
+
 
 
 
