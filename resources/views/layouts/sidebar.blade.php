@@ -40,7 +40,7 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)">DATA PEKERJA</a></li>
                         <li><a href="/data/" class="slide-item"> List Data</a></li>
                         <li><a href="/data/verifikasi" class="slide-item"> Pengajuan Pengesahan</a></li>
-                        <li><a href="/cetak/" class="slide-item"> Export Data</a></li>
+                        <li><a href="/export/" class="slide-item"> Export Data</a></li>
                         <li><a href="/data/create" class="slide-item"> Tambah Data</a></li>
                     </ul>
                 </li>
