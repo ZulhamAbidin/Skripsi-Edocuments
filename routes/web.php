@@ -53,8 +53,6 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
 
 Route::get('pencaker/confirm-delete/{id}', 'PencakerController@confirmDelete')->name('pencaker.confirm-delete');
 
-// web.php
-
 
 Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
     Route::get('data', [DataController::class, 'index'])->name('data.index');
@@ -67,6 +65,9 @@ Route::middleware(['auth', 'role:guru,kepala_sekolah' ])->group(function () {
 
     Route::get('/data/export', [DataController::class, 'export'])->name('data.export');
     Route::get('/data/print', [DataController::class, 'print'])->name('data.print');
+
+
+Route::get('/data/verifikasi/search', [VerifikasiController::class, 'search'])->name('data.verifikasi.search');
 
     Route::get('/data/verifikasi', [VerifikasiController::class, 'index'])->name('data/verifikasi.index');
     Route::get('/data/verifikasi/create', [VerifikasiController::class, 'create'])->name('data/verifikasi.create');

@@ -17,13 +17,24 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
+
+                <div class="card-body pb-4">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="search-input" placeholder="Searching.....">
+                        <span class="input-group-text btn btn-primary">Search</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Pengajuan Data Pengesahan</h4>
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+
+                        <table class="table border text-nowrap text-md-nowrap table-hover mb-0" id="data-table">
                             <thead>
                                 <tr>
                                     <th>NIK</th>
@@ -37,7 +48,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="searchResults">
                                 @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $item->NIK }}</td>
@@ -72,169 +83,177 @@
     </div>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    @push('scripts')
-        <script>
-
-            // function confirmVerification(id) {
-            //             Swal.fire({
-            //                 title: 'Konfirmasi',
-            //                 text: 'Apakah Anda yakin ingin memverifikasi data ini?',
-            //                 icon: 'question',
-            //                 showCancelButton: true,
-            //                 confirmButtonText: 'Ya',
-            //                 cancelButtonText: 'Tidak',
-            //                 reverseButtons: true
-            //             }).then((result) => {
-            //                 if (result.isConfirmed) {
-            //                     window.location.href = "/data/verifikasi/verifikasi/" +
-            //                         id; // Perbarui URL dengan path yang tepat
-            //                 } else {
-            //                     Swal.fire({
-            //                         title: 'Dibatalkan',
-            //                         text: 'Verifikasi data dibatalkan.',
-            //                         icon: 'info',
-            //                         showConfirmButton: false,
-            //                         timer: 3000
-            //                     });
-            //                 }
-            //             });
-            //         }
-
-            function confirmVerification(id) {
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function confirmVerification(id) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin memverifikasi data ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/data/verifikasi/verifikasi/" + id; // Perbarui URL dengan path yang tepat
                 Swal.fire({
-                    title: 'Konfirmasi',
-                    text: 'Apakah Anda yakin ingin memverifikasi data ini?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya',
-                    cancelButtonText: 'Tidak',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/data/verifikasi/verifikasi/" + id; // Perbarui URL dengan path yang tepat
-                        Swal.fire({
-                            title: 'Berhasil',
-                            text: 'Data berhasil diverifikasi.',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Dibatalkan',
-                            text: 'Verifikasi data dibatalkan.',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    }
+                    title: 'Berhasil',
+                    text: 'Data berhasil diverifikasi.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            } else {
+                Swal.fire({
+                    title: 'Dibatalkan',
+                    text: 'Verifikasi data dibatalkan.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 3000
                 });
             }
+        });
+    }
 
-                    // function confirmDeletion(event) {
-                    //     event.preventDefault();
-                    //     Swal.fire({
-                    //         title: 'Konfirmasi',
-                    //         text: 'Apakah Anda yakin ingin menghapus data ini?',
-                    //         icon: 'warning',
-                    //         showCancelButton: true,
-                    //         confirmButtonColor: '#d33',
-                    //         cancelButtonColor: '#3085d6',
-                    //         confirmButtonText: 'Ya, hapus',
-                    //         cancelButtonText: 'Batal'
-                    //     }).then((result) => {
-                    //         if (result.isConfirmed) {
-                    //             event.target.form.submit();
-                    //         }
-                    //     });
-                    // }
+    function confirmDeletion(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.form.submit();
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Data berhasil dihapus.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    }
 
-                    function confirmDeletion(event) {
-                        event.preventDefault();
-                        Swal.fire({
-                            title: 'Konfirmasi',
-                            text: 'Apakah Anda yakin ingin menghapus data ini?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'Ya, hapus',
-                            cancelButtonText: 'Batal'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                event.target.form.submit();
-                                Swal.fire({
-                                    title: 'Berhasil',
-                                    text: 'Data berhasil dihapus.',
-                                    icon: 'success',
-                                    showConfirmButton: false,
-                                    timer: 3000
-                                });
-                            }
-                        });
-                    }
+    function confirmRejection(id) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menolak data ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true,
+            input: 'textarea',
+            inputPlaceholder: 'Alasan penolakan...',
+            inputAttributes: {
+                'aria-label': 'Alasan penolakan'
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Anda harus memasukkan alasan penolakan!';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const alasanPenolakan = result.value;
 
-                    function confirmRejection(id) {
-                        Swal.fire({
-                            title: 'Konfirmasi',
-                            text: 'Apakah Anda yakin ingin menolak data ini?',
-                            icon: 'question',
-                            showCancelButton: true,
-                            confirmButtonText: 'Ya',
-                            cancelButtonText: 'Tidak',
-                            reverseButtons: true,
-                            input: 'textarea',
-                            inputPlaceholder: 'Alasan penolakan...',
-                            inputAttributes: {
-                                'aria-label': 'Alasan penolakan'
-                            },
-                            inputValidator: (value) => {
-                                if (!value) {
-                                    return 'Anda harus memasukkan alasan penolakan!';
-                                }
-                            }
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                const alasanPenolakan = result.value;
+                // Mengirim alasan penolakan ke server menggunakan Axios
+                axios.post(`/data/verifikasi/reject/${id}`, {
+                    alasan: alasanPenolakan
+                }).then(response => {
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data ditolak!',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    }).then(() => {
+                        // Mengarahkan pengguna kembali ke halaman view/data/verifikasi/index
+                        window.location.href = '/data/verifikasi/index';
+                    });
+                }).catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        title: 'Terjadi Kesalahan',
+                        text: 'Gagal menolak data.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                });
+            } else {
+                Swal.fire({
+                    title: 'Dibatalkan',
+                    text: 'Penolakan data dibatalkan.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    }
 
-                                // Mengirim alasan penolakan ke server menggunakan Axios
-                                axios.post(`/data/verifikasi/reject/${id}`, {
-                                    alasan: alasanPenolakan
-                                }).then(response => {
-                                    Swal.fire({
-                                        title: 'Berhasil',
-                                        text: 'Data ditolak!',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    }).then(() => {
-                                        // Mengarahkan pengguna kembali ke halaman view/data/verifikasi/index
-                                        window.location.href = '/data/verifikasi/index';
-                                    });
-                                }).catch(error => {
-                                    console.error(error);
-                                    Swal.fire({
-                                        title: 'Terjadi Kesalahan',
-                                        text: 'Gagal menolak data.',
-                                        icon: 'error',
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    });
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: 'Dibatalkan',
-                                    text: 'Penolakan data dibatalkan.',
-                                    icon: 'info',
-                                    showConfirmButton: false,
-                                    timer: 3000
-                                });
-                            }
-                        });
-                    }
-        </script>
-    @endpush
+    $(document).ready(function () {
+        var searchTimeout;
+        var tableBody = $('#data-table tbody');
+
+        $('#search-input').on('keyup', function () {
+            clearTimeout(searchTimeout);
+            var searchValue = $(this).val();
+
+            searchTimeout = setTimeout(function () {
+                fetchSearchResults(searchValue);
+            }, 500);
+        });
+
+        function fetchSearchResults(searchValue) {
+            $.ajax({
+                url: '/data/verifikasi/search',
+                method: 'GET',
+                data: {
+                    search: searchValue
+                },
+                success: function (response) {
+                    displaySearchResults(response);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        function displaySearchResults(data) {
+            tableBody.empty();
+
+            // Tampilkan data hasil pencarian
+            $.each(data, function (index, item) {
+                var row = $('<tr>');
+                row.append($('<td>').text(item.NIK));
+                row.append($('<td>').text(item.NamaLengkap));
+                row.append($('<td>').text(item.AlamatDomisili));
+                row.append($('<td>').text(item.JenisKelamin));
+                row.append($('<td>').text(item.PendidikanTerakhir));
+                row.append($('<td>').text(item.Jurusan));
+                row.append($('<td>').text(item.TanggalPengesahan));
+                row.append($('<td>').text(item.Status));
+
+                var actionCell = $('<td>').html(item.Aksi); // Menggunakan .html() untuk menyisipkan kode HTML button aksi
+                row.append(actionCell);
+
+                tableBody.append(row);
+            });
+        }
+    });
+</script>
+@endpush
+
 
 @endsection
