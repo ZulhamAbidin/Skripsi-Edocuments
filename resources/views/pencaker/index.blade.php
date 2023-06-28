@@ -115,7 +115,7 @@
                 <div class="bg-green-100 border my-10 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                     <strong class="font-bold">Selamat!</strong>
                     <span class="block sm:inline">Data Anda telah diverifikasi.</span>
-                    <span class="block sm:inline">Anda dapat melanjutkan ke tahap berikutnya.</span>
+                    <span class="block sm:inline">Silakan ke admin untuk melanjutkan hasil Pengesahan.</span>
                 </div>
                 @endif
 

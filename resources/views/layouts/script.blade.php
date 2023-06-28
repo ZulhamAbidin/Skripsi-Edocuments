@@ -9,62 +9,35 @@
                     });
     
     
-                    var table = $('.data-table').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                            url: "{{ route('data.index') }}",
-                            data: function(d) {
-                                d.verifikasi =
-                                    1; // Mengirim parameter verifikasi = 1 untuk memfilter data terverifikasi
-                            }
-                        },
-                        columns: [{
-                                data: 'DT_RowIndex',
-                                name: 'DT_RowIndex',
-                                orderable: false,
-                                searchable: false
-                            },
-                            {
-                                data: 'NIK',
-                                name: 'NIK'
-                            },
-                            {
-                                data: 'NamaLengkap',
-                                name: 'NamaLengkap'
-                            },
-                            {
-                                data: 'AlamatDomisili',
-                                name: 'AlamatDomisili'
-                            },
-                            {
-                                data: 'JenisKelamin',
-                                name: 'JenisKelamin'
-                            },
-                            {
-                                data: 'PendidikanTerakhir',
-                                name: 'PendidikanTerakhir'
-                            },
-                            {
-                                data: 'Jurusan',
-                                name: 'Jurusan'
-                            },
-                            {
-                                data: 'TanggalPengesahan',
-                                name: 'TanggalPengesahan'
-                            },
-                            {
-                                data: 'Status',
-                                name: 'Status'
-                            },
-                            {
-                                data: 'action',
-                                name: 'action',
-                                orderable: false,
-                                searchable: false
-                            },
-                        ],
-                    });
+                   var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: true, // Mengaktifkan fitur pencarian
+                ajax: {
+                url: "{{ route('data.index') }}",
+                data: function(d) {
+                d.verifikasi = 1; // Mengirim parameter verifikasi = 1 untuk memfilter data terverifikasi
+                }
+                },
+                columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'NIK', name: 'NIK' },
+                { data: 'NamaLengkap', name: 'NamaLengkap' },
+                { data: 'AlamatDomisili', name: 'AlamatDomisili' },
+                { data: 'JenisKelamin', name: 'JenisKelamin' },
+                { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
+                { data: 'Jurusan', name: 'Jurusan' },
+                { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
+                { data: 'Status', name: 'Status' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+                ],
+                });
+                
+                // Tangani aksi pencarian saat pengguna mengetik
+                $('#search-input').on('keyup', function() {
+                var searchValue = $(this).val();
+                table.search(searchValue).draw();
+                });
     
                     window.addEventListener('load', function() {
                         @if (session('success'))
@@ -157,6 +130,8 @@
                             }
                         });
                     });
+
+                    
                 });
 </script>
 

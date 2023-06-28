@@ -2,6 +2,12 @@
 
 @section('container')
 
+<style>.dataTables_filter 
+    {
+        display: none;
+    }
+</style>
+
 <div class="main-container container-fluid">
 
     <div class="page-header">
@@ -15,11 +21,23 @@
     </div>
 
     <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">List Data Pengesahan</h4>
+        <div class="col-xl-12 col-lg-12">
+            <div class="card">
+
+                <div class="card-body pb-4">
+                    <div class="input-group mb-2">
+                        <input type="seach" class="form-control form-control" id="search-input" placeholder="Searching.....">
+                        <span class="input-group-text btn btn-primary" id="search-button">Search</span>
                     </div>
+                </div>
+    
+            </div>
+    
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">List Data Pengesahan</h4>
+                </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered data-table">

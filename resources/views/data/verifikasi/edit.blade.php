@@ -1,5 +1,5 @@
 <!-- resources/views/dashboard/data/edit.blade.php -->
-
+{{-- 
 @extends('layouts.verifikasi')
 
 @section('container')
@@ -50,4 +50,4 @@
     <button type="submit">Update</button>
 </form>
 
-@endsection
+@endsection --}}

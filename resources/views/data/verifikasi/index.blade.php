@@ -24,6 +24,7 @@
                         <span class="input-group-text btn btn-primary">Search</span>
                     </div>
                 </div>
+                
             </div>
 
             <div class="card">
