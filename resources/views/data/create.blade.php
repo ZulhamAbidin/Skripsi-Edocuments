@@ -6,7 +6,7 @@
 <div class="main-container container-fluid">
 
     <div class="page-header">
-        <h1 class="page-title">TANMBAH DATA PENGESAHAN</h1>
+        <h1 class="page-title">Tambah Data Pengesahan</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Data</a></li>

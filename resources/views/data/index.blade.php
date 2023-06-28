@@ -2,13 +2,24 @@
 
 @section('container')
 
+<div class="main-container container-fluid">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="page-header">
+        <h1 class="page-title">List Data Pengesahan</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Data</a></li>
+                <li class="breadcrumb-item active" aria-current="page">List</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col-xl-12 col-lg-12">
                 <div class="card">
-                    {{-- <a href="data/create" class="btn btn-primary " id="addData">Tambah Data</a> --}}
-                    <div class="card-header">Data</div>
+                    <div class="card-header">
+                        <h4 class="card-title">List Data Pengesahan</h4>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered data-table">

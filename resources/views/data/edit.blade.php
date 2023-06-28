@@ -4,10 +4,17 @@
 @extends('layouts.main')
 
 @section('container')
+
+<style>
+    .capitalize-text {
+        text-transform: capitalize !important;
+    }
+</style>
+
 <div class="main-container container-fluid">
 
     <div class="page-header">
-        <h1 class="page-title">DATA PENGESAHAN</h1>
+        <h1 class="page-title capitalize-text">Edit Data {{ old('NamaLengkap', $data->NamaLengkap) }}</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Data</a></li>

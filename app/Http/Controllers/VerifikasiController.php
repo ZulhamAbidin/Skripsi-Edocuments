@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\DB;
 class VerifikasiController extends Controller
 {
     public function index()
-    {
-        $data = Data::all();
-        return view('data.verifikasi.index', compact('data'));
-    }
+{
+    $data = Data::where('Status', '!=', 'Terverifikasi')->get();
+    return view('data.verifikasi.index', compact('data'));
+}
+
 
     public function destroy(Data $item)
     {
