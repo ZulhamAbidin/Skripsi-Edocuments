@@ -115,7 +115,6 @@ class DocumentController extends Controller
         return response()->json(['document' => $document]);
     }
 
-    
     public function update(Request $request, $id)
     {
         $document = Document::findOrFail($id);
@@ -148,4 +147,32 @@ class DocumentController extends Controller
             ->route('documents.index')
             ->with('success', 'Dokumen berhasil diperbarui');
     }
+
+    public function getDocuments(Request $request)
+    {
+        if ($request->ajax()) {
+            $searchValue = $request->input('search');
+
+            $documents = Document::select(['id', 'title', 'file_path'])
+                ->where('title', 'LIKE', "%$searchValue%");
+
+            return DataTables::of($documents)
+                ->addColumn('action', function ($document) {
+                    $actionButtons = '';
+
+                    // Tambahkan tombol aksi sesuai kebutuhan
+                    $actionButtons .= '<a href="' . route('documents.view', $document->id) . '" target="_blank" class="btn btn-primary btn-sm">View</a>';
+                    $actionButtons .= '<a href="' . route('documents.download', $document->id) . '" class="btn btn-success btn-sm">Download</a>';
+                    $actionButtons .= '<button class="btn btn-warning btn-sm edit-document" data-toggle="modal" data-target="#editModal" data-document-id="' . $document->id . '" data-document-title="' . $document->title . '">Edit</button>';
+                    $actionButtons .= '<a href="#" class="btn btn-danger btn-sm delete-document" data-document-id="' . $document->id . '">Delete</a>';
+
+                    return $actionButtons;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return abort(404);
+    }
+
 }

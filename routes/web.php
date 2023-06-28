@@ -87,6 +87,9 @@ Route::get('/data/verifikasi/search', [VerifikasiController::class, 'search'])->
     Route::get('/documents/{id}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
     Route::put('/documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
 
+    
+Route::get('/documents/get', [DocumentController::class, 'getDocuments'])->name('documents.get');
+// Tambahkan rute lain sesuai kebutuhan
 
  
 

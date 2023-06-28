@@ -1,4 +1,4 @@
-@extends('layouts.main')
+{{-- @extends('layouts.main')
 
 @section('container')
     <div class="container">
@@ -15,15 +15,96 @@
     </div>
 
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+@endsection
+
+ --}}
+
+
+
+@extends('layouts.main')
+
+@section('container')
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+
+        td .action-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        }
+        
+        td .action-buttons .btn {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        }
+    </style>
+
+    <div class="main-container container-fluid">
+
+        <div class="page-header">
+            <h1 class="page-title">List Document</h1>
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Document</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+
+                    {{-- <div class="card-body pb-4">
+                    <div class="input-group mb-2">
+                        <input type="seach" class="form-control form-control" id="search-input"
+                            placeholder="Searching.....">
+                        <span class="input-group-text btn btn-primary" id="search-button">Search</span>
+                    </div>
+                </div> --}}
+
+                    <div class="card-body pb-4">
+                        <div class="input-group mb-2">
+                            <input type="search" class="form-control" id="search-input" placeholder="Searching.....">
+                            <span class="input-group-text btn btn-primary" id="search-button">Search</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">List Document</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="w-full">Title</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Edit Dokumen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <!-- Form Edit -->
@@ -49,11 +130,15 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-
-            $('#document-table').DataTable({
+            var dataTable = $('#document-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('documents.index') }}',
+                ajax: {
+                    url: '{{ route('documents.get') }}',
+                    data: function(d) {
+                        d.search = $('#search-input').val(); // Mengambil nilai dari input pencarian
+                    }
+                },
                 columns: [{
                         data: 'title',
                         name: 'title'
@@ -62,9 +147,30 @@
                         data: 'action',
                         name: 'action',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, full, meta) {
+                        var actionButtons = '<div class="action-buttons">';
+                            actionButtons += data;
+                            actionButtons += '</div>';
+                        return '<td>' + actionButtons + '</td>';
+                        }
                     }
+                ],
+                columnDefs: [{
+                        width: '90%',
+                        targets: 0
+                    } // Mengatur lebar kolom 'Title' menjadi 90%
                 ]
+            });
+
+            // Menghandle klik tombol "Search"
+            $('#search-button').on('click', function() {
+                dataTable.draw();
+            });
+
+            // Menghandle pencarian live saat mengetik
+            $('#search-input').on('keyup', function() {
+                dataTable.draw();
             });
 
             // Menangani klik tombol Edit

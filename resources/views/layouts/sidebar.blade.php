@@ -54,13 +54,12 @@
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="/document/show" class="slide-item"> List Document</a></li>
-                        <li><a href="/document/index" class="slide-item"> Unggah Document</a></li>
+                        <li><a href="/documents" class="slide-item"> List Document</a></li>
+                        <li><a href="/documents/create" class="slide-item"> Unggah Document</a></li>
                     </ul>
                 </li>
 
-               
-
+            
                 <li class="sub-category">
                     <h3>Management Users</h3>
                 </li>
