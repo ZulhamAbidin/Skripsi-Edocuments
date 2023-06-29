@@ -91,12 +91,6 @@ Route::get('/data/verifikasi/search', [VerifikasiController::class, 'search'])->
 Route::get('/documents/get', [DocumentController::class, 'getDocuments'])->name('documents.get');
 // Tambahkan rute lain sesuai kebutuhan
 
- 
-
-
-
-    Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
-    Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);
 });
 
 Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
@@ -104,11 +98,10 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
     Route::delete('/management/{id}', [UserController::class, 'destroy'])->name('management.destroy');
     Route::get('/management/{id}/edit', [UserController::class, 'edit'])->name('management.edit');
     Route::put('/management/{id}', [UserController::class, 'update'])->name('management.update');
-
     Route::get('/export', [ExportController::class, 'index'])->name('export.index');
     Route::get('/export/data', [ExportController::class, 'getData'])->name('export.data');
-
-    
+    Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
+    Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);
 });
 
 require __DIR__ . '/auth.php';

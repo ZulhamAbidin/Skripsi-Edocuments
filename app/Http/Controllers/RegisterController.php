@@ -45,26 +45,25 @@ class RegisterController extends Controller
     }
 
     public function registerGuru(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        $role = Role::where('name', 'guru')->first();
+    $role = Role::where('name', 'guru')->first();
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role()->associate($role);
-        $user->save();
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->password = Hash::make($request->password);
+    $user->role()->associate($role);
+    $user->save();
 
-        Auth::login($user);
+    return redirect()->route('management.index');
+}
 
-        return redirect()->route('dashboard');
-    }
 
         public function showKepalaSekolahRegistrationForm()
     {

@@ -1,26 +1,3 @@
-{{-- @extends('layouts.main')
-
-@section('container')
-    <div class="container">
-        <h1>Document Management</h1>
-        <a href="{{ route('documents.create') }}" class="btn btn-primary mb-3">Upload Document</a>
-        <table class="table table-bordered" id="document-table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-
-
-@endsection
-
- --}}
-
-
-
 @extends('layouts.main')
 
 @section('container')
@@ -30,15 +7,15 @@
         }
 
         td .action-buttons {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
         }
-        
+
         td .action-buttons .btn {
-        display: block !important;
-        width: 100% !important;
-        margin-bottom: 5px !important;
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 5px !important;
         }
     </style>
 
@@ -99,27 +76,29 @@
     </div>
 
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Dokumen</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit Document</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form Edit -->
-                    <form id="editForm" method="POST" enctype="multipart/form-data">
+                    <form id="editForm" action="" method="POST">
                         @csrf
                         @method('PUT')
+    
                         <div class="form-group">
-                            <label for="title">Judul</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <label for="editTitle">Title</label>
+                            <input type="text" name="title" id="editTitle" class="form-control" required>
                         </div>
+    
                         <div class="form-group">
-                            <label for="file">File</label>
-                            <input type="file" class="form-control-file" id="file" name="file">
+                            <label for="editDocument">Document</label>
+                            <input type="file" name="document" id="editDocument" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
             </div>
@@ -149,10 +128,10 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, full, meta) {
-                        var actionButtons = '<div class="action-buttons">';
+                            var actionButtons = '<div class="action-buttons">';
                             actionButtons += data;
                             actionButtons += '</div>';
-                        return '<td>' + actionButtons + '</td>';
+                            return '<td>' + actionButtons + '</td>';
                         }
                     }
                 ],
@@ -177,10 +156,12 @@
             $(document).on('click', '.edit-document', function() {
                 var documentId = $(this).data('document-id');
                 var title = $(this).data('document-title');
+                var document = $(this).data('document');
 
-                // Mengisi nilai input modal dengan data judul
+                // Mengisi nilai input modal dengan data judul dan dokumen
                 $('#editForm').attr('action', '/documents/' + documentId);
                 $('#editTitle').val(title);
+                $('#editDocument').val(document);
 
                 // Membuka modal
                 $('#editModal').modal('show');

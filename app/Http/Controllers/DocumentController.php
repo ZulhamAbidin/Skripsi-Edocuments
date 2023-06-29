@@ -26,9 +26,10 @@ class DocumentController extends Controller
                         // Hanya menampilkan tombol "View" jika file adalah gambar atau PDF
                         $actionButtons .= '<a href="' . route('documents.view', $document->id) . '" target="_blank" class="btn btn-primary btn-sm">View</a>';
                     }
-
                     $actionButtons .= '<a href="' . route('documents.download', $document->id) . '" class="btn btn-success btn-sm">Download</a>';
+                    // $actionButtons .= '<button class="btn btn-warning btn-sm edit-document" data-toggle="modal" data-target="#editModal" data-document-id="' . $document->id . '" data-document-title="' . $document->title . '">Edit</button>';
                     $actionButtons .= '<button class="btn btn-warning btn-sm edit-document" data-toggle="modal" data-target="#editModal" data-document-id="' . $document->id . '" data-document-title="' . $document->title . '">Edit</button>';
+
                     $actionButtons .= '<a href="#" class="btn btn-danger btn-sm delete-document" data-document-id="' . $document->id . '">Delete</a>';
 
                     return $actionButtons;

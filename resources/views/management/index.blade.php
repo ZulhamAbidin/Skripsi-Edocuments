@@ -1,48 +1,35 @@
-<!-- resources/views/management/index.blade.php -->
-
 @extends('layouts.main')
 
 @section('container')
-    <h1>Manajemen Pengguna</h1>
+<h1>Manajemen Pengguna</h1>
 
-    <table id="users-table" class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Tanggal Verifikasi Email</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-    </table>
+<table id="users-table" class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Peran</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+</table>
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             var table = $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('management.index') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'role.name',
-                        name: 'role.name'
-                    },
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'email', name: 'email' },
+                    { data: 'role.name', name: 'role.name' },
                     {
                         data: 'action',
                         name: 'action',
@@ -104,6 +91,5 @@
                 window.location.href = "{{ url('management') }}/" + userId + "/edit";
             });
         });
-    </script>
-    
+</script>
 @endpush

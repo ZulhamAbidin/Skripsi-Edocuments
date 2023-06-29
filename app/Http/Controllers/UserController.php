@@ -37,23 +37,31 @@ class UserController extends Controller
     return view('management.edit', compact('user', 'roles'));
 }
 
+  public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id);
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'password' => 'nullable|min:6',
+        'role_id' => 'required|exists:roles,id',
+    ]);
 
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6',
-        ]);
+    $validatedData['password'] = isset($validatedData['password']) ? Hash::make($validatedData['password']) : $user->password;
 
-        $validatedData['password'] = isset($validatedData['password']) ? Hash::make($validatedData['password']) : $user->password;
+    $user->name = $validatedData['name'];
+    $user->email = $validatedData['email'];
+    $user->password = $validatedData['password'];
+    $user->role_id = $validatedData['role_id'];
 
-        $user->update($validatedData);
+    $user->save();
 
-        return redirect()->route('management.index')->with('success', 'User updated successfully');
-    }
+    return redirect()->route('management.index')->with('success', 'User updated successfully');
+}
+
+
+
 
     public function destroy($id)
     {
