@@ -119,7 +119,7 @@
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
                                                     class="side-menu__label">Testimonials</span></a>
                                         </li>
-                                        
+
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#footer"><span
                                                     class="side-menu__label">About</span></a>
@@ -167,7 +167,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="../assets/images/landing/market4.png" alt="">
+                                <img src="{{ asset('image/okk.jpg') }}" alt="">
                             </div>
                         </div>
                     </div>
