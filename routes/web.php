@@ -111,3 +111,4 @@ require __DIR__ . '/auth.php';
 
 // Route::get('/register/admin', [RegisterController::class, 'showKepalaSekolahRegistrationForm'])->name('register.kepala-sekolah');
 // Route::post('/register/admin', [RegisterController::class, 'registerKepalaSekolah'])->name('register.kepala-sekolah.submit');
+
