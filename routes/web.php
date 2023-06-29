@@ -4,6 +4,7 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
@@ -11,10 +12,10 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PencakerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\VerifikasiController;
 
 
 use App\Http\Middleware\CheckWritePermission;
+use App\Http\Controllers\VerifikasiController;
 
 
 
@@ -24,9 +25,9 @@ Route::post('/data/verifikasi/reject/{id}', [VerifikasiController::class, 'rejec
 Route::get('/data/verifikasi/verifikasi/{id}', [VerifikasiController::class, 'verifikasi'])->name('data.verifikasi.verifikasi');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
 Route::post('/register', [RegisterController::class, 'registerSiswa']);
@@ -118,3 +119,15 @@ Route::get('/export', [ExportController::class, 'index'])->name('export.index');
 
 Route::get('/cetak/cetak-data-pekerja-form', [ExportController::class, 'cetakForm'])->name('cetak-data-pekerja-form');
 Route::get('/cetak/cetak-data-pertanggal/{tglawal}/{tglakhir}', [ExportController::class, 'cetakPekerjaPertanggal'])->name('cetak-data-pertanggal');
+
+
+Route::post('/', [HomeController::class, 'submitForm'])->name('welcome.submit');
+Route::get('/', [HomeController::class, 'createForm'])->name('create');
+// use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+// Menyembunyikan pengalaman pengguna
+Route::delete('/pengalaman/{id}', [HomeController::class, 'deletePengalaman'])->name('pengalaman.delete');
+
+// Route::post('/', [HomeController::class, 'submitForm'])->name('submit');

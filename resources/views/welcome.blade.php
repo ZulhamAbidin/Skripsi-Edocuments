@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- FAVICON -->
 
-    
+
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
 
@@ -31,22 +31,18 @@
 
     <style>
         .typed-cursor {
-        display: none !important;
+            display: none !important;
         }
 
 
         .section.pb-0 {
-        text-align: center !important;
+            text-align: center !important;
         }
-
-
     </style>
 
 </head>
 
 <body class="app ltr landing-page horizontal">
-
-    <!-- GLOBAL-LOADER -->
     <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
     </div>
@@ -63,7 +59,7 @@
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
-                        <a class="logo-horizontal " href="index.html">
+                        <a class="logo-horizontal " href="/">
                             <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
                             <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
                                 alt="logo">
@@ -80,11 +76,11 @@
                                 <div class="collapse navbar-collapse bg-white px-0" id="navbarSupportedContent-4">
                                     <!-- SEARCH -->
                                     <div class="header-nav-right p-5">
-                                        <a href="register.html"
+                                        <a href="/register"
                                             class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
-                                            target="_blank">New User
+                                            target="_blank">Register
                                         </a>
-                                        <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
+                                        <a href="/login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
                                             target="_blank">Login
                                         </a>
                                     </div>
@@ -94,6 +90,11 @@
                     </div>
                 </div>
             </div>
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             <!-- /app-Header -->
 
             <div class="landing-top-header overflow-hidden">
@@ -113,14 +114,15 @@
                                             <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
                                                     class="side-menu__label">Home</span></a>
                                         </li>
-                                    
+
+                                        <li class="slide">
+                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
+                                                    class="side-menu__label">Testimonials</span></a>
+                                        </li>
+                                        
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#footer"><span
                                                     class="side-menu__label">About</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
-                                                    class="side-menu__label">Pengujung</span></a>
                                         </li>
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
@@ -128,11 +130,11 @@
                                         </li>
                                     </ul>
                                     <div class="header-nav-right d-none d-lg-flex">
-                                        <a href="register.html"
+                                        <a href="/register"
                                             class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                            target="_blank">New User
+                                            target="_blank">Register
                                         </a>
-                                        <a href="login.html"
+                                        <a href="/login"
                                             class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                             target="_blank">Login
                                         </a>
@@ -148,18 +150,20 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
                                 <h4 class="fw-semibold mt-7">Selamat Datang</h4>
-                                <h1 id="typed-text" class="zulham text-start fw-bold text-primary" ></h1>
+                                <h1 id="typed-text" class="zulham text-start fw-bold text-primary"></h1>
                                 <h6 class="pb-3">
-                                   Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja Menerbitkan Kartu AK1 atau kartu tanda pencari kerja yang sering disebut dengan kartu kuning. Kartu ini dikeluarkan
-                                 Dinas Ketenagakerjaan atau Disnaker dengan tujuan untuk pendataan para pencari kerja</h6>
+                                    Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja Menerbitkan Kartu AK1
+                                    atau kartu tanda pencari kerja yang sering disebut dengan kartu kuning. Kartu ini
+                                    dikeluarkan
+                                    Dinas Ketenagakerjaan atau Disnaker dengan tujuan untuk pendataan para pencari kerja
+                                </h6>
 
-                                <a href="/register"
-                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
+                                <a href="/register" target="_blank"
+                                    class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
                                         class="fa fa-lock me-2"></i> Daftar Sekarang
                                 </a>
-                                <a href="/login"
-                                    class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fa fa-lock me-2"></i>Login
+                                <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"
+                                    target="_blank"><i class="fa fa-lock me-2"></i>Login
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
@@ -176,6 +180,7 @@
 
                     <!-- CONTAINER -->
                     <div class="main-container">
+                        
                         <div class="">
 
                             <!-- ROW-1 OPEN -->
@@ -186,12 +191,14 @@
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold mb-7">Pengunjung.</h2>
                                     </div>
-                                    <div class="row text-center justify-items-center d-flex justify-content-center services-statistics landing-statistics">
+                                    <div
+                                        class="row text-center justify-items-center d-flex justify-content-center services-statistics landing-statistics">
                                         <div class="col-xl-3 col-md-6 col-lg-6">
                                             <div class="card">
                                                 <div class="card-body bg-primary-transparent">
                                                     <div class="counter-status">
-                                                        <div class="counter-icon bg-primary-transparent box-shadow-primary">
+                                                        <div
+                                                            class="counter-icon bg-primary-transparent box-shadow-primary">
                                                             <i class="fe fe-layers text-primary fs-23"></i>
                                                         </div>
                                                         <div class="test-body text-center">
@@ -199,47 +206,59 @@
                                                                 <span class="counter fw-semibold counter ">10</span>+
                                                             </h1>
                                                             <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">Total Pengunjung</h5>
+                                                                <h5 class="font-weight-normal mb-0 ">Total Pengunjung
+                                                                </h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                             <!-- ROW-1 CLOSED -->
 
-                        
-
                             <!-- ROW-9 OPEN -->
-                            <div class="testimonial-owl-landing section pb-0" >
+                            <div class="testimonial-owl-landing section pb-0" id="Clients">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card bg-transparent">
                                                 <div class="card-body pt-5">
-                                                    <h4 class="text-center fw-semibold text-white-80">Pengalaman Pengunjung </h4>
+                                                    <h4 class="text-center fw-semibold text-white-80">Pengalaman
+                                                        Pengunjung </h4>
                                                     <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold text-white mb-7">bagaimana pengalaman pengunjung mengenai pelayanan kami.</h2>
+                                                    <h2 class="text-center fw-semibold text-white mb-7">bagaimana
+                                                        pengalaman pengunjung mengenai pelayanan kami.</h2>
                                                     <div class="testimonial-carousel">
+                                                    
+                                                    @foreach ($pengalamanList as $pengalaman)
+
                                                         <div class="slide text-center">
                                                             <div class="row">
                                                                 <div class="col-xl-8 col-md-12 d-block mx-auto">
                                                                     <div class="testimonia">
                                                                         <p class="text-white-80">
-                                                                            <i class="fa fa-quote-left fs-20 text-white-80"></i>
-                                                                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, commodi.
+                                                                            <i class="fa fa-quote-left fs-20 text-white-80"></i>{{ $pengalaman->pengalamanpengunjung }}
                                                                         </p>
-                                                                        <h3 class="title">Elizabeth</h3>
-                                                                        <span class="post">Status Terverisik</span>
+                                                                        <h3 class="title">{{ $pengalaman->user->name }}</h3>
                                                                         <div class="rating-stars block my-rating-5 mb-5" data-rating="4"></div>
+                                                                        @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
+                                                                                <form action="{{ route('pengalaman.delete', $pengalaman->id) }}" method="POST" class="delete-form">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+                                                                                </form>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                    @endforeach
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,7 +295,11 @@
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
                                                                                                 Alamat</h4>
-                                                                                            <p>Jl. A. P. Pettarani No.72, Banta-Bantaeng, Kec. Rappocini, Kota Makassar, Sulawesi Selatan 90222 </p>
+                                                                                            <p>Jl. A. P. Pettarani
+                                                                                                No.72, Banta-Bantaeng,
+                                                                                                Kec. Rappocini, Kota
+                                                                                                Makassar, Sulawesi
+                                                                                                Selatan 90222 </p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -293,7 +316,8 @@
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
                                                                                                 Phone</h4>
-                                                                                            <p class="mb-0">(0411) 853930 </p>
+                                                                                            <p class="mb-0">(0411)
+                                                                                                853930 </p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -311,8 +335,9 @@
                                                                                                 class="mb-2 fw-semibold">
                                                                                                 Contact</h4>
                                                                                             <p class="mb-0">
-                                                                                                disnaker@makassar.go.id</p>
-                                                                                            
+                                                                                                disnaker@makassar.go.id
+                                                                                            </p>
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -329,8 +354,10 @@
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
                                                                                                 Jam Operasional</h4>
-                                                                                            <p class="mb-0">Senin – Jum’at (08.00 – 16.00 WIB)</p>
-                                                                                            
+                                                                                            <p class="mb-0">Senin –
+                                                                                                Jum’at (08.00 – 16.00
+                                                                                                WIB)</p>
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -342,29 +369,36 @@
                                                         </div>
                                                         <div class="col-xl-9">
                                                             <div class="">
-                                                                <form class="form-horizontal reveal revealrotate m-t-20"
-                                                                    action="index.html">
+                                                                
+                                                                <form action="{{ route('welcome.submit') }}"
+                                                                    method="POST"
+                                                                    class="form-horizontal reveal revealrotate m-t-20">
+                                                                    @csrf
+
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
                                                                             <input class="form-control" type="text"
-                                                                                required="" placeholder="Username*">
+                                                                                name="name" id="name" required=""
+                                                                                placeholder="Username*">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
                                                                             <input class="form-control" type="email"
-                                                                                required="" placeholder="Email*">
+                                                                                name="email" id="name" required=""
+                                                                                placeholder="Email*">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
                                                                             <textarea class="form-control"
-                                                                                rows="5">Your Comment*</textarea>
+                                                                                id="pengalamanpengunjung"
+                                                                                name="pengalamanpengunjung" placeholder="bagaimana tanggapan anda dengan pelayanan kami ?*"
+                                                                                rows="5"></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="">
-                                                                        <a href="javascript:void(0)"
-                                                                            class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</a>
+                                                                        <button type="submit" class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -395,11 +429,15 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12 col-md-12 reveal revealleft">
                                         <h6>About</h6>
-                                        <p>Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja adalah salah satu bidang di dinas ketenagakerjaan mempunyai tugas pokok dan fungsi
-                                        menerbitkan Kartu AK1 atau kartu tanda pencari kerja yang sering disebut pula dengan kartu kuning. Kartu ini dikeluarkan oleh
-                                        lembaga pemerintah, Dinas Ketenagakerjaan atau Disnaker, yang dibuat dengan tujuan untuk pendataan para pencari kerja.
+                                        <p>Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja adalah salah
+                                            satu bidang di dinas ketenagakerjaan mempunyai tugas pokok dan fungsi
+                                            menerbitkan Kartu AK1 atau kartu tanda pencari kerja yang sering disebut
+                                            pula dengan kartu kuning. Kartu ini dikeluarkan oleh
+                                            lembaga pemerintah, Dinas Ketenagakerjaan atau Disnaker, yang dibuat dengan
+                                            tujuan untuk pendataan para pencari kerja.
                                         </p>
-                                        <p class="mb-5 mb-lg-2">Website ini adalah salah satu bentuk implementasi dari pendataan para pencari kerja tersebut
+                                        <p class="mb-5 mb-lg-2">Website ini adalah salah satu bentuk implementasi dari
+                                            pendataan para pencari kerja tersebut
                                         </p>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
@@ -430,7 +468,8 @@
                                                     src="../assets/images/brand/logo-3.png"></a>
                                             <a href="index.html"><img src="../assets/images/brand/logo.png"
                                                     class="logo-3" alt="logo"></a>
-                                            <p>Website ini adalah salah satu bentuk implementasi dari pendataan para pencari kerja yang berdomisili kota makassar.</p>
+                                            <p>Website ini adalah salah satu bentuk implementasi dari pendataan para
+                                                pencari kerja yang berdomisili kota makassar.</p>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"
@@ -460,8 +499,7 @@
                                 <div class="row ">
                                     <div class="col-md-12 col-sm-12">
                                         Copyright © <span id="year"></span> <a href="javascript:void(0)">E-Document</a>.
-                                         With by <a
-                                            href="javascript:void(0)"> Zulham Abidin </a> All rights reserved.
+                                        With by <a href="javascript:void(0)"> Zulham Abidin </a> All rights reserved.
                                     </div>
                                 </div>
                             </footer>
@@ -478,14 +516,49 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
     <script>
         var typed = new Typed('#typed-text', {
-          strings: ['Disnaker Kota Makassar Pengesahan Kartu AK1'],
-          typeSpeed: 150,
-          backSpeed: 150,
-          loop: true
+            strings: ['Disnaker Kota Makassar Pengesahan Kartu AK1'],
+            typeSpeed: 150,
+            backSpeed: 150,
+            loop: true
         });
     </script>
+    <!-- Tambahkan script SweetAlert -->
 
+    <script src="https://unpkg.com/sweetalert@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteForms = document.querySelectorAll('.delete-form');
 
+            deleteForms.forEach((form) => {
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'Apakah Anda Yakin Ingin Menghapus Pengalaman Pengguna ?',
+                        icon: 'warning',
+                        buttons: ['Cancel', 'Delete'],
+                        dangerMode: true,
+                    }).then((confirmed) => {
+                        if (confirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+
+        @if(session('success'))
+        swal({
+            title: 'Success',
+            text: '{{ session('
+            success ') }}',
+            icon: 'success',
+            timer: 3000,
+            button: false,
+        });
+        @endif
+    </script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>

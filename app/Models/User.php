@@ -5,6 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Data;
 use App\Models\Role;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,9 +22,20 @@ class User extends Authenticatable
         return $this->hasMany(Data::class);
     }
 
+    public function hasVerifiedData()
+    {
+        return $this->data()->where('status', 'Terverifikasi')->exists();
+    }
+    
+
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+     public function pengalaman(): HasMany
+    {
+        return $this->hasMany(Pengalaman::class);
     }
 
     /**
