@@ -1,84 +1,196 @@
-@extends('layouts.main')
+{{-- @extends('layouts.main')
 
 @section('container')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="main-container container-fluid">
+
+    <div class="page-header">
+        <h1 class="page-title">Tambah User Magang</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Register as Guru') }}</div>
+                <div class="card-header">
+                    <h4 class="card-title">Tambah Users</h4>
+                </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register.guru') }}">
+
+                    <form method="POST" action="{{ route('register.guru') }}" class="form-horizontal">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" required autofocus>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Nama Lengkap</label>
+                            <div class="col-md-9">
+                                <input type="text" required autofocus name="name" id="name" value="{{ old('name') }}"
+                                    class=" form-control @error('name') is-invalid @enderror">
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required>
-
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Email</label>
+                            <div class="col-md-9">
+                                <input type="email" required autofocus name="email" id="email" value="{{ old('email') }}"
+                                    class=" form-control @error('email') is-invalid @enderror">
+                        
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                        
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
-                                }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
-
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Password</label>
+                            <div class="col-md-9">
+                                <input type="password" required autofocus name="password" id="password" value="{{ old('password') }}"
+                                    class=" form-control @error('password') is-invalid @enderror">
+                        
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                        
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm
-                                Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Password-confirm</label>
+                            <div class="col-md-9">
+                                <input type="password_confirmation" required autofocus name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}"
+                                    class=" form-control @error('password_confirm') is-invalid @enderror">
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                        <div class="row mb-4 mt-2">
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mb-1">Submit</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+@endsection --}}
+
+
+@extends('layouts.main')
+
+@section('container')
+    <div class="main-container container-fluid">
+
+        <div class="page-header">
+            <h1 class="page-title">Tambah User Magang</h1>
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Tambah Users</h4>
+                    </div>
+
+                    <div class="card-body">
+
+                        <form method="POST" action="{{ route('register.guru') }}" class="form-horizontal">
+                            @csrf
+
+                            <div class="row mb-4">
+                                <label class="col-md-3 form-label">Nama Lengkap</label>
+                                <div class="col-md-9">
+                                    <input type="text" required autofocus name="name" id="name"
+                                        value="{{ old('name') }}"
+                                        class=" form-control @error('name') is-invalid @enderror">
+
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-3 form-label">Email</label>
+                                <div class="col-md-9">
+                                    <input type="email" required autofocus name="email" id="email"
+                                        value="{{ old('email') }}"
+                                        class=" form-control @error('email') is-invalid @enderror">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-3 form-label">Password</label>
+                                <div class="col-md-9">
+                                    <input type="password" required autofocus name="password" id="password"
+                                        value="{{ old('password') }}"
+                                        class=" form-control @error('password') is-invalid @enderror">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-3 form-label">Password-confirm</label>
+                                <div class="col-md-9">
+                                    <input type="password" required autofocus name="password_confirmation"
+                                        id="password_confirmation" value="{{ old('password_confirmation') }}"
+                                        class=" form-control @error('password_confirm') is-invalid @enderror">
+                                </div>
+                            </div>
+
+                            <div class="row mb-4 mt-2">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary mb-1">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 @endsection
+

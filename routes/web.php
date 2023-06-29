@@ -102,10 +102,12 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
     Route::get('/export/data', [ExportController::class, 'getData'])->name('export.data');
     Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
     Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);
+
+    
 });
 
 require __DIR__ . '/auth.php';
 
 
-Route::get('/register/admin', [RegisterController::class, 'showKepalaSekolahRegistrationForm'])->name('register.kepala-sekolah');
-Route::post('/register/admin', [RegisterController::class, 'registerKepalaSekolah'])->name('register.kepala-sekolah.submit');
+// Route::get('/register/admin', [RegisterController::class, 'showKepalaSekolahRegistrationForm'])->name('register.kepala-sekolah');
+// Route::post('/register/admin', [RegisterController::class, 'registerKepalaSekolah'])->name('register.kepala-sekolah.submit');

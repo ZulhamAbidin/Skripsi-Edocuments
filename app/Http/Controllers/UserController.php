@@ -9,26 +9,49 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = User::with('role')->get();
+
+    //         return DataTables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function ($row) {
+    //                 $editUrl = route('management.edit', ['id' => $row->id]);
+    //                 $deleteUrl = route('management.destroy', ['id' => $row->id]);
+    //                 $btn = '<button class="btn btn-sm btn-primary btn-edit" data-id="' . $row->id . '">Edit</button>';
+    //                 $btn .= '<button class="btn btn-sm btn-danger btn-delete" data-id="' . $row->id . '">Delete</button>';
+    //                 return $btn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+
+    //     return view('management.index');
+    // }
+
     public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = User::with('role')->get();
+{
+    if ($request->ajax()) {
+        $data = User::with('role')->where('id', '!=', auth()->user()->id)->get();
+        // Menambahkan kondisi where('id', '!=', auth()->user()->id) untuk mengabaikan pengguna yang sedang login
 
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $editUrl = route('management.edit', ['id' => $row->id]);
-                    $deleteUrl = route('management.destroy', ['id' => $row->id]);
-                    $btn = '<button class="btn btn-sm btn-primary btn-edit" data-id="' . $row->id . '">Edit</button>';
-                    $btn .= '<button class="btn btn-sm btn-danger btn-delete" data-id="' . $row->id . '">Delete</button>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-
-        return view('management.index');
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $editUrl = route('management.edit', ['id' => $row->id]);
+                $deleteUrl = route('management.destroy', ['id' => $row->id]);
+                $btn = '<button class="btn btn-sm btn-primary btn-edit" data-id="' . $row->id . '">Edit</button>';
+                $btn .= '<button class="btn btn-sm btn-danger btn-delete" data-id="' . $row->id . '">Delete</button>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
+
+    return view('management.index');
+}
+
 
     public function edit($id)
 {

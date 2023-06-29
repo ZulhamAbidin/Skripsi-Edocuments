@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -44,7 +45,29 @@ class RegisterController extends Controller
         return view('auth.register-guru');
     }
 
-    public function registerGuru(Request $request)
+    // public function registerGuru(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:8|confirmed',
+    //     ]);
+
+    //     $role = Role::where('name', 'guru')->first();
+
+    //     $user = new User();
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->password = Hash::make($request->password);
+    //     $user->role()->associate($role);
+    //     $user->save();
+
+    //     return redirect()->route('management.index');
+    // }
+
+    
+
+public function registerGuru(Request $request)
 {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -61,8 +84,11 @@ class RegisterController extends Controller
     $user->role()->associate($role);
     $user->save();
 
+    Alert::success('Success', 'Pendaftaran guru berhasil.');
+
     return redirect()->route('management.index');
 }
+
 
 
         public function showKepalaSekolahRegistrationForm()

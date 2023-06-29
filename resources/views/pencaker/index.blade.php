@@ -24,14 +24,14 @@
                     </a>
                 </div>
 
-                <form action="/logout" method="post" class="flex lg:hidden">
+                <form action="{{ route('logout') }}" method="post" class="flex lg:hidden">
                     @csrf
                     <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
                         <span aria-hidden="true">&rarr;</span>
                     </button>
                 </form>
 
-                <form action="/logout" method="post" class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <form action="{{ route('logout') }}" method="post" class="hidden lg:flex lg:flex-1 lg:justify-end">
                     @csrf
                     <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
                         <span aria-hidden="true">&rarr;</span>

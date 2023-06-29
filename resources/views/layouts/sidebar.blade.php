@@ -65,17 +65,16 @@
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/user"><i
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/management"><i
                             class="side-menu__icon fe fe-user"></i><span class="side-menu__label">List
                             Account</span></a>
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/register"><i
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="/register/praktik-industri"><i
                             class="side-menu__icon fe fe-user-plus"></i>
                         <span class="side-menu__label">Create Account</span></a>
                 </li>
-
                 @endif
 
 
