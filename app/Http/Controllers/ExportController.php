@@ -20,4 +20,23 @@ class ExportController extends Controller
         return DataTables::of($data)->make(true);
     } 
 
+        public function cetakForm()
+    {
+        return view('/cetak/cetak-pekerja-form');
+    }
+
+    // public function cetakPekerjaPertanggal($tglawal, $tglakhir)
+    // {
+    //     $cetakPertanggal = Data::whereBetween('TanggalPengesahan', [$tglawal, $tglakhir])->get();
+    //     return view('/export/cetak-pekerja-pertanggal', compact('cetakPertanggal'));
+    // }
+    public function cetakPekerjaPertanggal($tglawal, $tglakhir)
+{
+    $cetakPertanggal = Data::whereBetween('TanggalPengesahan', [$tglawal, $tglakhir])
+        ->where('Status', 'Terverifikasi')
+        ->get();
+    return view('export.cetak-pekerja-pertanggal', compact('cetakPertanggal', 'tglawal', 'tglakhir'));
+}
+
+
 }

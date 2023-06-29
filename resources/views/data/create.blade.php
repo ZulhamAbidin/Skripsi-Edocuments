@@ -132,7 +132,6 @@
                             <label class="col-md-3 form-label">TanggalPengesahan</label>
                             <div class="col-md-9">
                                 <input type="date" name="TanggalPengesahan" id="dp1687894207649" placeholder="MM/DD/YYYY"
-                                    value="{{ old('TanggalPengesahan') }}"
                                     class=" form-control fc-datepicker hasDatepicker" required>
                             </div>
                         </div>

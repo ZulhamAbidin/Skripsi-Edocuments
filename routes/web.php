@@ -112,3 +112,9 @@ require __DIR__ . '/auth.php';
 // Route::get('/register/admin', [RegisterController::class, 'showKepalaSekolahRegistrationForm'])->name('register.kepala-sekolah');
 // Route::post('/register/admin', [RegisterController::class, 'registerKepalaSekolah'])->name('register.kepala-sekolah.submit');
 
+// Route::get('/export-data', [ExportController::class, 'exportData'])->name('export.data');
+Route::get('/export', [ExportController::class, 'index'])->name('export.index');
+
+
+Route::get('/cetak/cetak-data-pekerja-form', [ExportController::class, 'cetakForm'])->name('cetak-data-pekerja-form');
+Route::get('/cetak/cetak-data-pertanggal/{tglawal}/{tglakhir}', [ExportController::class, 'cetakPekerjaPertanggal'])->name('cetak-data-pertanggal');
