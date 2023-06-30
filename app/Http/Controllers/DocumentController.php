@@ -117,37 +117,37 @@ class DocumentController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $document = Document::findOrFail($id);
+{
+    $document = Document::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required',
-            'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
-        ]);
+    $request->validate([
+        'title' => 'required',
+        'file' => 'required|mimes:jpeg,png,pdf,jpg,xlsx,xls|max:10000',
+    ]);
 
-        $document->title = $request->title;
+    $document->title = $request->title;
 
-        if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
-            $oldFilePath = storage_path('app/public/' . $document->file_path);
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
-            }
-
-            // Unggah file baru
-            $file = $request->file('file');
-            $fileName = str_replace(' ', '_', $file->getClientOriginalName());
-            $filePath = $file->storeAs('uploads', $fileName, 'public');
-
-            $document->file_path = $filePath;
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        $oldFilePath = public_path('uploads/' . $document->file_path);
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
         }
 
-        $document->save();
+        // Unggah file baru
+        $file = $request->file('file');
+        $fileName = str_replace(' ', '_', $file->getClientOriginalName());
+        $filePath = $file->storeAs('uploads', $fileName, 'public');
 
-        return redirect()
-            ->route('documents.index')
-            ->with('success', 'Dokumen berhasil diperbarui');
+        $document->file_path = $filePath;
     }
+
+    $document->save();
+
+    return redirect()
+        ->route('documents.index')
+        ->with('success', 'Dokumen berhasil diperbarui');
+}
 
     public function getDocuments(Request $request)
     {

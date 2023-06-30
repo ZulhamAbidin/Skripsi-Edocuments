@@ -105,7 +105,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="main-sidemenu navbar px-0">
-                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="index.html">
+                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="#">
                                         <img alt="" class="logo-2" src="../assets/images/brand/logo-3.png">
                                         <img src="../assets/images/brand/logo.png" class="logo-3" alt="logo">
                                     </a>
@@ -203,7 +203,7 @@
                                                         </div>
                                                         <div class="test-body text-center">
                                                             <h1 class=" mb-0">
-                                                                <span class="counter fw-semibold counter ">10</span>+
+                                                                <span class="counter fw-semibold counter ">{{ ($totalData) }}</span>+
                                                             </h1>
                                                             <div class="counter-text">
                                                                 <h5 class="font-weight-normal mb-0 ">Total Pengunjung
@@ -464,9 +464,9 @@
                                     </div>
                                     <div class="col-lg-4 col-sm-12 col-md-4 reveal revealleft">
                                         <div class="">
-                                            <a href="index.html"><img loading="lazy" alt="" class="logo-2 mb-3"
+                                            <a href="#"><img loading="lazy" alt="" class="logo-2 mb-3"
                                                     src="../assets/images/brand/logo-3.png"></a>
-                                            <a href="index.html"><img src="../assets/images/brand/logo.png"
+                                            <a href="#"><img src="../assets/images/brand/logo.png"
                                                     class="logo-3" alt="logo"></a>
                                             <p>Website ini adalah salah satu bentuk implementasi dari pendataan para
                                                 pencari kerja yang berdomisili kota makassar.</p>

@@ -75,32 +75,35 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Modal Edit Dokumen -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Document</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="editModalLabel">Edit Dokumen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <form id="editForm" action="" method="POST">
+                <form id="editForm" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
                         @csrf
                         @method('PUT')
-    
                         <div class="form-group">
-                            <label for="editTitle">Title</label>
-                            <input type="text" name="title" id="editTitle" class="form-control" required>
+                            <label for="editTitle">Judul</label>
+                            <input type="text" class="form-control" id="editTitle" name="title">
                         </div>
-    
                         <div class="form-group">
-                            <label for="editDocument">Document</label>
-                            <input type="file" name="document" id="editDocument" class="form-control" required>
+                            <label for="editFile">File</label>
+                            <input type="file" class="form-control" id="editFile" name="file">
                         </div>
-    
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -173,7 +176,8 @@
 
                 var form = $(this);
                 var url = form.attr('action');
-                var title = form.find('#title').val(); // Mengambil nilai judul dari input dengan id "title"
+                var title = form.find('#editTitle')
+            .val(); // Mengambil nilai judul dari input dengan id "editTitle"
 
                 // Membuat objek FormData untuk mengirim data form, termasuk file
                 var formData = new FormData(form[0]);

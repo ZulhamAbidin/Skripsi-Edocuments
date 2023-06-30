@@ -31,6 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         // Cek role_id pengguna yang login
         $user = $request->user();
+        
         if ($user->role_id == 3) {
             return redirect()->route('pencaker.index');
         }

@@ -24,21 +24,28 @@
                     </a>
                 </div>
 
-                <form action="{{ route('logout') }}" method="post" class="flex lg:hidden">
-                    @csrf
-                    <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
-                        <span aria-hidden="true">&rarr;</span>
-                    </button>
-                </form>
+                <div class="flex gap-x-6">
+                    <a href="/profile" class="rounded-md mobile-menu-button bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Profile    
+                    </a>
+                    <form action="{{ route('logout') }}" method="post" class="flex lg:hidden">
+                        @csrf
+                        <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
+                            <span aria-hidden="true">&rarr;</span>
+                        </button>
+                    </form>
+    
+                    <form action="{{ route('logout') }}" method="post" class="hidden lg:flex lg:flex-1 lg:justify-end">
+                        @csrf
+                        <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
+                            <span aria-hidden="true">&rarr;</span>
+                        </button>
+                    </form>
 
-                <form action="{{ route('logout') }}" method="post" class="hidden lg:flex lg:flex-1 lg:justify-end">
-                    @csrf
-                    <button type="submit" class="text-sm font-semibold leading-6 text-gray-900">Logout
-                        <span aria-hidden="true">&rarr;</span>
-                    </button>
-                </form>
+                </div>
             </nav>
         </header>
+
 
         <div class="relative isolate px-6 pt-14 lg:px-8">
             <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -58,7 +65,7 @@
                 <div class="text-center">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Pengesahan AK1</h1>
                     <p class="mt-6 text-lg capitalize leading-8 text-gray-600">
-                        bidang penempatan tenaga kerja dan perluasakan kesempatan kerja Dinas ketenagakerjaan kota
+                        bidang penempatan tenaga kerja dan perluasan kesempatan kerja, Dinas ketenagakerjaan kota
                         makassar.</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
 
@@ -301,8 +308,10 @@
 
     </div>
 
+
     <script src="{{ asset('assets/js/navbar.js') }}"></script>
     
+
     <script>
       // Fungsi untuk konfirmasi penghapusan
     function confirmDeletion(event) {

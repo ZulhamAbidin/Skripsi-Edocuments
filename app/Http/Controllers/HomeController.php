@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Data;
 use App\Models\Pengalaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +12,11 @@ class HomeController extends Controller
 {
     public function index()
 {
+    $totalData = Data::where('status', 'Terverifikasi')->count();
     $pengalamanList = Pengalaman::with('user')->get();
-    return view('welcome', compact('pengalamanList'));
+
+    return view('welcome', compact('pengalamanList', 'totalData'));
+    // return view('welcome', compact('pengalamanList'));
 }
 
 

@@ -4,7 +4,7 @@
     <div class="main-container container-fluid">
 
         <div class="page-header">
-            <h1 class="page-title">Dashboard 01</h1>
+            <h1 class="page-title">Dashboard</h1>
             <div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>

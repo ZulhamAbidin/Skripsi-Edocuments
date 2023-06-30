@@ -9,11 +9,20 @@ use Illuminate\Support\HtmlString;
 
 class VerifikasiController extends Controller
 {
-    public function index()
+//     public function index()
+// {
+//     $data = Data::where('Status', '!=', 'Terverifikasi')->get();
+//     return view('data.verifikasi.index', compact('data'));
+// }
+
+public function index()
 {
-    $data = Data::where('Status', '!=', 'Terverifikasi')->get();
+    $data = Data::where('Status', '!=', 'Terverifikasi')
+                ->orderBy('created_at', 'desc')
+                ->get();
     return view('data.verifikasi.index', compact('data'));
 }
+
 
 
     public function destroy(Data $item)

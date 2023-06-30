@@ -26,8 +26,7 @@
                     Tenaga Kerja Dan Perluasan Kesempatan Kerja.</p>
             </div>
 
-        <form method="POST" action="{{ route('login') }}"
-            class="mx-auto lg:mt-1 max-w-lg sm:py-32 md:py-14 lg:py-7 lg:px-8 px-10">
+        <form method="POST" action="{{ route('login') }}"   class="mx-auto lg:mt-1 max-w-lg sm:py-32 md:py-14 lg:py-7 lg:px-8 px-10">
             @csrf
 
             @if ($errors->has('email'))
