@@ -60,7 +60,8 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="/">
-                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo"
+                                alt="logo">
                             <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
@@ -76,13 +77,25 @@
                                 <div class="collapse navbar-collapse bg-white px-0" id="navbarSupportedContent-4">
                                     <!-- SEARCH -->
                                     <div class="header-nav-right p-5">
-                                        <a href="/register"
-                                            class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto"
-                                            target="_blank">Register
-                                        </a>
-                                        <a href="/login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto"
-                                            target="_blank">Login
-                                        </a>
+
+                                        @if (auth()->check())
+                                            @if (auth()->user()->role_id == 3)
+                                                <a href="/pencaker"
+                                                    class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Ke
+                                                    Dashboard</a>
+                                            @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                                <a href="/dashboard"
+                                                    class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Dashboard</a>
+                                            @endif
+                                        @else
+                                            <a href="/register"
+                                                class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Register
+                                            </a>
+                                            <a href="/login"
+                                                class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login
+                                            </a>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -91,9 +104,9 @@
                 </div>
             </div>
             @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
             @endif
             <!-- /app-Header -->
 
@@ -111,8 +124,8 @@
                                     </a>
                                     <ul class="side-menu">
                                         <li class="slide">
-                                            <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
-                                                    class="side-menu__label">Home</span></a>
+                                            <a class="side-menu__item active" data-bs-toggle="slide"
+                                                href="#home"><span class="side-menu__label">Home</span></a>
                                         </li>
 
                                         <li class="slide">
@@ -130,14 +143,20 @@
                                         </li>
                                     </ul>
                                     <div class="header-nav-right d-none d-lg-flex">
-                                        <a href="/register"
-                                            class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                            target="_blank">Register
-                                        </a>
-                                        <a href="/login"
-                                            class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                            target="_blank">Login
-                                        </a>
+                                        @if (auth()->check())
+                                        @if (auth()->user()->role_id == 3)
+                                        <a href="/pencaker" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Ke
+                                            Dashboard</a>
+                                        @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <a href="/dashboard" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Dashboard</a>
+                                        @endif
+                                        @else
+                                        <a href="/register" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i class="fa fa-lock me-2"></i> Daftar
+                                            Sekarang</a>
+                                        <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"><i class="fa fa-lock me-2"></i> Login</a>
+                                        @endif
+
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +164,8 @@
                     </div>
                     <!--/APP-SIDEBAR-->
                 </div>
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
+                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal"
+                    id="home">
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
@@ -157,14 +177,20 @@
                                     dikeluarkan
                                     Dinas Ketenagakerjaan atau Disnaker dengan tujuan untuk pendataan para pencari kerja
                                 </h6>
-
-                                <a href="/register" target="_blank"
-                                    class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fa fa-lock me-2"></i> Daftar Sekarang
-                                </a>
-                                <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"
-                                    target="_blank"><i class="fa fa-lock me-2"></i>Login
-                                </a>
+                                @if (auth()->check())
+                                    @if (auth()->user()->role_id == 3)
+                                        <a href="/pencaker" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Ke
+                                            Dashboard</a>
+                                    @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <a href="/dashboard" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Dashboard</a>
+                                    @endif
+                                @else
+                                    <a href="/register" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
+                                            class="fa fa-lock me-2"></i> Daftar
+                                        Sekarang</a>
+                                    <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"><i
+                                            class="fa fa-lock me-2"></i> Login</a>
+                                @endif
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
                                 <img src="{{ asset('image/okk.jpg') }}" alt="">
@@ -180,7 +206,7 @@
 
                     <!-- CONTAINER -->
                     <div class="main-container">
-                        
+
                         <div class="">
 
                             <!-- ROW-1 OPEN -->
@@ -203,7 +229,8 @@
                                                         </div>
                                                         <div class="test-body text-center">
                                                             <h1 class=" mb-0">
-                                                                <span class="counter fw-semibold counter ">{{ ($totalData) }}</span>+
+                                                                <span
+                                                                    class="counter fw-semibold counter ">{{ $totalData }}</span>+
                                                             </h1>
                                                             <div class="counter-text">
                                                                 <h5 class="font-weight-normal mb-0 ">Total Pengunjung
@@ -233,31 +260,36 @@
                                                     <h2 class="text-center fw-semibold text-white mb-7">bagaimana
                                                         pengalaman pengunjung mengenai pelayanan kami.</h2>
                                                     <div class="testimonial-carousel">
-                                                    
-                                                    @foreach ($pengalamanList as $pengalaman)
 
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80">
-                                                                            <i class="fa fa-quote-left fs-20 text-white-80"></i>{{ $pengalaman->pengalamanpengunjung }}
-                                                                        </p>
-                                                                        <h3 class="title">{{ $pengalaman->user->name }}</h3>
-                                                                        <div class="rating-stars block my-rating-5 mb-5" data-rating="4"></div>
-                                                                        @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
-                                                                                <form action="{{ route('pengalaman.delete', $pengalaman->id) }}" method="POST" class="delete-form">
+                                                        @foreach ($pengalamanList as $pengalaman)
+                                                            <div class="slide text-center">
+                                                                <div class="row">
+                                                                    <div class="col-xl-8 col-md-12 d-block mx-auto">
+                                                                        <div class="testimonia">
+                                                                            <p class="text-white-80">
+                                                                                <i
+                                                                                    class="fa fa-quote-left fs-20 text-white-80"></i>{{ $pengalaman->pengalamanpengunjung }}
+                                                                            </p>
+                                                                            <h3 class="title">
+                                                                                {{ $pengalaman->user->name }}</h3>
+                                                                            <div class="rating-stars block my-rating-5 mb-5"
+                                                                                data-rating="4"></div>
+                                                                            @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
+                                                                                <form
+                                                                                    action="{{ route('pengalaman.delete', $pengalaman->id) }}"
+                                                                                    method="POST"
+                                                                                    class="delete-form">
                                                                                     @csrf
                                                                                     @method('DELETE')
-                                                                                    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+                                                                                    <button type="submit"
+                                                                                        class="delete-btn btn btn-danger">Delete</button>
                                                                                 </form>
-                                                                        @endif
+                                                                            @endif
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                    @endforeach
+                                                        @endforeach
 
                                                     </div>
                                                 </div>
@@ -369,7 +401,7 @@
                                                         </div>
                                                         <div class="col-xl-9">
                                                             <div class="">
-                                                                
+
                                                                 <form action="{{ route('welcome.submit') }}"
                                                                     method="POST"
                                                                     class="form-horizontal reveal revealrotate m-t-20">
@@ -378,27 +410,27 @@
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
                                                                             <input class="form-control" type="text"
-                                                                                name="name" id="name" required=""
+                                                                                name="name" id="name"
+                                                                                required=""
                                                                                 placeholder="Username*">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
                                                                             <input class="form-control" type="email"
-                                                                                name="email" id="name" required=""
-                                                                                placeholder="Email*">
+                                                                                name="email" id="name"
+                                                                                required="" placeholder="Email*">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-xs-12">
-                                                                            <textarea class="form-control"
-                                                                                id="pengalamanpengunjung"
-                                                                                name="pengalamanpengunjung" placeholder="bagaimana tanggapan anda dengan pelayanan kami ?*"
-                                                                                rows="5"></textarea>
+                                                                            <textarea class="form-control" id="pengalamanpengunjung" name="pengalamanpengunjung"
+                                                                                placeholder="bagaimana tanggapan anda dengan pelayanan kami ?*" rows="5"></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="">
-                                                                        <button type="submit" class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -498,7 +530,8 @@
                             <footer class="main-footer px-0 pb-0 text-center">
                                 <div class="row ">
                                     <div class="col-md-12 col-sm-12">
-                                        Copyright © <span id="year"></span> <a href="javascript:void(0)">E-Document</a>.
+                                        Copyright © <span id="year"></span> <a
+                                            href="javascript:void(0)">E-Document</a>.
                                         With by <a href="javascript:void(0)"> Zulham Abidin </a> All rights reserved.
                                     </div>
                                 </div>
@@ -548,15 +581,15 @@
             });
         });
 
-        @if(session('success'))
-        swal({
-            title: 'Success',
-            text: '{{ session('
-            success ') }}',
-            icon: 'success',
-            timer: 3000,
-            button: false,
-        });
+        @if (session('success'))
+            swal({
+                title: 'Success',
+                text: '{{ session('
+                                            success ') }}',
+                icon: 'success',
+                timer: 3000,
+                button: false,
+            });
         @endif
     </script>
     <script src="../assets/js/jquery.min.js"></script>
