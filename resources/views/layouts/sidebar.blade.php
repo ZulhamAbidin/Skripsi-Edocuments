@@ -40,7 +40,9 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)">DATA PEKERJA</a></li>
                         <li><a href="/data/" class="slide-item"> List Data</a></li>
                         <li><a href="/data/verifikasi" class="slide-item"> Pengajuan Pengesahan</a></li>
+                        @if(auth()->user()->role_id == 1)
                         <li><a href="/export/" class="slide-item"> Export Data</a></li>
+                        @endif
                         <li><a href="/data/create" class="slide-item"> Tambah Data</a></li>
                     </ul>
                 </li>
@@ -89,7 +91,7 @@
                     </a>
                 </li>
                 
-                <li class="slide">
+                {{-- <li class="slide">
                     <form action="/logout" method="post" class="side-menu__item has-link" data-bs-toggle="slide">
                         @csrf
                         <i class="side-menu__icon mr-2 fe fe-log-out"></i>
@@ -97,7 +99,7 @@
                             <span class="side-menu__label">Sign out</span>
                         </button>
                     </form>
-                </li>
+                </li> --}}
 
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

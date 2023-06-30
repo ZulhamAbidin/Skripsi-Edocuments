@@ -23,7 +23,23 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     // Cek role_id pengguna yang login
+    //     $user = $request->user();
+        
+    //     if ($user->role_id == 3) {
+    //         return redirect()->route('pencaker.index');
+    //     }
+
+    //     return redirect()->intended(RouteServiceProvider::HOME);
+    // }
+
+        public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
@@ -34,10 +50,13 @@ class AuthenticatedSessionController extends Controller
         
         if ($user->role_id == 3) {
             return redirect()->route('pencaker.index');
+        } elseif ($user->role_id == 1 || $user->role_id == 2) {
+            return redirect()->route('dashboard');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
 
     /**
      * Destroy an authenticated session.
