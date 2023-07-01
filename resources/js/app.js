@@ -1,12 +1,7 @@
-import './bootstrap';
+import "./bootstrap";
 
-import Alpine from 'alpinejs';
-import "tailwindcss/dist/tailwind.min.css";
+import Alpine from "alpinejs";
 
 window.Alpine = Alpine;
 
 Alpine.start();
-
-
-// window.$ = window.jQuery = require("jquery");
-// require("datatables.net-bs4");

@@ -1,24 +1,11 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
 <head>
-
-    <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-
-
-    <!-- Referensi ke file CSS SweetAlert -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-{{--     
-    <!-- Referensi ke file JavaScript SweetAlert -->
-    <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
 
     <!-- TITLE -->
     <title>E-Documents</title>
@@ -30,6 +17,10 @@
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet " />
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
+
+    <!-- Referensi ke file CSS SweetAlert -->
+    <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
 
 </head>
 
@@ -56,6 +47,13 @@
     </div>
     
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -94,9 +92,7 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
-    
     @stack('scripts')
-
 
 </body>
 

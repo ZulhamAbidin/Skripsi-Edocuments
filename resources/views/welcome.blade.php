@@ -1,34 +1,20 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
 <head>
-
-    <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- FAVICON -->
-
-
-    <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-
-    <!-- TITLE -->
     <title>E-Document</title>
+    <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" />
 
-    <!-- BOOTSTRAP CSS -->
-    <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- STYLE CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <link href="../assets/css/dark-style.css" rel="stylesheet" />
-
-    <!--- FONT-ICONS CSS -->
-    <link href="../assets/css/icons.css" rel="stylesheet" />
-
-    <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-
+    <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
+    
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
     <style>
         .typed-cursor {
             display: none !important;
@@ -39,16 +25,13 @@
             text-align: center !important;
         }
     </style>
-
 </head>
 
 <body class="app ltr landing-page horizontal">
     <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+        <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
+    
     <div class="page">
         <div class="page-main">
 
@@ -60,10 +43,8 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="/">
-                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo"
-                                alt="logo">
-                            <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -119,8 +100,8 @@
                             <div class="row">
                                 <div class="main-sidemenu navbar px-0">
                                     <a class="navbar-brand ps-0 d-none d-lg-block" href="#">
-                                        <img alt="" class="logo-2" src="../assets/images/brand/logo-3.png">
-                                        <img src="../assets/images/brand/logo.png" class="logo-3" alt="logo">
+                                        <img alt="" class="logo-2" src="{{ asset('assets/images/brand/logo-3.png') }}">
+                                        <img src="{{ asset('assets/images/brand/logo.png') }}" class="logo-3" alt="logo">
                                     </a>
                                     <ul class="side-menu">
                                         <li class="slide">
@@ -497,8 +478,8 @@
                                     <div class="col-lg-4 col-sm-12 col-md-4 reveal revealleft">
                                         <div class="">
                                             <a href="#"><img loading="lazy" alt="" class="logo-2 mb-3"
-                                                    src="../assets/images/brand/logo-3.png"></a>
-                                            <a href="#"><img src="../assets/images/brand/logo.png"
+                                                    src="{{ asset('assets/images/brand/logo-3.png') }}"></a>
+                                            <a href="#"><img src="{{ asset('assets/images/brand/logo.png') }}"
                                                     class="logo-3" alt="logo"></a>
                                             <p>Website ini adalah salah satu bentuk implementasi dari pendataan para
                                                 pencari kerja yang berdomisili kota makassar.</p>
@@ -546,7 +527,6 @@
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
     <script>
         var typed = new Typed('#typed-text', {
             strings: ['Disnaker Kota Makassar Pengesahan Kartu AK1'],
@@ -555,9 +535,8 @@
             loop: true
         });
     </script>
-    <!-- Tambahkan script SweetAlert -->
 
-    <script src="https://unpkg.com/sweetalert@latest"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const deleteForms = document.querySelectorAll('.delete-form');
@@ -582,30 +561,38 @@
         });
 
         @if (session('success'))
-            swal({
-                title: 'Success',
-                text: '{{ session('
-                                            success ') }}',
-                icon: 'success',
-                timer: 3000,
-                button: false,
+            Swal.fire({
+            title: 'Success',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false
             });
         @endif
     </script>
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/plugins/counters/counterup.min.js"></script>
-    <script src="../assets/plugins/counters/waypoints.min.js"></script>
-    <script src="../assets/plugins/counters/counters-1.js"></script>
-    <script src="../assets/plugins/owl-carousel/owl.carousel.js"></script>
-    <script src="../assets/plugins/company-slider/slider.js"></script>
-    <script src="../assets/plugins/rating/jquery-rate-picker.js"></script>
-    <script src="../assets/plugins/rating/rating-picker.js"></script>
-    <script src="../assets/plugins/ratings-2/jquery.star-rating.js"></script>
-    <script src="../assets/plugins/ratings-2/star-rating.js"></script>
-    <script src="../assets/js/sticky.js"></script>
-    <script src="../assets/js/landing.js"></script>
+
+   
+
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/typed.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/counters/counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/counters/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/counters/counters-1.js') }}"></script>
+    <script src="{{ asset('assets/plugins/owl-carousel/owl.carousel.js') }}"></script>
+    <script src="{{ asset('assets/plugins/company-slider/slider.js') }}"></script>
+    <script src="{{ asset('assets/plugins/rating/jquery-rate-picker.js') }}"></script>
+    <script src="{{ asset('assets/plugins/rating/rating-picker.js') }}"></script>
+    <script src="{{ asset('assets/plugins/ratings-2/jquery.star-rating.js') }}"></script>
+    <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
+    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+    <script src="{{ asset('assets/js/landing.js') }}"></script>
 
 </body>
 

@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-   
+
+    <link href="{{ asset('assets/js/alert/animated.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/js/alert/animated.min.css') }}" rel="stylesheet" />
+
+    <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
+    @vite('resources/css/app.css')
 </head>
 
 <body>
@@ -101,14 +103,6 @@
 
                 <div class="relative overflow-x-auto mt-10 mx-4 lg:mx-64">
                     @foreach ($pencakerData as $data)
-                   {{-- @if ($data->Status == 'Ditolak')
-                <div class="bg-red-100 border my-10 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Maaf!</strong>
-                    <span class="block sm:inline">Data Anda telah ditolak.</span>
-                    <span class="block sm:inline capitalize">Dengan Alasan {{ $data->alasan_penolakan }} Hapus Data Anda Dan Lengkapi
-                        Kembali Data Anda.</span>
-                </div>
-                @endif --}}
 
 
                 @if ($data->Status == 'Ditolak')
@@ -151,9 +145,7 @@
                                         <button type="submit"
                                             class="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 delete-button">Hapus</button>
                                     </form>
-                                    {{-- <a href="{{ route('pencaker.show', $data->id) }}"
-                                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Download</a> --}}
-                                </div>
+                                     </div>
                                 
                                 
 
@@ -308,6 +300,12 @@
 
     </div>
 
+
+    {{-- sweetalert2 --}}
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/alert/sweetalert2.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/navbar.js') }}"></script>
     

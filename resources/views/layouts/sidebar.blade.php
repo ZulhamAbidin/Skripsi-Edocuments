@@ -4,10 +4,10 @@
         <div class="side-header">
             <a class="header-brand1" href="/">
                 {{-- icon sash --}}
-                <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                <img src="../assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
-                <img src="../assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
-                <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-1.png') }}" class="header-brand-img toggle-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-2.png') }}" class="header-brand-img light-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1" alt="logo">
             </a>
             <!-- LOGO -->
         </div>
@@ -91,15 +91,15 @@
                     </a>
                 </li>
                 
-                {{-- <li class="slide">
-                    <form action="/logout" method="post" class="side-menu__item has-link" data-bs-toggle="slide">
+                <li class="slide">
+                    <form action="{{ route('logout') }}" method="post" class="side-menu__item has-link" data-bs-toggle="slide">
                         @csrf
                         <i class="side-menu__icon mr-2 fe fe-log-out"></i>
                         <button type="submit" class="border-0 bg-transparent">
                             <span class="side-menu__label">Sign out</span>
                         </button>
                     </form>
-                </li> --}}
+                </li>
 
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

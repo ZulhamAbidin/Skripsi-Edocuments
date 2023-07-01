@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'validatorpengunjug',
-            'email' => 'validatorpengunjug@gmail.com',
-            'password' => bcrypt('validatorpengunjug'),
+            'name' => 'validatorpengunjung',
+            'email' => 'validatorpengunjung@gmail.com',
+            'password' => bcrypt('validatorpengunjung'),
             'role_id' => 3
         ]);
 

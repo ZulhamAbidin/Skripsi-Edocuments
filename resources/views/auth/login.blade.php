@@ -1,16 +1,8 @@
-<!doctype html>
-<html>
+@extends('auth.auth')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-</head>
 
-<body>
+@section('container')
+    
     <div class="isolate bg-white sm:py-3 md:py-0 lg:px-8">
         
             <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -77,8 +69,12 @@
         </form>
     </div>
 
-    <script>
-        function togglePasswordVisibility() {
+@endsection
+
+@push('script')
+
+<script>
+    function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eye-icon');
 
@@ -92,8 +88,8 @@
                 eyeIcon.classList.add('text-gray-500');
             }
         }
-    </script>
+</script>
+    
+@endpush
 
-</body>
-
-</html>
+   

@@ -4,7 +4,7 @@
 
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
-                <img src="../assets/images/brand/logo-3.png" class="h-8 w-auto" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="h-8 w-auto" alt="logo">
             </a>
         </div>
 

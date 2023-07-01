@@ -6,8 +6,8 @@
                 href="javascript:void(0)"></a>
             <!-- sidebar-toggle-->
             <a class="logo-horizontal " href="/">
-                <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1" alt="logo">
             </a>
 
             <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -53,9 +53,8 @@
                                         <button class="btn"><i class="dropdown-icon fe fe-user"></i> Profile</button>
                                     </a>
 
-                                    <form action="/logout" method="post" class="dropdown-item">
+                                    <form action="{{ route('logout') }}" method="post" class="dropdown-item">
                                         @csrf
-                                        
                                         <button type="submit" class="btn"><i class="dropdown-icon fe fe-alert-circle"></i> Sign out</button>
                                     </form>
 
