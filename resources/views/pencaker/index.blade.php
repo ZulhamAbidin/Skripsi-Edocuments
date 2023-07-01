@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="{{ asset('assets/js/alert/animated.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/js/alert/animated.min.css') }}" rel="stylesheet" />
-
     <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
     @vite('resources/css/app.css')
@@ -17,12 +14,12 @@
 <body>
     <div class="bg-white">
 
-        <header class="absolute inset-x-0 top-0 z-50">
+        <header class="absolute inset-x-0 top-0 z-40">
             <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
 
                 <div class="flex lg:flex-1">
-                    <a href="#" class="-m-1.5 p-1.5">
-                        <img src="../assets/images/brand/logo-3.png" class="h-8 w-auto" alt="logo">
+                    <a href="" class="-m-1.5 p-1.5">
+                        <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="h-8 w-auto" alt="logo">
                     </a>
                 </div>
 
@@ -47,7 +44,6 @@
                 </div>
             </nav>
         </header>
-
 
         <div class="relative isolate px-6 pt-14 lg:px-8">
             <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -192,10 +188,9 @@
                 @endforeach
         </div>
 
-        <div class="fixed mobile-menu hidden animate__animated animate__backInDown inset-0 z-50 overflow-y-auto rounded-3xl">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div
-                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="fixed mt-20 md:mt-0 mobile-menu hidden animate__animated animate__backInDown inset-0 z-50 overflow-y-auto rounded-3xl">
+            <div class="md:flex min-h-full items-end justify-center text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                     <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                         <div class="flex min-h-full flex-col justify-center px-6 lg:px-8">
                             <h2 class="mt-3 text-left text-sm tracking-tight text-gray-900 font-semibold">Lengkapi
