@@ -69,7 +69,8 @@
 
 @endsection
 
-@push('scripts')
+
+@push('script')
 <script>
     $(document).ready(function() {
         $('form').submit(function(e) {

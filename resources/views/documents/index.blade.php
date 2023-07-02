@@ -1,41 +1,41 @@
 @extends('layouts.main')
 
 @section('container')
-    <style>
-        .dataTables_filter {
-            display: none;
-        }
+<style>
+    .dataTables_filter {
+        display: none;
+    }
 
-        td .action-buttons {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-        }
+    td .action-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
 
-        td .action-buttons .btn {
-            display: block !important;
-            width: 100% !important;
-            margin-bottom: 5px !important;
-        }
-    </style>
+    td .action-buttons .btn {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+    }
+</style>
 
-    <div class="main-container container-fluid">
+<div class="main-container container-fluid">
 
-        <div class="page-header">
-            <h1 class="page-title">List Document</h1>
-            <div>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Document</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List</li>
-                </ol>
-            </div>
+    <div class="page-header">
+        <h1 class="page-title">List Document</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Document</a></li>
+                <li class="breadcrumb-item active" aria-current="page">List</li>
+            </ol>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="card">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card">
 
-                    {{-- <div class="card-body pb-4">
+                {{-- <div class="card-body pb-4">
                     <div class="input-group mb-2">
                         <input type="seach" class="form-control form-control" id="search-input"
                             placeholder="Searching.....">
@@ -43,75 +43,76 @@
                     </div>
                 </div> --}}
 
-                    <div class="card-body pb-4">
-                        <div class="input-group mb-2">
-                            <input type="search" class="form-control" id="search-input" placeholder="Searching.....">
-                            <span class="input-group-text btn btn-primary" id="search-button">Search</span>
-                        </div>
+                <div class="card-body pb-4">
+                    <div class="input-group mb-2">
+                        <input type="search" class="form-control" id="search-input" placeholder="Searching.....">
+                        <span class="input-group-text btn btn-primary" id="search-button">Search</span>
                     </div>
-
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">List Document</h4>
-                    </div>
+            </div>
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="document-table">
-                                <thead>
-                                    <tr>
-                                        <th class="w-full">Title</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">List Document</h4>
                 </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="document-table">
+                            <thead>
+                                <tr>
+                                    <th class="w-full">Title</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Edit Dokumen -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Dokumen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="editForm" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="editTitle">Judul</label>
-                            <input type="text" class="form-control" id="editTitle" name="title">
-                        </div>
-                        <div class="form-group">
-                            <label for="editFile">File</label>
-                            <input type="file" class="form-control" id="editFile" name="file">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-                </form>
+<!-- Modal Edit Dokumen -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Dokumen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form id="editForm" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="editTitle">Judul</label>
+                        <input type="text" class="form-control" id="editTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="editFile">File</label>
+                        <input type="file" class="form-control" id="editFile" name="file">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
+@push('script')
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
             var dataTable = $('#document-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -254,5 +255,5 @@
 
 
         });
-    </script>
+</script>
 @endpush
