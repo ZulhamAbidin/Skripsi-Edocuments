@@ -1,598 +1,399 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-    <title>E-Document</title>
-    <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" />
-
-    <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
-    
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .typed-cursor {
             display: none !important;
         }
-
-
-        .section.pb-0 {
-            text-align: center !important;
-        }
     </style>
 </head>
 
-<body class="app ltr landing-page horizontal">
-    <div id="global-loader">
-        <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
-    </div>
-    
-    <div class="page">
-        <div class="page-main">
+<body>
+    <div class="bg-white">
 
-            <!-- app-Header -->
-            <div class="hor-header header">
-                <div class="container main-container">
-                    <div class="d-flex">
-                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
-                            href="javascript:void(0)"></a>
-                        <!-- sidebar-toggle-->
-                        <a class="logo-horizontal " href="/">
-                            <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1" alt="logo">
+        <header class="absolute inset-x-0 top-0 z-50">
+            <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="#" class="-m-1.5 p-1.5">
+                        <span class="sr-only"></span>
+                        <img class="h-8 w-auto" src="{{ asset('assets/images/brand/logo-3.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="flex lg:hidden">
+                    <button type="button"
+                        class="mobile-menu-button -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="#Home" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
+                    <a href="#Experience" class="text-sm font-semibold leading-6 text-gray-900">Masukan</a>
+                    <a href="#Contact" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
+                </div>
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <a href="/login"
+                        class="{{ auth()->check() ? 'hidden' : '' }} rounded-md flex bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </span>Login
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Mobile menu, show/hide based on menu open state. -->
+            <div class="mobile-menu hidden lg:hidden" role="dialog" aria-modal="true">
+
+                <div
+                    class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div class="flex items-center justify-between">
+
+                        <a href="" class="-m-1.5 p-1.5">
+                            <span class="sr-only">Your Company</span>
+                            <img class="h-8 w-auto" src="{{ asset('assets/images/brand/logo-3.png') }}" alt="">
                         </a>
-                        <!-- LOGO -->
-                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
-                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
-                                aria-controls="navbarSupportedContent-4" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon fe fe-more-vertical"></span>
-                            </button>
-                            <div class="navbar navbar-collapse responsive-navbar p-0">
-                                <div class="collapse navbar-collapse bg-white px-0" id="navbarSupportedContent-4">
-                                    <!-- SEARCH -->
-                                    <div class="header-nav-right p-5">
+                        <button type="button" class="-m-2.5 mobile-menu-close rounded-md p-2.5 text-gray-700">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-6 flow-root">
+                        <div class="-my-6 divide-y divide-gray-500/10">
 
-                                        @if (auth()->check())
-                                            @if (auth()->user()->role_id == 3)
-                                                <a href="/pencaker"
-                                                    class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Ke
-                                                    Dashboard</a>
-                                            @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                                                <a href="/dashboard"
-                                                    class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Dashboard</a>
-                                            @endif
-                                        @else
-                                            <a href="/register"
-                                                class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto">Register
-                                            </a>
-                                            <a href="/login"
-                                                class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login
-                                            </a>
-                                        @endif
-
-                                    </div>
-                                </div>
+                            <div class="space-y-2 py-6">
+                                <a
+                                    href="#/"class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-indigo-500 hover:text-slate-50">Home</a>
+                                <a href="#Experience"
+                                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-indigo-500 hover:text-slate-50">Masukan<a>
+                                        <a href="#Contact"
+                                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-indigo-500 hover:text-slate-50">Contact</a>
+                                        <a href="/login"
+                                            class="{{ auth()->check() ? 'hidden' : '' }} -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-indigo-500 hover:text-slate-50 ">Login</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-            <!-- /app-Header -->
+        </header>
 
-            <div class="landing-top-header overflow-hidden">
-                <div class="top sticky overflow-hidden">
-                    <!--APP-SIDEBAR-->
-                    <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
-                    <div class="app-sidebar bg-transparent horizontal-main">
-                        <div class="container">
-                            <div class="row">
-                                <div class="main-sidemenu navbar px-0">
-                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="#">
-                                        <img alt="" class="logo-2" src="{{ asset('assets/images/brand/logo-3.png') }}">
-                                        <img src="{{ asset('assets/images/brand/logo.png') }}" class="logo-3" alt="logo">
+        <section id="1">
+            <div class="relative z-40 isolate px-6 lg:px-8 mt-24 md:mt-36">
+
+                <div class="absolute inset-x-0 -top-40 -z-40 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                    aria-hidden="true">
+                    <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                    </div>
+                </div>
+
+                <div class="mx-auto grid grid-cols-7 my-6 md:my-10 px-4 gap-x-8  ">
+
+                    <div class="col-span-7 md:col-span-4 text-left">
+                        <h1 id="typed-text" class="zulham text-start fw-bold text-indigo-500 font-bold text-3xl"></h1>
+                        <p class="mt-4 text-sm leading-8 text-gray-600 text-justify">Bidang Penempatan Tenaga Kerja
+                            Dan Perluasan Kesempatan Kerja Menerbitkan Kartu AK1 atau kartu tanda pencari kerja yang
+                            sering disebut dengan kartu kuning. Kartu ini dikeluarkan Dinas Ketenagakerjaan atau
+                            Disnaker dengan tujuan untuk pendataan para pencari kerja.</p>
+                        <div class="mt-5 flex items-center md:justify-start gap-x-6">
+                            @if (auth()->check())
+                                @if (auth()->user()->role_id == 3)
+                                    <a href="/pencaker"
+                                        class="rounded-md flex bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        Dashboard
                                     </a>
-                                    <ul class="side-menu">
-                                        <li class="slide">
-                                            <a class="side-menu__item active" data-bs-toggle="slide"
-                                                href="#home"><span class="side-menu__label">Home</span></a>
-                                        </li>
-
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
-                                                    class="side-menu__label">Testimonials</span></a>
-                                        </li>
-
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#footer"><span
-                                                    class="side-menu__label">About</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
-                                                    class="side-menu__label">Contact</span></a>
-                                        </li>
-                                    </ul>
-                                    <div class="header-nav-right d-none d-lg-flex">
-                                        @if (auth()->check())
-                                        @if (auth()->user()->role_id == 3)
-                                        <a href="/pencaker" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Ke
-                                            Dashboard</a>
-                                        @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                                        <a href="/dashboard" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Dashboard</a>
-                                        @endif
-                                        @else
-                                        <a href="/register" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i class="fa fa-lock me-2"></i> Daftar
-                                            Sekarang</a>
-                                        <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"><i class="fa fa-lock me-2"></i> Login</a>
-                                        @endif
-
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/APP-SIDEBAR-->
-                </div>
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal"
-                    id="home">
-                    <div class="container px-sm-0">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-7">Selamat Datang</h4>
-                                <h1 id="typed-text" class="zulham text-start fw-bold text-primary"></h1>
-                                <h6 class="pb-3">
-                                    Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja Menerbitkan Kartu AK1
-                                    atau kartu tanda pencari kerja yang sering disebut dengan kartu kuning. Kartu ini
-                                    dikeluarkan
-                                    Dinas Ketenagakerjaan atau Disnaker dengan tujuan untuk pendataan para pencari kerja
-                                </h6>
-                                @if (auth()->check())
-                                    @if (auth()->user()->role_id == 3)
-                                        <a href="/pencaker" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Ke
-                                            Dashboard</a>
-                                    @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                                        <a href="/dashboard" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">Dashboard</a>
-                                    @endif
-                                @else
-                                    <a href="/register" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                            class="fa fa-lock me-2"></i> Daftar
-                                        Sekarang</a>
-                                    <a href="/login" class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2"><i
-                                            class="fa fa-lock me-2"></i> Login</a>
+                                @elseif(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                    <a href="/dashboard"
+                                        class="rounded-md flex bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        Dashboard
+                                    </a>
                                 @endif
-                            </div>
-                            <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="{{ asset('image/okk.jpg') }}" alt="">
-                            </div>
+                            @else
+                                <a href="/register"
+                                    class="rounded-md flex bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><span><svg
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                        </svg></span>Daftar Sekarang </a>
+                                <a href="/login"
+                                    class="text-xs font-semibold leading-6 text-gray-900 border rounded-lg px-10 py-1.5 hover:bg-indigo-500 hover:text-white border-gray-300">Login
+                                    <span aria-hidden="true">→</span></a>
+                            @endif
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-7 md:col-span-3 pt-10 md:flex md:pt-2 md:pl-12">
+                        <div class="transparent">
+                            <img class="object-cover rounded-lg" src="{{ asset('image/ok.webp') }}">
                         </div>
                     </div>
+
+                </div>
+
+
+                {{-- <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+                    aria-hidden="true">
+                    <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                    </div>
+                </div> --}}
+
+                <hr class="mt-3 bg-gray-700">
+            </div>
+        </section>
+
+        <section class="mx-4" id="Experience">
+
+            <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                <div class="relative h-56 overflow-hidden rounded-lg">
+
+                    @foreach ($pengalamanList as $pengalaman)
+                        <div class="hidden duration-700 ease-in-out gap-y-6 mt-10 pt-4 w-full px-4 md:px-64" data-carousel-item>
+
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#3B82F6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 mr-1 w-6 text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                </svg>
+                                <p class="text-sm font-semibold leading-6 text-gray-900 text-center pb-2">{{ $pengalaman->user->name }}</p>
+                            </div>
+
+                            <p class="mt-1 text-xs text-wrap leading-5 text-gray-500 text-center"> {{ $pengalaman->pengalamanpengunjung }}</p>
+                            
+                            @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
+                                <form action="{{ route('pengalaman.delete', $pengalaman->id) }}" method="POST" class="delete-form flex justify-center pt-6">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="rounded-md delete-btn delete-form flex bg-red-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Delete</button>
+                                </form>
+                            @endif
+
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
 
-            <!--app-content open-->
-            <div class="main-content mt-0">
-                <div class="side-app">
+            <hr class="z-50 mt-3 bg-gray-700">
 
-                    <!-- CONTAINER -->
-                    <div class="main-container">
+        </section>
 
-                        <div class="">
+        <section class="mx-4" id="Contact">
 
-                            <!-- ROW-1 OPEN -->
-                            <div class="section pb-0">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">Statistics</h4>
-                                        <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold mb-7">Pengunjung.</h2>
-                                    </div>
-                                    <div
-                                        class="row text-center justify-items-center d-flex justify-content-center services-statistics landing-statistics">
-                                        <div class="col-xl-3 col-md-6 col-lg-6">
-                                            <div class="card">
-                                                <div class="card-body bg-primary-transparent">
-                                                    <div class="counter-status">
-                                                        <div
-                                                            class="counter-icon bg-primary-transparent box-shadow-primary">
-                                                            <i class="fe fe-layers text-primary fs-23"></i>
-                                                        </div>
-                                                        <div class="test-body text-center">
-                                                            <h1 class=" mb-0">
-                                                                <span
-                                                                    class="counter fw-semibold counter ">{{ $totalData }}</span>+
-                                                            </h1>
-                                                            <div class="counter-text">
-                                                                <h5 class="font-weight-normal mb-0 ">Total Pengunjung
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ROW-1 CLOSED -->
-
-                            <!-- ROW-9 OPEN -->
-                            <div class="testimonial-owl-landing section pb-0" id="Clients">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card bg-transparent">
-                                                <div class="card-body pt-5">
-                                                    <h4 class="text-center fw-semibold text-white-80">Pengalaman
-                                                        Pengunjung </h4>
-                                                    <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold text-white mb-7">bagaimana
-                                                        pengalaman pengunjung mengenai pelayanan kami.</h2>
-                                                    <div class="testimonial-carousel">
-
-                                                        @foreach ($pengalamanList as $pengalaman)
-                                                            <div class="slide text-center">
-                                                                <div class="row">
-                                                                    <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                        <div class="testimonia">
-                                                                            <p class="text-white-80">
-                                                                                <i
-                                                                                    class="fa fa-quote-left fs-20 text-white-80"></i>{{ $pengalaman->pengalamanpengunjung }}
-                                                                            </p>
-                                                                            <h3 class="title">
-                                                                                {{ $pengalaman->user->name }}</h3>
-                                                                            <div class="rating-stars block my-rating-5 mb-5"
-                                                                                data-rating="4"></div>
-                                                                            @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
-                                                                                <form
-                                                                                    action="{{ route('pengalaman.delete', $pengalaman->id) }}"
-                                                                                    method="POST"
-                                                                                    class="delete-form">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="submit"
-                                                                                        class="delete-btn btn btn-danger">Delete</button>
-                                                                                </form>
-                                                                            @endif
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-image-landing section pb-0" id="Contact">
-                                <div class="container">
-                                    <div class="">
-                                        <div class="card card-shadow reveal">
-                                            <h4 class="text-center fw-semibold mt-7">Contact</h4>
-                                            <span class="landing-title"></span>
-                                            <h2 class="text-center fw-semibold mb-0 px-2">Get in Touch with <span
-                                                    class="text-primary">US.</span></h2>
-                                            <div class="card-body p-5 pb-6 text-dark">
-                                                <div class="statistics-info p-4">
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-lg-9">
-                                                            <div class="mt-3">
-                                                                <div class="text-dark">
-                                                                    <div class="services-statistics reveal my-5">
-                                                                        <div class="row text-center">
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-primary-transparent box-shadow-primary">
-                                                                                                <i
-                                                                                                    class="fe fe-map-pin text-primary fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Alamat</h4>
-                                                                                            <p>Jl. A. P. Pettarani
-                                                                                                No.72, Banta-Bantaeng,
-                                                                                                Kec. Rappocini, Kota
-                                                                                                Makassar, Sulawesi
-                                                                                                Selatan 90222 </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-secondary-transparent box-shadow-secondary">
-                                                                                                <i
-                                                                                                    class="fe fe-phone text-secondary fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Phone</h4>
-                                                                                            <p class="mb-0">(0411)
-                                                                                                853930 </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-statuss">
-                                                                                            <div
-                                                                                                class="counter-icon bg-success-transparent box-shadow-success">
-                                                                                                <i
-                                                                                                    class="fe fe-mail text-success fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Contact</h4>
-                                                                                            <p class="mb-0">
-                                                                                                disnaker@makassar.go.id
-                                                                                            </p>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xl-3 col-md-6 col-lg-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body p-0">
-                                                                                        <div class="counter-status">
-                                                                                            <div
-                                                                                                class="counter-icon bg-danger-transparent box-shadow-danger">
-                                                                                                <i
-                                                                                                    class="fe fe-airplay text-danger fs-23"></i>
-                                                                                            </div>
-                                                                                            <h4
-                                                                                                class="mb-2 fw-semibold">
-                                                                                                Jam Operasional</h4>
-                                                                                            <p class="mb-0">Senin –
-                                                                                                Jum’at (08.00 – 16.00
-                                                                                                WIB)</p>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-9">
-                                                            <div class="">
-
-                                                                <form action="{{ route('welcome.submit') }}"
-                                                                    method="POST"
-                                                                    class="form-horizontal reveal revealrotate m-t-20">
-                                                                    @csrf
-
-                                                                    <div class="form-group">
-                                                                        <div class="col-xs-12">
-                                                                            <input class="form-control" type="text"
-                                                                                name="name" id="name"
-                                                                                required=""
-                                                                                placeholder="Username*">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-xs-12">
-                                                                            <input class="form-control" type="email"
-                                                                                name="email" id="name"
-                                                                                required="" placeholder="Email*">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-xs-12">
-                                                                            <textarea class="form-control" id="pengalamanpengunjung" name="pengalamanpengunjung"
-                                                                                placeholder="bagaimana tanggapan anda dengan pelayanan kami ?*" rows="5"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="">
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- CONTAINER CLOSED-->
+            <div class="absolute bottom-0 inset-x-0  -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+                aria-hidden="true">
+                <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                    style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
                 </div>
             </div>
-            <!--app-content closed-->
-        </div>
 
-        <!-- FOOTER OPEN -->
-        <div class="demo-footer" id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="top-footer">
-                                <div class="row">
-                                    <div class="col-lg-4 col-sm-12 col-md-12 reveal revealleft">
-                                        <h6>About</h6>
-                                        <p>Bidang Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja adalah salah
-                                            satu bidang di dinas ketenagakerjaan mempunyai tugas pokok dan fungsi
-                                            menerbitkan Kartu AK1 atau kartu tanda pencari kerja yang sering disebut
-                                            pula dengan kartu kuning. Kartu ini dikeluarkan oleh
-                                            lembaga pemerintah, Dinas Ketenagakerjaan atau Disnaker, yang dibuat dengan
-                                            tujuan untuk pendataan para pencari kerja.
-                                        </p>
-                                        <p class="mb-5 mb-lg-2">Website ini adalah salah satu bentuk implementasi dari
-                                            pendataan para pencari kerja tersebut
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
-                                        <h6>Alur</h6>
-                                        <ul class="list-unstyled mb-5 mb-lg-0">
-                                            <li><a href="">Register</a></li>
-                                            <li><a href="">Login</a></li>
-                                            <li><a href="">Dashboard</a></li>
-                                            <li><a href="">Ajukan Permintaan Verifikasi Data</a></li>
-                                            <li><a href="">*Aprroval Pengajuan</a></li>
-                                            <li><a href="">Lanjutkan Tahap Pengesahan</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
-                                        <h6>Information</h6>
-                                        <ul class="list-unstyled mb-5 mb-lg-0">
-                                            <li><a href="">Testimonials</a></li>
-                                            <li><a href="">Contact US</a></li>
-                                            <li><a href="">About</a></li>
-                                            <li><a href="">Services</a></li>
-                                            <li><a href="">Footer</a></li>
-                                            <li><a href="">Terms and Services</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12 col-md-4 reveal revealleft">
-                                        <div class="">
-                                            <a href="#"><img loading="lazy" alt="" class="logo-2 mb-3"
-                                                    src="{{ asset('assets/images/brand/logo-3.png') }}"></a>
-                                            <a href="#"><img src="{{ asset('assets/images/brand/logo.png') }}"
-                                                    class="logo-3" alt="logo"></a>
-                                            <p>Website ini adalah salah satu bentuk implementasi dari pendataan para
-                                                pencari kerja yang berdomisili kota makassar.</p>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter your email"
-                                                        aria-label="Example text with button addon"
-                                                        aria-describedby="button-addon1">
-                                                    <button class="btn btn-primary" type="button"
-                                                        id="button-addon2">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="btn-list mt-6">
-                                            <button type="button" class="btn btn-icon rounded-pill"><i
-                                                    class="fa fa-facebook"></i></button>
-                                            <button type="button" class="btn btn-icon rounded-pill"><i
-                                                    class="fa fa-youtube"></i></button>
-                                            <button type="button" class="btn btn-icon rounded-pill"><i
-                                                    class="fa fa-twitter"></i></button>
-                                            <button type="button" class="btn btn-icon rounded-pill"><i
-                                                    class="fa fa-instagram"></i></button>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <footer class="main-footer px-0 pb-0 text-center">
-                                <div class="row ">
-                                    <div class="col-md-12 col-sm-12">
-                                        Copyright © <span id="year"></span> <a
-                                            href="javascript:void(0)">E-Document</a>.
-                                        With by <a href="javascript:void(0)"> Zulham Abidin </a> All rights reserved.
-                                    </div>
-                                </div>
-                            </footer>
-                        </div>
+            <div class="grid grid-cols-4 pt-10 gap-x-10 gap-y-8 md:max-w-6xl mx-auto ">
+
+                <div class="col-span-4 md:col-span-1  rounded-xl text-gray-800">
+                    <div class="w-16 h-16 flex mx-auto rounded-xl mb-3 bg-[#F0EFFF] text-[#6C5FFC]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mx-auto" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </div>
+                    <p class="text-sm md:text-sm font-semibold  leading-6 text-gray-900 text-center pb-2">Alamat
+                    </p>
+                    <p class="text-xs text-wrap leading-5 px-14 md:px-0 text-gray-500 text-center">Jl. A. P.
+                        Pettarani No.72, Banta-Bantaeng, Kec. Rappocini, Kota Makassar, Sulawesi Selatan 90222</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-1 rounded-xl text-gray-800">
+                    <div class="w-16 h-16 flex mx-auto rounded-xl mb-3 bg-[#F0EFFF] text-[#6C5FFC]">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mx-auto" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        </svg>
+
+                    </div>
+                    <p class="text-sm md:text-sm font-semibold  leading-6 text-gray-900 text-center pb-2">Phone</p>
+                    <p class="text-xs text-wrap leading-5 px-14 md:px-0 text-gray-500 text-center">(0411) 853930
+                    </p>
+                </div>
+
+                <div class="col-span-4 md:col-span-1  rounded-xl text-gray-800">
+                    <div class="w-16 h-16 flex mx-auto rounded-xl mb-3 bg-[#F0EFFF] text-[#6C5FFC]">
+                        <svg class="w-6 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+
+                    </div>
+                    <p class="text-sm md:text-sm font-semibold leading-6 text-gray-900 text-center pb-2">Contact
+                    </p>
+                    <p class="text-xs text-wrap leading-5 px-14 md:px-0 text-gray-500 text-center">
+                        disnaker@makassar.go.id</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-1  rounded-xl text-gray-800">
+                    <div class="w-16 h-16 flex mx-auto rounded-xl mb-3 bg-[#F0EFFF] text-[#6C5FFC]">
+                        <svg class="w-7 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                    </div>
+                    <p class="text-sm md:text-sm font-semibold leading-6 text-gray-900 text-center pb-2">Jam
+                        Operasional</p>
+                    <p class="text-xs text-wrap leading-5 px-14 md:px-0 text-gray-500 text-center">Senin – Jum’at
+                        (08.00 – 16.00 WIB)</p>
+                </div>
+
+            </div>
+
+            <hr class="z-50 mt-10 bg-gray-700">
+
+        </section>
+
+        <section class="mx-4" id="4">
+            <div class="isolate bg-white px-6 py-24 pb-5 lg:px-8">
+                <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                    aria-hidden="true">
+                    <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+                        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
                     </div>
                 </div>
+                <div class="mx-auto max-w-2xl text-center">
+                    <h2 class="text-xl font-semibold tracking-tight text-gray-900 md:text-3xl">Kotak Saran Dan Masukan
+                    </h2>
+                    <p class="mt-2 text-sm  text-gray-600 text-wrap leading-5 capitalize text-center">
+                        Saran dan Masukan mengenai pelayan kami</p>
+                </div>
+
+                <form action="{{ route('welcome.submit') }}" method="POST" class="mx-auto mt-6 md:20 max-w-xl ">
+                    @csrf
+                    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+                        <div class="sm:col-span-2">
+                            <label for="text"
+                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Username</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="name" id="name" autocomplete="name"
+                                    class="block w-full text-xs rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="email"
+                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Email</label>
+                            <div class="mt-2.5">
+                                <input type="email" name="email" id="email" autocomplete="email"
+                                    class="block w-full text-xs rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="message"
+                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Message</label>
+                            <div class="mt-2.5">
+                                <textarea name="pengalamanpengunjung" id="message" rows="4"
+                                    class="block w-full text-xs rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-5">
+                        <button type="submit"
+                            class="block w-full text-xs rounded-md bg-indigo-600 px-3.5 py-2.5 text-center  font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Let's
+                            Submit</button>
+                    </div>
+                </form>
             </div>
-        </div>
-        <!-- FOOTER CLOSED -->
+
+        </section>
+
+        <footer class="bg-white rounded-lg shadow ">
+            <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+                <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+                <span class="block text-sm text-gray-500 sm:text-center ">© 2023 <a href=""
+                        class="hover:underline">Zulham Abidin & Edocuments</a>. All Rights Reserved.</span>
+            </div>
+        </footer>
+
     </div>
 
-    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
+    <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
 
-    <script>
-        var typed = new Typed('#typed-text', {
-            strings: ['Disnaker Kota Makassar Pengesahan Kartu AK1'],
-            typeSpeed: 150,
-            backSpeed: 150,
-            loop: true
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+    <script src="{{ asset('assets/navbar.js') }}"></script>
 
-    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const deleteForms = document.querySelectorAll('.delete-form');
-
+    
             deleteForms.forEach((form) => {
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
-
-                    swal({
+    
+                    Swal.fire({
                         title: 'Are you sure?',
-                        text: 'Apakah Anda Yakin Ingin Menghapus Pengalaman Pengguna ?',
+                        text: 'Apakah Anda Yakin Ingin Menghapus Saran Dan Masukan?',
                         icon: 'warning',
-                        buttons: ['Cancel', 'Delete'],
-                        dangerMode: true,
-                    }).then((confirmed) => {
-                        if (confirmed) {
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             form.submit();
                         }
                     });
                 });
             });
         });
-
-        @if (session('success'))
+    
+        @if(session('success'))
             Swal.fire({
-            title: 'Success',
-            text: '{{ session('success') }}',
-            icon: 'success',
-            timer: 3000,
-            showConfirmButton: false
+                title: 'Success',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
             });
         @endif
+
+        @if(session('error'))
+        Swal.fire({
+        title: 'Error',
+        text: '{{ session('error') }}',
+        icon: 'error',
+        timer: 3000,
+        showConfirmButton: false
+        });
+        @endif
+    
     </script>
-
-   
-
-    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/typed.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/counters/counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/counters/waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/counters/counters-1.js') }}"></script>
-    <script src="{{ asset('assets/plugins/owl-carousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('assets/plugins/company-slider/slider.js') }}"></script>
-    <script src="{{ asset('assets/plugins/rating/jquery-rate-picker.js') }}"></script>
-    <script src="{{ asset('assets/plugins/rating/rating-picker.js') }}"></script>
-    <script src="{{ asset('assets/plugins/ratings-2/jquery.star-rating.js') }}"></script>
-    <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
-    <script src="{{ asset('assets/js/sticky.js') }}"></script>
-    <script src="{{ asset('assets/js/landing.js') }}"></script>
 
 </body>
 

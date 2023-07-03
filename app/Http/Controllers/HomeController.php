@@ -86,7 +86,7 @@ public function submitForm(Request $request)
     $pengalaman->save();
 
     // Redirect ke halaman sukses atau melakukan tindakan lain yang sesuai
-    return redirect()->back()->with('success', 'Data berhasil disimpan.');
+    return redirect()->back()->with('success', 'Terima kasih telah memberikan saran dan masukan.');
 }
 
 public function deletePengalaman($id)
@@ -96,11 +96,12 @@ public function deletePengalaman($id)
     // Hapus data pengalaman jika role_id adalah 1 atau 2 dan telah login
     if (Auth::check() && in_array(Auth::user()->role_id, [1, 2])) {
         $pengalaman->delete();
-        return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        return redirect()->back()->with('success', 'Saran dan Masukan Berhasil dihapus.');
     } else {
         return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk menghapus data ini.');
     }
 }
+
 
 
 }

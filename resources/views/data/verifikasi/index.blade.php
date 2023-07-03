@@ -84,7 +84,7 @@
     </div>
 </div>
 
-@push('scripts')
+@push('script')
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     function confirmVerification(id) {

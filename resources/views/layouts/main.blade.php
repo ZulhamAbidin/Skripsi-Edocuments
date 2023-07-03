@@ -92,7 +92,7 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
-    @stack('scripts')
+    @stack('script')
 
 </body>
 
