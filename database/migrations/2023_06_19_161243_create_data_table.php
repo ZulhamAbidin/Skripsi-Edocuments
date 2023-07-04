@@ -17,6 +17,9 @@ class CreateDataTable extends Migration
             $table->string('PendidikanTerakhir');
             $table->string('Jurusan');
             $table->date('TanggalPengesahan');
+            $table->date('TanggalPengambilan')->nullable();
+            $table->time('WaktuPengambilan')->nullable();
+            $table->string('Total');
             $table->string('Status')->default('BelumTerverifikasi');
             $table->timestamps();
         });

@@ -16,6 +16,9 @@ class Data extends Model
         'Jurusan',
         'TanggalPengesahan',
         'Status',
+        'TanggalPengambilan',
+        'WaktuPengambilan',
+        'Total'
     ];
 
     public function user()

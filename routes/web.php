@@ -37,6 +37,9 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
         Route::put('/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
         Route::delete('/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
         Route::get('pencaker/confirm-delete/{id}', 'PencakerController@confirmDelete')->name('pencaker.confirm-delete');
+
+
+         Route::get('/show-alert', [PencakerController::class, 'showAlert'])->name('pencaker.showAlert');
     });
 });
 
