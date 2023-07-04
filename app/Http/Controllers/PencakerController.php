@@ -9,36 +9,41 @@ use Illuminate\Support\Facades\Auth;
 
 class PencakerController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
 
-        $pencakerData = Data::where('user_id', $user->id)
-            ->whereIn('status', ['Terverifikasi', 'Ditolak'])
-            ->get();
 
-        $pencakerDataButton = Data::where('user_id', $user->id)
-            ->where('status', 'BelumTerverifikasi')
-            ->get();
+public function index()
+{
+    $user = Auth::user();
 
-        $status = 'Ditolak';
+    $pencakerData = Data::where('user_id', $user->id)
+        ->whereIn('status', ['Terverifikasi', 'Ditolak', 'BelumTerverifikasi'])
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        // Mendapatkan nilai waktu pengambilan dari database
-        $pencaker = Data::find(1); // Ubah sesuai dengan query yang sesuai untuk mengambil data yang diinginkan
+    $latestTotal = Data::where('user_id', $user->id)
+    ->orderBy('created_at', 'desc')
+    ->value('Total');
 
-        // Mengirimkan nilai waktu pengambilan dan data lainnya ke view
-        return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton', 'pencaker'));
-    }
+    $pencakerDataButton = Data::where('user_id', $user->id)
+        ->where('status', 'BelumTerverifikasi')
+        ->get();
+
+    $status = 'Ditolak';
+
+    // Mengirimkan nilai waktu pengambilan dan data terbaru ke view
+    return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton', 'latestTotal'));
+}
+
+
 
     private function getStatus($data)
     {
-        return $data->Status === 'Ditolak' ? 'Ditolak' : 'Diterima';
+        return $dataditolak->Status === 'Ditolak' ? 'Ditolak' : 'Diterima';
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
-
         $request->validate([
             'NIK' => 'required|unique:data',
             'NamaLengkap' => 'required',
@@ -48,11 +53,11 @@ class PencakerController extends Controller
             'Jurusan' => 'required',
             'TanggalPengambilan' => 'required',
             'WaktuPengambilan' => 'required',
-            'otal' => 'required',
+            'Total' => 'required',
         ]);
 
-        $existingData = Data::where('TanggalPengambilan', $request->input('tanggal_pengambilan'))
-            ->where('WaktuPengambilan', $request->input('waktu_pengambilan'))
+        $existingData = Data::where('TanggalPengambilan', $request->input('TanggalPengambilan'))
+            ->where('WaktuPengambilan', $request->input('TanggalPengambilan'))
             ->count();
 
         if ($existingData >= 2) {
