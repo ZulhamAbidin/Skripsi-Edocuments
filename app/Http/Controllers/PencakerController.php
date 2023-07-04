@@ -11,18 +11,51 @@ class PencakerController extends Controller
 {
 
 
+// public function index()
+// {
+//     $user = Auth::user();
+
+//     $pencakerData = Data::where('user_id', $user->id)
+//         ->whereIn('status', ['Terverifikasi'])
+//         ->orderBy('created_at', 'desc')
+//         ->get();
+
+//     $pencakerDataLooping = Data::where('user_id', $user->id)
+//         ->whereIn('status', ['Terverifikasi', 'Ditolak', 'BelumTerverifikasi'])
+//         ->orderBy('created_at', 'desc')
+//         ->get();
+
+//     $latestTotal = Data::where('user_id', $user->id)
+//     ->orderBy('created_at', 'desc')
+//     ->value('Total');
+
+//     $pencakerDataButton = Data::where('user_id', $user->id)
+//         ->where('status', 'BelumTerverifikasi')
+//         ->get();
+
+//     $status = 'Ditolak';
+
+//     // Mengirimkan nilai waktu pengambilan dan data terbaru ke view
+//     return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton', 'latestTotal'));
+// }
+
 public function index()
 {
     $user = Auth::user();
 
     $pencakerData = Data::where('user_id', $user->id)
+        ->whereIn('status', ['Terverifikasi'])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $pencakerDataLooping = Data::where('user_id', $user->id)
         ->whereIn('status', ['Terverifikasi', 'Ditolak', 'BelumTerverifikasi'])
         ->orderBy('created_at', 'desc')
         ->get();
 
     $latestTotal = Data::where('user_id', $user->id)
-    ->orderBy('created_at', 'desc')
-    ->value('Total');
+        ->orderBy('created_at', 'desc')
+        ->value('Total');
 
     $pencakerDataButton = Data::where('user_id', $user->id)
         ->where('status', 'BelumTerverifikasi')
@@ -30,8 +63,7 @@ public function index()
 
     $status = 'Ditolak';
 
-    // Mengirimkan nilai waktu pengambilan dan data terbaru ke view
-    return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton', 'latestTotal'));
+    return view('pencaker.index', compact('pencakerData', 'user', 'status', 'pencakerDataButton', 'latestTotal', 'pencakerDataLooping'));
 }
 
 
@@ -42,49 +74,53 @@ public function index()
     }
 
     public function store(Request $request)
-    {
-        $user = Auth::user();
-        $request->validate([
-            'NIK' => 'required|unique:data',
-            'NamaLengkap' => 'required',
-            'AlamatDomisili' => 'required',
-            'JenisKelamin' => 'required',
-            'PendidikanTerakhir' => 'required',
-            'Jurusan' => 'required',
-            'TanggalPengambilan' => 'required',
-            'WaktuPengambilan' => 'required',
-            'Total' => 'required',
-        ]);
+{
+    $user = Auth::user();
+    $request->validate([
+        'NIK' => 'required|unique:data',
+        'NamaLengkap' => 'required',
+        'AlamatDomisili' => 'required',
+        'JenisKelamin' => 'required',
+        'PendidikanTerakhir' => 'required',
+        'Jurusan' => 'required',
+        'TanggalPengambilan' => 'required',
+        'WaktuPengambilan' => 'required',
+        'Total' => 'required',
+    ]);
 
-        $existingData = Data::where('TanggalPengambilan', $request->input('TanggalPengambilan'))
-            ->where('WaktuPengambilan', $request->input('TanggalPengambilan'))
-            ->count();
+    $tanggalPengambilan = $request->input('TanggalPengambilan');
+    $waktuPengambilan = $request->input('WaktuPengambilan');
 
-        if ($existingData >= 2) {
-            return redirect()
-                ->route('pencaker.index')
-                ->with('error', 'Maaf, jumlah data untuk tanggal dan waktu pengambilan tersebut sudah mencapai batas maksimal.');
-        }
+    $existingData = Data::where('TanggalPengambilan', $tanggalPengambilan)
+        ->where('WaktuPengambilan', $waktuPengambilan)
+        ->count();
 
-        $pencaker = new Data();
-        $pencaker->NIK = $request->input('NIK');
-        $pencaker->NamaLengkap = $request->input('NamaLengkap');
-        $pencaker->AlamatDomisili = $request->input('AlamatDomisili');
-        $pencaker->JenisKelamin = $request->input('JenisKelamin');
-        $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
-        $pencaker->Jurusan = $request->input('Jurusan');
-        $pencaker->TanggalPengesahan = now();
-        $pencaker->TanggalPengambilan = $request->input('TanggalPengambilan');
-        $pencaker->WaktuPengambilan = $request->input('WaktuPengambilan');
-        $pencaker->Total = $request->input('Total');
-        $pencaker->Status = 'BelumTerverifikasi';
-
-        $user->data()->save($pencaker);
-
+    if ($existingData >= 2) {
         return redirect()
             ->route('pencaker.index')
-            ->with('success', 'Selanjutnya, harap hubungi admin untuk memverifikasi data Anda.');
+            ->with('error', 'Maaf, jumlah data untuk tanggal dan waktu pengambilan tersebut sudah mencapai batas maksimal.');
     }
+
+    $pencaker = new Data();
+    $pencaker->NIK = $request->input('NIK');
+    $pencaker->NamaLengkap = $request->input('NamaLengkap');
+    $pencaker->AlamatDomisili = $request->input('AlamatDomisili');
+    $pencaker->JenisKelamin = $request->input('JenisKelamin');
+    $pencaker->PendidikanTerakhir = $request->input('PendidikanTerakhir');
+    $pencaker->Jurusan = $request->input('Jurusan');
+    $pencaker->TanggalPengesahan = now();
+    $pencaker->TanggalPengambilan = $request->input('TanggalPengambilan');
+    $pencaker->WaktuPengambilan = $request->input('WaktuPengambilan');
+    $pencaker->Total = $request->input('Total');
+    $pencaker->Status = 'BelumTerverifikasi';
+
+    $user->data()->save($pencaker);
+
+    return redirect()
+        ->route('pencaker.index')
+        ->with('success', 'Selanjutnya, harap hubungi admin untuk memverifikasi data Anda.');
+}
+
 
     /* public function edit($id)
     {
