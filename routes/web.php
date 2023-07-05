@@ -89,6 +89,8 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
     Route::get('/management/{id}/edit', [UserController::class, 'edit'])->name('management.edit');
     Route::put('/management/{id}', [UserController::class, 'update'])->name('management.update');
 
+    Route::get('/visit/{id}', [UserController::class, 'show'])->name('visit.show');
+
 
     Route::get('/export', [ExportController::class, 'index'])->name('export.index');
     Route::get('/export/data', [ExportController::class, 'getData'])->name('export.data');
