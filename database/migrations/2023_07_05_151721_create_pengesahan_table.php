@@ -4,30 +4,42 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataTable extends Migration
+class CreatePengesahanTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('data', function (Blueprint $table) {
+        Schema::create('pengesahan', function (Blueprint $table) {
             $table->id();
-            // $table->string('NIK')->nullable();
-            // $table->string('NIK')->unique();
             $table->string('NamaLengkap');
             $table->string('AlamatDomisili');
             $table->string('JenisKelamin');
+            $table->string('NoTelfon');
+            $table->string('Agama');
             $table->string('PendidikanTerakhir');
-            $table->string('Jurusan');
+            $table->string('Jurusan')->nullable();
             $table->date('TanggalPengesahan');
             $table->date('TanggalPengambilan')->nullable();
             $table->time('WaktuPengambilan')->nullable();
             $table->string('Total');
             $table->string('Status')->default('BelumTerverifikasi');
+            $table->integer('User_id');
+            $table->text('AlasanPenolakan')->nullable();
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('data');
+        Schema::dropIfExists('pengesahan');
     }
-};
+}

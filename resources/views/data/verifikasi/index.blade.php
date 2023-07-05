@@ -35,16 +35,20 @@
                 <div class="card-body">
                     <div class="table-responsive">
 
-                        <table class="table border text-nowrap text-md-nowrap table-hover mb-0" id="data-table">
+                        <table class="table border text-nowrap text-md-nowrap table-hover mb-0 text-center" id="data-table">
                             <thead>
                                 <tr>
-                                    <th>NIK</th>
                                     <th>Nama Lengkap</th>
                                     <th>Alamat Domisili</th>
+                                    <th>No Ponsel</th>
+                                    <th>Agama</th>
                                     <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Jenis<br>Kelamin</th>
                                     <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Pendidikan<br>Terakhir</th>
                                     <th>Jurusan</th>
                                     <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Tanggal<br>Pengesahan</th>
+                                    <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Tanggal<br>Pengambilan</th>
+                                    <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Waktu<br>Pengambilan</th>
+                                    <th class="col-1 text-center" style="vertical-align: bottom; line-height: 1,5;">Lembar Yang<br>di SAH kan</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -52,13 +56,17 @@
                             <tbody id="searchResults">
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $item->NIK }}</td>
                                     <td>{{ $item->NamaLengkap }}</td>
                                     <td>{{ $item->AlamatDomisili }}</td>
+                                    <td>{{ $item->NoTelfon }}</td>
+                                    <td>{{ $item->Agama }}</td>
                                     <td>{{ $item->JenisKelamin }}</td>
                                     <td>{{ $item->PendidikanTerakhir }}</td>
                                     <td>{{ $item->Jurusan }}</td>
                                     <td>{{ $item->TanggalPengesahan }}</td>
+                                    <td>{{ $item->TanggalPengambilan }}</td>
+                                    <td>{{ $item->WaktuPengambilan }}</td>
+                                    <td>{{ $item->Total }}</td>
                                     <td>{{ $item->Status }}</td>
                                     <td class="float-end">
                                         <form action="{{ route('data.verifikasi.destroy', $item) }}" method="POST" class="d-inline">

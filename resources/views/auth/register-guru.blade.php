@@ -26,7 +26,7 @@
                             @csrf
 
                             <div class="row mb-4">
-                                <label class="col-md-3 form-label">Nama Lengkap</label>
+                                <label class="col-md-3 form-label">Username</label>
                                 <div class="col-md-9">
                                     <input type="text" required autofocus name="name" id="name"
                                         value="{{ old('name') }}"
@@ -38,6 +38,21 @@
                                         </span>
                                     @enderror
 
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-3 form-label">NIK</label>
+                                <div class="col-md-9">
+                                    <input type="number" required autofocus name="NIK" id="NIK" value="{{ old('NIK') }}"
+                                        class=" form-control @error('NIK') is-invalid @enderror">
+                            
+                                    @error('NIK')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            
                                 </div>
                             </div>
 

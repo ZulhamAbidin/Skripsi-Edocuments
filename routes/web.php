@@ -31,7 +31,10 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::prefix('pencaker')->group(function () {
         Route::get('/', [PencakerController::class, 'index'])->name('pencaker.index');
-        Route::get('/create', [PencakerController::class, 'create'])->name('pencaker.create');
+
+        Route::get('create', [PencakerController::class, 'create'])->name('pencaker.create');
+
+
         Route::post('/', [PencakerController::class, 'store'])->name('pencaker.store');
         Route::get('/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
         Route::put('/{id}', [PencakerController::class, 'update'])->name('pencaker.update');

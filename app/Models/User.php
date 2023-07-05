@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -22,11 +24,15 @@ class User extends Authenticatable
         return $this->hasMany(Data::class);
     }
 
+     public function pengesahan()
+    {
+        return $this->hasMany(Pengesahan::class, 'User_id', 'id');
+    }
+
     public function hasVerifiedData()
     {
         return $this->data()->where('status', 'Terverifikasi')->exists();
     }
-    
 
     public function role()
     {
@@ -38,7 +44,6 @@ class User extends Authenticatable
         return $this->hasMany(Pengalaman::class);
     }
 
-    
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +53,7 @@ class User extends Authenticatable
     protected $fillable = [
         'role',
         'name',
+        'NIK',
         'email',
         'password',
     ];

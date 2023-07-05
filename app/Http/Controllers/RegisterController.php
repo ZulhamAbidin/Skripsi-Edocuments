@@ -18,12 +18,36 @@ class RegisterController extends Controller
         return view('auth.register-siswa');
     }
 
+    // public function registerSiswa(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:8|confirmed',
+    //     ]);
+
+    //     $role = Role::where('name', 'siswa')->first();
+
+    //     $user = new User();
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->password = Hash::make($request->password);
+    //     $user->role()->associate($role);
+    //     $user->save();
+
+    //     Auth::login($user);
+
+    //     return redirect()->route('pencaker.index');
+    // }
+
+    //baru
     public function registerSiswa(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'NIK' => 'required|string|max:255|unique:users',
         ]);
 
         $role = Role::where('name', 'siswa')->first();
@@ -31,6 +55,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->NIK = $request->NIK; // Menambahkan pengisian kolom NIK
         $user->password = Hash::make($request->password);
         $user->role()->associate($role);
         $user->save();
@@ -62,38 +87,34 @@ class RegisterController extends Controller
     //     $user->role()->associate($role);
     //     $user->save();
 
+    //     Alert::success('Success', 'Pendaftaran guru berhasil.');
+
     //     return redirect()->route('management.index');
     // }
 
-    
-
-public function registerGuru(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
-
-    $role = Role::where('name', 'guru')->first();
-
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->password = Hash::make($request->password);
-    $user->role()->associate($role);
-    $user->save();
-
-    Alert::success('Success', 'Pendaftaran guru berhasil.');
-
-    return redirect()->route('management.index');
-}
-
-
-
-        public function showKepalaSekolahRegistrationForm()
+    //Baru
+    public function registerGuru(Request $request)
     {
-        return view('auth.register-kepala-sekolah');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'NIK' => 'required|string|max:255|unique:users',
+        ]);
+
+        $role = Role::where('name', 'guru')->first();
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->NIK = $request->NIK; // Menambahkan pengisian kolom NIK
+        $user->role()->associate($role);
+        $user->save();
+
+        Alert::success('Success', 'Pendaftaran guru berhasil.');
+
+        return redirect()->route('management.index');
     }
 
     public function registerKepalaSekolah(Request $request)
@@ -102,6 +123,7 @@ public function registerGuru(Request $request)
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'NIK' => 'required|string|max:255|unique:users',
         ]);
 
         $user = new User();
@@ -109,6 +131,7 @@ public function registerGuru(Request $request)
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role_id = 1; // Atur role_id menjadi 1 untuk kepala sekolah
+        $user->NIK = $request->NIK; // Menambahkan pengisian kolom NIK
         $user->save();
 
         Auth::login($user);

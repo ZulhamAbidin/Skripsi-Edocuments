@@ -36,6 +36,19 @@
                 </div>
 
                 <div class="sm:col-span-2">
+                    <label for="NIK" class="block text-sm font-semibold leading-6 text-gray-900">NIK</label>
+                    <div class="mt-2.5">
+                        <input type="text" name="NIK" id="NIK" value="{{ old('NIK') }}" required autofocus
+                            class="@error('NIK') is-invalid @enderror focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-inset  sm:text-sm sm:leading-6">
+                    </div>
+                    @error('NIK')
+                    <span class="invalid-feedback text-xs text-red-500" role="alert">
+                        <strong>NIK Telah Digunakan</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-2">
                     <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                     <div class="mt-2.5">
                         <input type="email" name="email" id="email" value="{{ old('email') }}" required autofocus
