@@ -110,12 +110,7 @@
             </div>
         @endif
 
-
-       
-
         {{-- terbaru --}}
-
-
 
         <style>
             .swal2-popup .swal2-title {
@@ -170,6 +165,9 @@
                 <thead class="text-xs text-gray-700 uppercase bg-transparent text-center border-b-2 border-gray-300">
                     <tr>
                         <th scope="col" class="px-2 py-7">
+                            NIK
+                        </th>
+                        <th scope="col" class="px-2 py-7">
                             Nama Lengkap
                         </th>
                         <th scope="col" class="px-2 py-7">
@@ -205,6 +203,9 @@
                 <tbody class="text-center">
                     @foreach ($pencakerDataLooping as $data)
                         <tr class="border-b ">
+                            <td class="px-2 py-4">
+                                {{ $NIK }}
+                            </td>
                             <td class="px-2 py-4">
                                 {{ $data->NamaLengkap }}
                             </td>
