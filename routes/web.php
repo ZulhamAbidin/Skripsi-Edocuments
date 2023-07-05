@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
@@ -98,5 +99,9 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
     Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
     Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);
 });
+
+
+Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
+Route::get('/visit/{id}', [VisitController::class, 'show'])->name('visit.show');
 
 require __DIR__ . '/auth.php';
