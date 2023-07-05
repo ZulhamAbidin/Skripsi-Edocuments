@@ -91,16 +91,16 @@
 
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-            
+
 
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Cetak Data Berdasarkan Rentang Waktu</h4>
                     </div>
-                
+
                     <div class="card-body">
                         <div class="row">
-                    
+
                             <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-header">
@@ -111,14 +111,14 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="date"
-                                                    name="tglawal" id="tglawal">
+                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY"
+                                                    type="date" name="tglawal" id="tglawal">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-header">
@@ -129,14 +129,14 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">
                                                     <span class="fa fa-calendar tx-16 lh-0 op-6"></span>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="date"
-                                                    name="tglakhir" id="tglakhir">
+                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY"
+                                                    type="date" name="tglakhir" id="tglakhir">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -145,13 +145,13 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                
+
                     <div class="card-body pb-4">
                         <div class="input-group mb-2">
                             <input type="seach" class="form-control form-control" id="custom-search-input"
@@ -159,7 +159,7 @@
                             <span class="input-group-text btn btn-primary" id="search-button">Search</span>
                         </div>
                     </div>
-                
+
                 </div>
 
                 <div class="card">
@@ -172,13 +172,15 @@
                             <table class="table table-bordered data-table" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th>NIK</th>
                                         <th>Nama Lengkap</th>
                                         <th>Alamat Domisili</th>
+                                        <th>No Ponsel</th>
+                                        <th>Agama</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Pendidikan Terakhir</th>
                                         <th>Jurusan</th>
                                         <th>Tanggal Pengesahan</th>
+                                        <th>Lembar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -210,16 +212,20 @@
                     serverSide: true,
                     ajax: "{{ route('export.data') }}",
                     columns: [{
-                            data: 'NIK',
-                            name: 'NIK'
-                        },
-                        {
                             data: 'NamaLengkap',
                             name: 'NamaLengkap'
                         },
                         {
                             data: 'AlamatDomisili',
                             name: 'AlamatDomisili'
+                        },
+                        {
+                            data: 'NoTelfon',
+                            name: 'NoTelfon'
+                        },
+                        {
+                            data: 'Agama',
+                            name: 'Agama',
                         },
                         {
                             data: 'JenisKelamin',
@@ -237,6 +243,21 @@
                             data: 'TanggalPengesahan',
                             name: 'TanggalPengesahan'
                         },
+                        {
+                        data: 'Total',
+                        name: 'Total',
+                        render: function(data, type, row) {
+                        if (type === 'display') {
+                        if (data === null) {
+                        return 'Lembar';
+                        } else {
+                        return data.toString() + ' Lembar';
+                        }
+                        }
+                        return data;
+                        }
+                        },
+
                     ],
                     dom: 'Bfrtip',
                     buttons: [{

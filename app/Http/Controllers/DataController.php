@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Data;
+use App\Models\Pengesahan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use DataTables;
@@ -13,7 +13,7 @@ class DataController extends Controller
     public function index(Request $request)
 {
     if ($request->ajax()) {
-        $query = Data::query();
+        $query = Pengesahan::query();
 
         if ($request->verifikasi) {
             $query->where('Status', 'Terverifikasi');
@@ -45,68 +45,75 @@ class DataController extends Controller
 public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'NIK' => 'required|unique:data',
         'NamaLengkap' => 'required',
         'AlamatDomisili' => 'required',
+        'NoTelfon' => 'required',
+        'Agama' => 'required',
         'JenisKelamin' => 'required',
         'PendidikanTerakhir' => 'required',
         'Jurusan' => 'required',
         'TanggalPengesahan' => 'required',
+        'TanggalPengambilan' => 'required',
+        'WaktuPengambilan' => 'required',
+        'Total' => 'required',
         'Status' => 'required',
     ], [
-        'NIK.required' => 'NIK is required.',
-        'NIK.unique' => 'NIK already exists.',
-        'NamaLengkap.required' => 'Nama Lengkap is required.',
-        'AlamatDomisili.required' => 'Alamat Domisili is required.',
-        'JenisKelamin.required' => 'Jenis Kelamin is required.',
-        'PendidikanTerakhir.required' => 'Pendidikan Terakhir is required.',
-        'Jurusan.required' => 'Jurusan is required.',
-        'TanggalPengesahan.required' => 'Tanggal Pengesahan is required.',
-        'Status.required' => 'Status is required.',
+        'NamaLengkap.required' => 'Nama Lengkap Wajib di Isi.',
+        'AlamatDomisili.required' => 'Alamat Domisili Wajib di Isi.',
+        'NoTelfon.required' => 'Wajib Di Isi',
+        'Agama.required' => 'Wajib Di Isi',
+        'JenisKelamin.required' => 'Jenis Kelamin Wajib di Isi.',
+        'PendidikanTerakhir.required' => 'Pendidikan Terakhir Wajib di Isi.',
+        'Jurusan.required' => 'Jurusan Wajib di Isi.',
+        'TanggalPengesahan.required' => 'Tanggal Pengesahan Wajib di Isi.',
+        'Total.required' => 'Wajib di Isi.',
+        'Status.required' => 'Status Wajib di Isi.',
     ]);
 
-    Data::create($validatedData);
+    Pengesahan::create($validatedData);
 
-    return redirect()->route('data.index')->with('success', 'Data created successfully');
+    return redirect()->route('data.index')->with('success', 'Data Berhasil Ditambahkan');
 }
-
 
 
     public function edit($id)
 {
-    $data = Data::findOrFail($id);
+    $data = Pengesahan::findOrFail($id);
     return view('data.edit', compact('data'));
 }
-
 
 
 public function update(Request $request, $id)
 {
     $validatedData = $request->validate([
-        'NIK' => 'required|unique:data,NIK,' . $id,
         'NamaLengkap' => 'required',
         'AlamatDomisili' => 'required',
+        'NoTelfon' => 'required',
+        'Agama' => 'required',
         'JenisKelamin' => 'required',
         'PendidikanTerakhir' => 'required',
         'Jurusan' => 'required',
         'TanggalPengesahan' => 'required',
+        'TanggalPengambilan' => 'required',
+        'WaktuPengambilan' => 'required',
+        'Total' => 'required',
         'Status' => 'required',
     ]);
 
-    $data = Data::findOrFail($id);
+    $data = Pengesahan::findOrFail($id);
     $data->update($validatedData);
 
-    Alert::success('Success', 'Data updated successfully')->autoClose(3000);
+    // Alert::success('Success', 'Data updated successfully')->autoClose(3000);
 
-    return redirect()->route('data.index');
+    return redirect()->route('data.index')->with('success', 'Data Berhasil Ditambahkan');
+    // return redirect()->route('data.index');
 }
-
 
     public function destroy($id)
     {
-        $data = Data::findOrFail($id);
+        $data = Pengesahan::findOrFail($id);
         $data->delete();
 
-        return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['message' => 'Data Berhasil Dihapus']);
     }
 }

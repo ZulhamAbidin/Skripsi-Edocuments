@@ -44,13 +44,17 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>NIK</th>
                                         <th>Nama Lengkap</th>
                                         <th>Alamat Domisili</th>
+                                        <th>NoTelfon</th>
+                                        <th>Agama</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Pendidikan Terakhir</th>
                                         <th>Jurusan</th>
                                         <th>Tanggal Pengesahan</th>
+                                        <th>Tanggal Pengambilan</th>
+                                        <th>Waktu Pengambilan</th>
+                                        <th>Total</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -64,6 +68,18 @@
             </div>
         </div>
     </div>
+
+    @if (session('alert'))
+    <script>
+        Swal.fire({
+                title: "Success",
+                text: "{{ session('alert.message') }}",
+                icon: "success",
+                timer: 3000,
+                buttons: false,
+            });
+    </script>
+    @endif
 
     @include('layouts.script')
 

@@ -231,7 +231,7 @@
                                 {{ $data->WaktuPengambilan }}
                             </td>
                             <td class="px-2  w-20 py-4">
-                                {{ $data->Total }}
+                                {{ $data->Total }} Lembar
                             </td>
                             <td class="px-4 py-4">
                                 @if ($data->Status == 'Ditolak')
@@ -251,8 +251,7 @@
         </div>
 
         {{-- modaladd --}}
-        <div
-            class="fixed mt-20 md:mt-0 mobile-menu hidden animate__animated animate__backInDown inset-0 z-50 overflow-y-auto rounded-3xl">
+        <div  class="fixed mt-20 md:mt-0 mobile-menu hidden animate__animated animate__backInDown inset-0 z-50 overflow-y-auto rounded-3xl">
             <div class="md:flex min-h-full items-end justify-center text-center sm:items-center sm:p-0">
                 <div
                     class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
@@ -288,17 +287,14 @@
                                             <option value="Kabupaten Enrekang">Kabupaten Enrekang </option>
                                             <option value="Kabupaten Gowa">Kabupaten Gowa </option>
                                             <option value="Kabupaten Jeneponto">Kabupaten Jeneponto </option>
-                                            <option value="Kabupaten Kepulauan Selayar">Kabupaten Kepulauan Selayar
-                                            </option>
+                                            <option value="Kabupaten Kepulauan Selayar">Kabupaten Kepulauan Selayar  </option>
                                             <option value="Kabupaten Luwu">Kabupaten Luwu</option>
                                             <option value="Kabupaten Luwu Timur">Kabupaten Luwu Timur </option>
                                             <option value="Kabupaten Luwu Utara">Kabupaten Luwu Utara</option>
                                             <option value="Kabupaten Maros">Kabupaten Maros </option>
-                                            <option value="Kabupaten Pangkajene dan Kepulauan" selected>Kabupaten
-                                                Pangkajene dan Kepulauan</option>
+                                            <option value="Kabupaten Pangkajene dan Kepulauan" selected>Kabupaten  Pangkajene dan Kepulauan</option>
                                             <option value="Kabupaten Pinrang">Kabupaten Pinrang </option>
-                                            <option value="Kabupaten Sidenreng Rappang">Kabupaten Pinrang Rappang
-                                            </option>
+                                            <option value="Kabupaten Sidenreng Rappang">Kabupaten Pinrang Rappang  </option>
                                             <option value="Kabupaten Sinjai">Kabupaten Sinjai</option>
                                             <option value="Kabupaten Soppeng">Kabupaten Soppeng </option>
                                             <option value="Kabupaten Takalar">Kabupaten Takalar </option>
@@ -395,9 +391,9 @@
                                         <select id="Total" name="Total"
                                             class="block w-full px-3 py-2 border capitalize border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring-indigo-500">
                                             <option value="">Pilih</option>
-                                            <option value="1 Lembar">1 Lembar</option>
-                                            <option value="2 Lembar">2 Lembar</option>
-                                            <option value="3 Lembar" selected>3 Lembar</option>
+                                            <option value="1">1 Lembar</option>
+                                            <option value="2">2 Lembar</option>
+                                            <option value="3" selected>3 Lembar</option>
                                         </select>
                                         <p class="text-xs pt-1 text-red-500">kami sangat merekomendasikan anda untuk
                                             memilih opsi ke 3</p>

@@ -29,18 +29,6 @@
                         @csrf
 
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">NIK</label>
-                            <div class="col-md-9">
-                                <input type="number" name="NIK" id="NIK" required value="{{ old('NIK') }}" class="form-control @error('NIK') is-invalid @enderror">
-                            </div>
-                            @error('NIK')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="row mb-4">
                             <label class="col-md-3 form-label">Nama Lengkap</label>
                             <div class="col-md-9">
                                 <input type="text" required name="NamaLengkap" id="NamaLengkap" value="{{ old('NamaLengkap') }}" class=" form-control @error('NamaLengkap') is-invalid @enderror">
@@ -67,8 +55,7 @@
                                     <option value="Kabupaten Luwu Timur">Kabupaten Luwu Timur </option>
                                     <option value="Kabupaten Luwu Utara">Kabupaten Luwu Utara</option>
                                     <option value="Kabupaten Maros">Kabupaten Maros </option>
-                                    <option value="Kabupaten Pangkajene dan Kepulauan">Kabupaten Pangkajene dan
-                                        Kepulauan</option>
+                                    <option value="Kabupaten Pangkajene dan Kepulauan">Kabupaten Pangkajene dan  Kepulauan</option>
                                     <option value="Kabupaten Pinrang">Kabupaten Pinrang </option>
                                     <option value="Kabupaten Sidenreng Rappang">Kabupaten Pinrang Rappang</option>
                                     <option value="Kabupaten Sinjai">Kabupaten Sinjai</option>
@@ -79,6 +66,32 @@
                                     <option value="Kabupaten Wajo">Kabupaten Wajo </option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">NoTelfon</label>
+                            <div class="col-md-9">
+                                <input type="number" name="NoTelfon" id="NoTelfon" required value="{{ old('NoTelfon') }}"
+                                    class="form-control @error('NoTelfon') is-invalid @enderror">
+                            </div>
+                            @error('NoTelfon')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Agama</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Agama" id="Agama" required value="{{ old('Agama') }}"
+                                    class="form-control @error('Agama') is-invalid @enderror">
+                            </div>
+                            @error('Agama')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="row mb-4">
@@ -131,8 +144,32 @@
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">TanggalPengesahan</label>
                             <div class="col-md-9">
-                                <input type="date" name="TanggalPengesahan" id="dp1687894207649" placeholder="MM/DD/YYYY"
-                                    class=" form-control fc-datepicker hasDatepicker" required>
+                                <input type="date" name="TanggalPengesahan" id="dp1687894207649" placeholder="MM/DD/YYYY" class=" form-control fc-datepicker hasDatepicker" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Tanggal Pengambilan</label>
+                            <div class="col-md-9">
+                                <input type="date" name="TanggalPengambilan" id="dp1687894207649" placeholder="MM/DD/YYYY" class=" form-control fc-datepicker hasDatepicker" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Waktu Pengambilan</label>
+                            <div class="col-md-9">
+                                <input type="time" name="WaktuPengambilan" id="dp1687894207649" placeholder="MM/DD/YYYY" class=" form-control fc-datepicker hasDatepicker" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Jumlah Yang Ingin DI SAH kan</label>
+                            <div class="col-md-9">
+                                <select name="Lembar" class="form-control form-select" id="Lembar" required data-bs-placeholder="Lembar">
+                                    <option value="1">1 Lembar</option>
+                                    <option value="2">2 Lembar</option>
+                                    <option value="3">3 Lembar</option>
+                                </select>
                             </div>
                         </div>
 

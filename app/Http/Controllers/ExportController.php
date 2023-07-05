@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Data;
+use App\Models\Pengesahan;
 use App\PDF\CustomPDF;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -16,27 +16,20 @@ class ExportController extends Controller
 
     public function getData()
     {
-        $data = Data::select(['id', 'NIK', 'NamaLengkap', 'AlamatDomisili', 'JenisKelamin', 'PendidikanTerakhir', 'Jurusan', 'TanggalPengesahan', 'Status']);
+        $data = Pengesahan::select(['id', 'NamaLengkap', 'AlamatDomisili', 'NoTelfon', 'Agama', 'JenisKelamin', 'PendidikanTerakhir', 'Jurusan', 'TanggalPengesahan', 'Total']);
         return DataTables::of($data)->make(true);
-    } 
+    }
 
-        public function cetakForm()
+    public function cetakForm()
     {
         return view('/cetak/cetak-pekerja-form');
     }
 
-    // public function cetakPekerjaPertanggal($tglawal, $tglakhir)
-    // {
-    //     $cetakPertanggal = Data::whereBetween('TanggalPengesahan', [$tglawal, $tglakhir])->get();
-    //     return view('/export/cetak-pekerja-pertanggal', compact('cetakPertanggal'));
-    // }
     public function cetakPekerjaPertanggal($tglawal, $tglakhir)
-{
-    $cetakPertanggal = Data::whereBetween('TanggalPengesahan', [$tglawal, $tglakhir])
-        ->where('Status', 'Terverifikasi')
-        ->get();
-    return view('export.cetak-pekerja-pertanggal', compact('cetakPertanggal', 'tglawal', 'tglakhir'));
-}
-
-
+    {
+        $cetakPertanggal = Pengesahan::whereBetween('TanggalPengesahan', [$tglawal, $tglakhir])
+            ->where('Status', 'Terverifikasi')
+            ->get();
+        return view('export.cetak-pekerja-pertanggal', compact('cetakPertanggal', 'tglawal', 'tglakhir'));
+    }
 }

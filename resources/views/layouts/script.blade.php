@@ -1,4 +1,4 @@
-@push('scripts')
+@push('script')
 <script>
     $(function() {
     
@@ -21,13 +21,30 @@
                 },
                 columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'NIK', name: 'NIK' },
                 { data: 'NamaLengkap', name: 'NamaLengkap' },
                 { data: 'AlamatDomisili', name: 'AlamatDomisili' },
+                { data: 'NoTelfon', name: 'NoTelfon' },
+                { data: 'Agama', name: 'Agama' },
                 { data: 'JenisKelamin', name: 'JenisKelamin' },
                 { data: 'PendidikanTerakhir', name: 'PendidikanTerakhir' },
                 { data: 'Jurusan', name: 'Jurusan' },
                 { data: 'TanggalPengesahan', name: 'TanggalPengesahan' },
+                { data: 'TanggalPengambilan', name: 'TanggalPengambilan' },
+                { data: 'WaktuPengambilan', name: 'WaktuPengambilan' },
+                {
+                data: 'Total',
+                name: 'Total',
+                render: function(data, type, row) {
+                if (type === 'display') {
+                if (data === null) {
+                return 'Lembar';
+                } else {
+                return data.toString() + ' Lembar';
+                }
+                }
+                return data;
+                }
+                },
                 { data: 'Status', name: 'Status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
                 ],
@@ -69,13 +86,17 @@
                             $('#addDataModal').modal('show');
                             $('#addDataModalLabel').text('Edit Data');
                             $('#addDataForm').attr('action', "{{ url('data') }}" + '/' + id);
-                            $('#addDataForm #NIK').val(data.NIK);
                             $('#addDataForm #NamaLengkap').val(data.NamaLengkap);
                             $('#addDataForm #AlamatDomisili').val(data.AlamatDomisili);
+                            $('#addDataForm #NoTelfon').val(data.NoTelfon);
+                            $('#addDataForm #Agama').val(data.Agama);
                             $('#addDataForm #JenisKelamin').val(data.JenisKelamin);
                             $('#addDataForm #PendidikanTerakhir').val(data.PendidikanTerakhir);
                             $('#addDataForm #Jurusan').val(data.Jurusan);
                             $('#addDataForm #TanggalPengesahan').val(data.TanggalPengesahan);
+                            $('#addDataForm #TanggalPengambilan').val(data.TanggalPengambilan);
+                            $('#addDataForm #WaktuPengambilan').val(data.WaktuPengambilan);
+                            $('#addDataForm #Total').val(data.Total);
                             $('#addDataForm #Status').val(data.Status);
                         });
                     });

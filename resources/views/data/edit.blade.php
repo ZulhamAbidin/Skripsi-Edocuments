@@ -47,13 +47,6 @@
                         @method('PUT')
 
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">NIK</label>
-                            <div class="col-md-9">
-                                <input type="number" name="NIK" id="NIK" value="{{ old('NIK', $data->NIK) }}" class="  form-control">
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
                             <label class="col-md-3 form-label">Nama Lengkap</label>
                             <div class="col-md-9">
                                 <input type="text" name="NamaLengkap" id="NamaLengkap" value="{{ old('NamaLengkap', $data->NamaLengkap) }}" class=" form-control">
@@ -106,6 +99,20 @@
                         </div>
 
                         <div class="row mb-4">
+                            <label class="col-md-3 form-label">No Ponsel</label>
+                            <div class="col-md-9">
+                                <input type="number" name="NoTelfon" id="NoTelfon" value="{{ old('NoTelfon', $data->NoTelfon) }}" class="  form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Agama</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Agama" id="Agama" value="{{ old('Agama', $data->Agama) }}" class="  form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
                             <label class="col-md-3 form-label">Status</label>
                             <div class="col-md-9">
                                 <select name="Status" class="form-control form-select" id="Status"
@@ -152,7 +159,35 @@
                             </div>
                         </div>
 
-                    
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">TanggalPengambilan</label>
+                            <div class="col-md-9">
+                                <input type="date" name="TanggalPengambilan" id="dp1687894207649" placeholder="MM/DD/YYYY"
+                                    value="{{ old('TanggalPengambilan', $data->TanggalPengambilan) }}"
+                                    class=" form-control fc-datepicker hasDatepicker" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">WaktuPengambilan</label>
+                            <div class="col-md-9">
+                                <input type="time" name="WaktuPengambilan" id="dp1687894207649" placeholder="MM/DD/YYYY"
+                                    value="{{ old('WaktuPengambilan', $data->WaktuPengambilan) }}"
+                                    class=" form-control fc-datepicker hasDatepicker" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Jumlah Yang Ingin Di SAH kan</label>
+                            <div class="col-md-9">
+                                <select name="Total" class="form-control form-select" id="Total" data-bs-placeholder="Total">
+                                    <option value="{{ old('Total', $data->Total) }}" selected>{{ old('Total', $data->Total) }} Lembar</option>
+                                    <option value="1">1 Lembar</option>
+                                    <option value="2">2 Lembar</option>
+                                    <option value="3">3 Lembar</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="row mb-4 mt-2">
                             <div class="col-md-12 d-flex justify-content-end">
