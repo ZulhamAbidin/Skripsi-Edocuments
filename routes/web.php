@@ -20,8 +20,11 @@ Route::post('/', [HomeController::class, 'submitForm'])->name('welcome.submit');
 Route::get('/', [HomeController::class, 'createForm'])->name('create');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::delete('/pengalaman/{id}', [HomeController::class, 'deletePengalaman'])->name('pengalaman.delete');
-Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
-Route::post('/register', [RegisterController::class, 'registerSiswa']);
+
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
+    Route::post('/register', [RegisterController::class, 'registerSiswa']);
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,18 +35,13 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::prefix('pencaker')->group(function () {
         Route::get('/', [PencakerController::class, 'index'])->name('pencaker.index');
-
         Route::get('create', [PencakerController::class, 'create'])->name('pencaker.create');
-
-
         Route::post('/', [PencakerController::class, 'store'])->name('pencaker.store');
         Route::get('/{id}/edit', [PencakerController::class, 'edit'])->name('pencaker.edit');
         Route::put('/{id}', [PencakerController::class, 'update'])->name('pencaker.update');
         Route::delete('/{id}', [PencakerController::class, 'destroy'])->name('pencaker.destroy');
         Route::get('pencaker/confirm-delete/{id}', 'PencakerController@confirmDelete')->name('pencaker.confirm-delete');
-
-
-         Route::get('/show-alert', [PencakerController::class, 'showAlert'])->name('pencaker.showAlert');
+        Route::get('/show-alert', [PencakerController::class, 'showAlert'])->name('pencaker.showAlert');
     });
 });
 
@@ -91,7 +89,6 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
 
     Route::get('/visit/{id}', [UserController::class, 'show'])->name('visit.show');
 
-
     Route::get('/export', [ExportController::class, 'index'])->name('export.index');
     Route::get('/export/data', [ExportController::class, 'getData'])->name('export.data');
     Route::get('/export', [ExportController::class, 'index'])->name('export.index');
@@ -100,10 +97,9 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
 
     Route::get('/register/praktik-industri', [RegisterController::class, 'showGuruRegistrationForm'])->name('register.guru');
     Route::post('/register/praktik-industri', [RegisterController::class, 'registerGuru']);
+
+    Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
+    Route::get('/visit/{id}', [VisitController::class, 'show'])->name('visit.show');
 });
-
-
-Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
-Route::get('/visit/{id}', [VisitController::class, 'show'])->name('visit.show');
 
 require __DIR__ . '/auth.php';

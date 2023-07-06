@@ -20,8 +20,9 @@ class DashboardController extends Controller
 
         $TotalDocument = Document::count();
 
-        $data = Pengesahan::all();
+        $data = Pengesahan::where('Status', 'Terverifikasi')->get();
         $totalSum = $data->sum('Total');
+
 
         return view('dashboard', compact('TotalDataPengesahan', 'totalSum', 'DataDenganStatusTerverifikasi', 'DataDenganStatusBelumTereverifikasi', 'DataDenganStatusDitolak', 'TotalDocument', 'role3Count', 'role1Count', 'role2Count'));
     }

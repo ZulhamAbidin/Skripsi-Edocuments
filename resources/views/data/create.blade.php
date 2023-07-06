@@ -165,7 +165,7 @@
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Jumlah Yang Ingin DI SAH kan</label>
                             <div class="col-md-9">
-                                <select name="Lembar" class="form-control form-select" id="Lembar" required data-bs-placeholder="Lembar">
+                                <select name="Total" class="form-control form-select" id="Lembar" required data-bs-placeholder="Lembar">
                                     <option value="1">1 Lembar</option>
                                     <option value="2">2 Lembar</option>
                                     <option value="3">3 Lembar</option>

@@ -33,17 +33,17 @@
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon fe fe-users"></i><span class="side-menu__label">Data Pekerja</span>
+                        <i class="side-menu__icon fe fe-users"></i><span class="side-menu__label">Data Pengesahan</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)">DATA PEKERJA</a></li>
+                        <li class="side-menu-label1"><a href="javascript:void(0)">DATA PENGESAHAN</a></li>
                         <li><a href="/data/" class="slide-item"> List Data</a></li>
                         <li><a href="/data/verifikasi" class="slide-item"> Pengajuan Pengesahan</a></li>
                         @if(auth()->user()->role_id == 1)
-                        <li><a href="/export/" class="slide-item"> Export Data</a></li>
+                        <li><a href="/export/" class="slide-item"> Export Data Pengesahan</a></li>
                         @endif
-                        <li><a href="/data/create" class="slide-item"> Tambah Data</a></li>
+                        <li><a href="/data/create" class="slide-item"> Tambah Data Pengesahan</a></li>
                     </ul>
                 </li>
 
@@ -56,8 +56,8 @@
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="/documents" class="slide-item"> List Document</a></li>
-                        <li><a href="/documents/create" class="slide-item"> Unggah Document</a></li>
+                        <li><a href="/documents" class="slide-item"> List Document Pengesahan</a></li>
+                        <li><a href="/documents/create" class="slide-item"> Unggah Document Pengesahan</a></li>
                     </ul>
                 </li>
 
@@ -79,7 +79,6 @@
                 </li>
                 @endif
 
-
                 <li class="sub-category">
                     <h3>General</h3>
                 </li>
@@ -87,7 +86,7 @@
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="/profile">
                         <i class="side-menu__icon fe fe-settings"></i>
-                        <span class="side-menu__label">Settings</span>
+                        <span class="side-menu__label">Pengaturan Profile</span>
                     </a>
                 </li>
                 

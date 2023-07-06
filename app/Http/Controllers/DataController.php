@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pengesahan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use DataTables;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DataController extends Controller
@@ -70,6 +72,8 @@ public function store(Request $request)
         'Status.required' => 'Status Wajib di Isi.',
     ]);
 
+    $validatedData['User_id'] = Auth::id();
+
     Pengesahan::create($validatedData);
 
     return redirect()->route('data.index')->with('success', 'Data Berhasil Ditambahkan');
@@ -105,7 +109,7 @@ public function update(Request $request, $id)
 
     // Alert::success('Success', 'Data updated successfully')->autoClose(3000);
 
-    return redirect()->route('data.index')->with('success', 'Data Berhasil Ditambahkan');
+    return redirect()->route('data.index')->with('success', 'Data Berhasil Diperbaharui');
     // return redirect()->route('data.index');
 }
 

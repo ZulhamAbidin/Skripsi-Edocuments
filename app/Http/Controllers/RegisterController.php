@@ -18,28 +18,6 @@ class RegisterController extends Controller
         return view('auth.register-siswa');
     }
 
-    // public function registerSiswa(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users',
-    //         'password' => 'required|string|min:8|confirmed',
-    //     ]);
-
-    //     $role = Role::where('name', 'siswa')->first();
-
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->password = Hash::make($request->password);
-    //     $user->role()->associate($role);
-    //     $user->save();
-
-    //     Auth::login($user);
-
-    //     return redirect()->route('pencaker.index');
-    // }
-
     //baru
     public function registerSiswa(Request $request)
     {
@@ -70,28 +48,6 @@ class RegisterController extends Controller
         return view('auth.register-guru');
     }
 
-    // public function registerGuru(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users',
-    //         'password' => 'required|string|min:8|confirmed',
-    //     ]);
-
-    //     $role = Role::where('name', 'guru')->first();
-
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->password = Hash::make($request->password);
-    //     $user->role()->associate($role);
-    //     $user->save();
-
-    //     Alert::success('Success', 'Pendaftaran guru berhasil.');
-
-    //     return redirect()->route('management.index');
-    // }
-
     //Baru
     public function registerGuru(Request $request)
     {
@@ -112,7 +68,10 @@ class RegisterController extends Controller
         $user->role()->associate($role);
         $user->save();
 
-        Alert::success('Success', 'Pendaftaran guru berhasil.');
+        Alert::success('Success', 'Pendaftaran guru berhasil.')
+            ->persistent(true)
+            ->autoClose(3000);
+        // Alert::success('Success', 'Pendaftaran guru berhasil.');
 
         return redirect()->route('management.index');
     }

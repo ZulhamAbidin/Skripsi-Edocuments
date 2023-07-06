@@ -169,6 +169,15 @@
                 window.location.href = "{{ url('management') }}/" + userId + "/edit";
             });
 
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Success',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                @endif
             
         });
     </script>
