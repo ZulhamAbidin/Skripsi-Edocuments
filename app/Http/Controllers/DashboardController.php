@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $TotalData = Pengesahan::whereIn('status', ['Terverifikasi', 'Ditolak', 'BelumTerverifikasi'])->count();
+        $TotalDataPengesahan = Pengesahan::whereIn('status', ['Terverifikasi', 'Ditolak', 'BelumTerverifikasi'])->count();
         $DataDenganStatusTerverifikasi = Pengesahan::whereIn('status', ['Terverifikasi'])->count();
         $DataDenganStatusBelumTereverifikasi = Pengesahan::whereIn('status', ['BelumTerverifikasi'])->count();
         $DataDenganStatusDitolak = Pengesahan::whereIn('status', ['Ditolak'])->count();
@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $data = Pengesahan::all();
         $totalSum = $data->sum('Total');
 
-        return view('dashboard', compact('TotalData', 'totalSum', 'DataDenganStatusTerverifikasi', 'DataDenganStatusBelumTereverifikasi', 'DataDenganStatusDitolak', 'TotalDocument', 'role3Count', 'role1Count', 'role2Count'));
+        return view('dashboard', compact('TotalDataPengesahan', 'totalSum', 'DataDenganStatusTerverifikasi', 'DataDenganStatusBelumTereverifikasi', 'DataDenganStatusDitolak', 'TotalDocument', 'role3Count', 'role1Count', 'role2Count'));
     }
 }
 

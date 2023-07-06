@@ -70,8 +70,11 @@
             var table = $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
-                searching: true, // Mengaktifkan fitur pencarian
-                ajax: "{{ route('management.index') }}",
+                searching: true,
+                ajax: {
+                url: "{{ route('management.index') }}",
+                type: "GET"
+                },
                 columns: [{
                         data: 'id',
                         name: 'id'

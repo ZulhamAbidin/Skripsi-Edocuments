@@ -2,23 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\Data;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Faker\Factory as FakerFactory;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     *
+     * @return void
      */
     public function run()
     {
+        // Menambahkan role
         Role::create(['name' => 'kepala_sekolah']);
         Role::create(['name' => 'guru']);
         Role::create(['name' => 'siswa']);
 
+        // Menambahkan pengguna
         User::create([
             'name' => 'validatoradmin',
             'email' => 'validatoradmin@gmail.com',
@@ -42,5 +45,8 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3,
             'NIK' => '654321987', // Ganti dengan NIK yang diinginkan
         ]);
+        
+        // Menjalankan factory untuk membuat data tambahan jika diperlukan
+       
     }
 }

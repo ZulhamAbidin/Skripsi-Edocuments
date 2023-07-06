@@ -30,11 +30,10 @@ class UserController extends Controller
 
     //     return view('management.index');
     // }
-
-    public function index(Request $request)
+public function index(Request $request)
 {
-    if ($request->ajax()) {
-        $data = User::with('role') // Menambahkan relasi 'role'
+    if ($request->ajax() || $request->header('X-Requested-With') == 'XMLHttpRequest') {
+        $data = User::with('role') // Menambahkan relasi 'role' dengan eager loading
             ->where('id', '!=', auth()->user()->id)
             ->get();
 
@@ -45,8 +44,13 @@ class UserController extends Controller
                 $deleteUrl = route('management.destroy', ['id' => $row->id]);
 
                 $editBtn = '<button class="btn btn-sm btn-primary btn-edit" data-id="' . $row->id . '">Edit</button>';
-                $deleteBtn = '<button class="btn btn-sm btn-danger btn-delete" data-id="' . $row->id . '">Delete</button>';
-                $viewBtn = '<a href="' . route('visit.show', $row->id) . '" class="view btn btn-primary btn-sm">View</a>';
+                $deleteBtn = '<button class="btn btn-sm btn-danger btn-delete mx-1" data-id="' . $row->id . '">Delete</button>';
+
+                // Periksa role_id sebelum menampilkan tombol "Visit"
+                $viewBtn = '';
+                if ($row->role_id !== 1 && $row->role_id !== 2) {
+                    $viewBtn = '<a href="' . route('visit.show', $row->id) . '" class="view btn btn-sm btn-info btn-md">Visit User</a>';
+                }
 
                 return $editBtn . $deleteBtn . $viewBtn;
             })
@@ -59,6 +63,8 @@ class UserController extends Controller
 
     return view('management.index');
 }
+
+
 
 
 

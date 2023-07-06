@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "realrashid/sweet-alert": "^7.0",
         "tecnickcom/tcpdf": "^6.6",
+        "yajra/laravel-datatables": "10.0",
         "yajra/laravel-datatables-oracle": "^10.4"
     },
     "require-dev": {
