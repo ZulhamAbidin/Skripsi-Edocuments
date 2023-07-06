@@ -16,7 +16,10 @@ class ExportController extends Controller
 
     public function getData()
     {
-        $data = Pengesahan::select(['id', 'NamaLengkap', 'AlamatDomisili', 'NoTelfon', 'Agama', 'JenisKelamin', 'PendidikanTerakhir', 'Jurusan', 'TanggalPengesahan', 'Total']);
+        $data = Pengesahan::select(['id', 'NamaLengkap', 'AlamatDomisili', 'NoTelfon', 'Agama', 'JenisKelamin', 'PendidikanTerakhir', 'Jurusan', 'TanggalPengesahan', 'Total'])
+            ->where('Status', 'Terverifikasi')
+            ->get();
+
         return DataTables::of($data)->make(true);
     }
 

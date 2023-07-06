@@ -24,13 +24,13 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
+        {{-- <div>
             <x-input-label for="NIK" :value="__('NIK')" />
             <x-text-input id="NIK" name="NIK" type="text"
                 class="mt-1 w-full  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-indigo-600  focus:ring-indigo-600  block rounded-md sm:text-sm focus:ring-1 py-1.5 px-4 "
                 :value="old('NIK', $user->NIK)" required autofocus autocomplete="NIK" />
             <x-input-error class="mt-2" :messages="$errors->get('NIK')" />
-        </div>
+        </div> --}}
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -59,6 +59,24 @@
         <div class="flex items-center gap-4">
             {{-- <x-button> Back </x-button> --}}
             <x-primary-button>{{ __('Save') }}</x-primary-button>
+
+            @php
+            $role_id = auth()->user()->role_id;
+            @endphp
+            
+            @if($role_id == 1 || $role_id == 2)
+            <a href="dashboard" class="inline-flex items-center px-4 py-2 bg-blue-600  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700  focus:bg-gray-700  active:bg-gray-900  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                Back
+            </a>
+            @endif
+
+            @if($role_id == 3 )
+            <a href="pencaker" class="inline-flex items-center px-4 py-2 bg-blue-600  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700  focus:bg-gray-700  active:bg-gray-900  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                Back
+            </a>
+            @endif
+            
+    
 
             @if (session('status') === 'profile-updated')
                 <p

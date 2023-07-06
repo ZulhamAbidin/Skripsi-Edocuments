@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
         .typed-cursor {
             display: none !important;
         }
     </style>
+
 </head>
 
 <body>
     <div class="bg-white">
+
 
         <header class="absolute inset-x-0 top-0 z-50">
             <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -148,15 +151,6 @@
 
                 </div>
 
-
-
-                {{-- <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-                    aria-hidden="true">
-                    <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-                        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-                    </div>
-                </div> --}}
-
                 <hr class="mt-3 bg-gray-700">
             </div>
         </section>
@@ -166,25 +160,40 @@
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <div class="relative h-56 overflow-hidden rounded-lg">
 
-                    @foreach ($pengalamanList as $pengalaman)
-                        <div class="hidden duration-700 ease-in-out gap-y-6 mt-10 pt-4 w-full px-4 md:px-64" data-carousel-item>
+                    @foreach ($saran as $item)
+                        <div class="hidden duration-700 ease-in-out gap-y-6 mt-10 pt-4 w-full px-4 md:px-64"
+                            data-carousel-item>
 
                             <div class="flex justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#3B82F6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 mr-1 w-6 text-white">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#3B82F6" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-6 mr-1 w-6 text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                                 </svg>
-                                <p class="text-sm font-semibold leading-6 text-gray-900 text-center pb-2">{{ $pengalaman->user->name }}</p>
+                                <p class="text-sm font-semibold leading-6 text-gray-900 text-center pb-2">
+                                    {{ $item->nama }}</p>
                             </div>
 
-                            <p class="mt-1 text-xs text-wrap leading-5 text-gray-500 text-center"> {{ $pengalaman->pengalamanpengunjung }}</p>
-                            
+                            <p class="mt-1 text-xs text-wrap leading-5 text-gray-500 text-center">
+                                {{ $item->saran }}</p>
+
                             @if (Auth::check() && in_array(Auth::user()->role_id, [1, 2]))
-                                <form action="{{ route('pengalaman.delete', $pengalaman->id) }}" method="POST" class="delete-form flex justify-center pt-6">
+                                <form action="{{ route('saran.destroy', $item->id) }}" method="POST"
+                                    class="delete-form flex justify-center pt-6">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="rounded-md delete-btn delete-form flex bg-red-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Delete</button>
+                                    <button type="submit"
+                                        class="rounded-md delete-btn delete-form flex bg-red-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Delete</button>
                                 </form>
                             @endif
+
+                            {{-- @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                            <form action="{{ route('saran.destroy', $item->id) }}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                            @endif --}}
 
                         </div>
                     @endforeach
@@ -289,15 +298,15 @@
                         Saran dan Masukan mengenai pelayan kami</p>
                 </div>
 
-                <form action="{{ route('welcome.submit') }}" method="POST" class="mx-auto mt-6 md:20 max-w-xl ">
+                 <form action="{{ route('saran.store') }}" method="POST" class="mx-auto mt-6 md:20 max-w-xl ">
                     @csrf
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
                         <div class="sm:col-span-2">
                             <label for="text"
-                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Username</label>
+                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Nama</label>
                             <div class="mt-2.5">
-                                <input type="text" name="name" id="name" autocomplete="name"
+                                <input type="text" name="nama" id="name" autocomplete="name"
                                     class="block w-full text-xs rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6">
                             </div>
                         </div>
@@ -313,9 +322,9 @@
 
                         <div class="sm:col-span-2">
                             <label for="message"
-                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Message</label>
+                                class="block text-xs md:text-sm font-semibold leading-6 text-gray-900">Saran</label>
                             <div class="mt-2.5">
-                                <textarea name="pengalamanpengunjung" id="message" rows="4"
+                                <textarea name="saran" id="message" rows="4"
                                     class="block w-full text-xs rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"></textarea>
                             </div>
                         </div>
@@ -326,7 +335,9 @@
                             class="block w-full text-xs rounded-md bg-indigo-600 px-3.5 py-2.5 text-center  font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Let's
                             Submit</button>
                     </div>
-                </form>
+                </form> 
+
+
             </div>
 
         </section>
@@ -351,11 +362,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const deleteForms = document.querySelectorAll('.delete-form');
-    
+
             deleteForms.forEach((form) => {
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
-    
+
                     Swal.fire({
                         title: 'Are you sure?',
                         text: 'Apakah Anda Yakin Ingin Menghapus Saran Dan Masukan?',
@@ -373,8 +384,8 @@
                 });
             });
         });
-    
-        @if(session('success'))
+
+        @if (session('success'))
             Swal.fire({
                 title: 'Success',
                 text: '{{ session('success') }}',
@@ -384,16 +395,15 @@
             });
         @endif
 
-        @if(session('error'))
-        Swal.fire({
-        title: 'Error',
-        text: '{{ session('error') }}',
-        icon: 'error',
-        timer: 3000,
-        showConfirmButton: false
-        });
+        @if (session('error'))
+            Swal.fire({
+                title: 'Error',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                timer: 3000,
+                showConfirmButton: false
+            });
         @endif
-    
     </script>
 
 </body>

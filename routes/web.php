@@ -4,7 +4,6 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\ExportController;
@@ -15,11 +14,14 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\CheckWritePermission;
 use App\Http\Controllers\VerifikasiController;
+use App\Http\Controllers\SaranController;
 
-Route::post('/', [HomeController::class, 'submitForm'])->name('welcome.submit');
-Route::get('/', [HomeController::class, 'createForm'])->name('create');
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::delete('/pengalaman/{id}', [HomeController::class, 'deletePengalaman'])->name('pengalaman.delete');
+
+Route::get('/', [SaranController::class, 'index'])->name('welcome.index');
+Route::get('/saran/create', [SaranController::class, 'create'])->name('saran.create');
+Route::post('/saran/store', [SaranController::class, 'store'])->name('saran.store');
+Route::delete('/saran/{id}', [SaranController::class, 'destroy'])->name('saran.destroy');
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'showSiswaRegistrationForm'])->name('register.siswa');
